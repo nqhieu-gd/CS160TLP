@@ -3,7 +3,7 @@
 #include <string>
 #include "Transaction.h"
 
-struct IncomeSource{
+struct Wallet{
     std::string ID;
     std::string Name;
     int quantity=0;
