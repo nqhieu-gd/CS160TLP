@@ -9,3 +9,5 @@ struct Wallet{
     int quantity=0;
     Transaction* List=nullptr;
 };
+
+void addTransaction(Wallet&, Transaction&);
