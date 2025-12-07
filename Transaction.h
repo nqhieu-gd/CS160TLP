@@ -8,12 +8,11 @@ struct Date{
     int year;
 };
 struct Transaction{
-    int amount;
+    long long amount;
     Date date;
     std::string description;
 };
 
-bool CheckvalidDate(Date);
-void inputTransactionFromConsole(Transaction&);
-void inputTransactionFromFile(std::ifstream&,Transaction&);
+bool CheckvalidDate(Date); // Only check if it's a valid Date or not - don't care about the current Date
+void inputTransactionFromFile(std::ifstream&,Transaction&); //Date->Amount->size of string ->Note
 void outputTransactiontoFile(std::ofstream&,Transaction);
