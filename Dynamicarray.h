@@ -57,6 +57,4 @@ struct wallet {
 
 struct wallist {
     func<wallet> w;
-
-    
 };
