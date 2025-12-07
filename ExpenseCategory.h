@@ -2,10 +2,23 @@
 #include <fstream>
 #include <string>
 #include "Transaction.h"
+#include "Dynamicarray.h"
 
-struct ExpenseCategory{
-    std::string ID;
-    std::string Name;
-    int quantity=0;
-    Transaction* List=nullptr;
+using std::string;
+
+struct ExpenseCategory {
+    string eID;
+    string eName;
+    func<Transaction> exp;
+    long long expense;
+
+    //create expense category list
+    void crexpegory();
+
+    void expAdd();
+
+    void expSub();
+
+    //clear expense category list
+    void clexpegory();
 };

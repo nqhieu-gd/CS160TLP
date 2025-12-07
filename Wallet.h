@@ -2,17 +2,18 @@
 #include <fstream>
 #include "Transaction.h"
 #include "Dynamicarray.h"
+#include "IncomeSource.h"
+#include "ExpenseCategory.h"
 
 using std::string;
 
 struct Wallet {
     string wID;
     string wName;
-    long long income;
-    long long expense;
+    long long bal;
 
-    func<Transaction> inc;
-    func<Transaction> exp;
+    func<IncomeSource> is;
+    func<ExpenseCategory> ec;
 
     void creallet();
 
@@ -20,9 +21,7 @@ struct Wallet {
 
     void expenseAdd(Transaction t);
 
-    void totalIncome();
-
-    void totalExpense();
+    void totalBalance();
 
     void cleallet();
 };

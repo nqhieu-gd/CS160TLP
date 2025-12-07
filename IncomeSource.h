@@ -2,10 +2,23 @@
 #include <fstream>
 #include <string>
 #include "Transaction.h"
+#include "Dynamicarray.h"
 
-struct IncomeSource{
-    std::string ID;
-    std::string Name;
-    int quantity=0;
-    Transaction* List=nullptr;
+using std::string;
+
+struct IncomeSource {
+    string iID;
+    string iName;
+    func<Transaction> inc;
+    long long income;
+
+    //create income source list
+    void crincourse();
+
+    void incAdd();
+
+    void incSub();
+
+    //clear income source list
+    void clincourse();
 };

@@ -7,42 +7,38 @@
 
 using std::string;
 
-long long income;
-long long expense;
+long long bal;
 
-func<Transaction> inc;
-func<Transaction> exp;
+IncomeSource ie;
+ExpenseCategory ec;
+
+func<IncomeSource> iep;
+func<ExpenseCategory> ecp;
 
 //create a new wallet
 void creallet() {
-    inc.alloc();
-    exp.alloc();
+    iep.alloc();
+    ie.inc.alloc();
+    ecp.alloc();
+    ec.exp.alloc();
 }
 
 void incomeAdd(Transaction t) {
-    inc.push(t);
+    ie.inc.push(t);
 }
 
 void expenseAdd(Transaction t) {
-    exp.push(t);
+    ec.exp.push(t);
 }
 
-void totalIncome() {
-    income = 0;
-    for (int i = 0; i < inc.store; i++) {
-        income += inc.p[i].amount;
-    }
-}
-
-void totalExpense() {
-    expense = 0;
-    for (int i = 0; i < exp.store; i++) {
-        expense += exp.p[i].amount;
-    }
+void totalBalance() {
+    bal = ie.income - ec.expense;
 }
 
 //clear the current wallet's data
 void cleallet() {
-    inc.dealloc();
-    exp.dealloc();
+    ie.inc.dealloc();
+    iep.dealloc();
+    ec.exp.dealloc();
+    ecp.dealloc();
 }
