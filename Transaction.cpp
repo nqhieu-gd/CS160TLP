@@ -4,7 +4,7 @@
 #include "Transaction.h"
 using namespace std;
 
-bool CheckvalidDate(Date& c){
+bool CheckvalidDate(const Date& c){
     switch (c.month){
         case 1:
         case 3:
@@ -35,10 +35,19 @@ void inputTransactionFromFile(ifstream& fin,Transaction& a){
     a.description.resize(lengthofstring);
     fin.read(&a.description[0], lengthofstring);
 }
-void outputTransactiontoFile(std::ofstream& fout,Transaction& a){
+void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
     fout.write((char*)&a.date,sizeof(Date));
     fout.write((char*)&a.amount,sizeof(a.amount));
     int len=a.description.length();
     fout.write((char*)&len, sizeof(len));
     fout.write(&a.description[0],len*sizeof(char));
+}
+int CompareTransaction(const Transaction& a, const Transaction& b){
+    if (a.date.year<b.date.year) return 1;
+    if (b.date.year<a.date.year) return -1;
+    if (a.date.month<b.date.month) return 1;
+    if (b.date.month<a.date.month) return -1;
+    if (a.date.day<b.date.day) return 1;
+    if (b.date.day<a.date.day) return -1;
+    return 0;
 }
