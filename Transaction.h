@@ -16,12 +16,4 @@ struct Transaction{
 bool CheckvalidDate(const Date&); // Only check if it's a valid Date or not - don't care about the current Date
 void inputTransactionFromFile(std::ifstream&,Transaction&); //Date->Amount->size of string ->Note
 void outputTransactiontoFile(std::ofstream&,const Transaction&);
-int CompareTransaction(const Transaction& a, const Transaction& b); //Sort via Date -> Calculate and Statistic
-
-
-
-struct date {
-    int day;
-    int month;
-    int year;
-};
+int CompareDate(const Date& a, const Date& b); //Sort via Date -> Calculate and Statistic

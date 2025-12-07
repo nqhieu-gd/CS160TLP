@@ -42,12 +42,12 @@ void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
     fout.write((char*)&len, sizeof(len));
     fout.write(&a.description[0],len*sizeof(char));
 }
-int CompareTransaction(const Transaction& a, const Transaction& b){
-    if (a.date.year<b.date.year) return 1;
-    if (b.date.year<a.date.year) return -1;
-    if (a.date.month<b.date.month) return 1;
-    if (b.date.month<a.date.month) return -1;
-    if (a.date.day<b.date.day) return 1;
-    if (b.date.day<a.date.day) return -1;
+int CompareDate(const Date& a, const Date& b){
+    if (a.year<b.year) return 1;
+    if (b.year<a.year) return -1;
+    if (a.month<b.month) return 1;
+    if (b.month<a.month) return -1;
+    if (a.day<b.day) return 1;
+    if (b.day<a.day) return -1;
     return 0;
 }
