@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Transaction.h"
+#include "Transaction\Tstn.h"
 #include "Wallet.h"
-#include "Dynamicarray.h"
+#include "..\..\Utilities\DA\Dynamicarray.h"
 
 using std::string;
 

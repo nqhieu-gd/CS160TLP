@@ -1,9 +1,9 @@
 #pragma once
 #include <fstream>
-#include "Transaction.h"
-#include "Dynamicarray.h"
-#include "IncomeSource.h"
-#include "ExpenseCategory.h"
+#include "Transaction\Tstn.h"
+#include "..\..\Utilities\DA\Dynamicarray.h"
+#include "..\Income Source\Sour.cpp"
+#include "..\Expense Category\Cate.cpp"
 
 using std::string;
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include "Transaction.h"
+#include "Tstn.h"
 using namespace std;
 
 bool CheckvalidDate(const Date& c){

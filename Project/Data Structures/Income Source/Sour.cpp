@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Transaction.h"
-#include "IncomeSource.h"
+#include "..\Wallet Info\Transaction\Tstn.h"
+#include "Sour.h"
 using namespace std;
