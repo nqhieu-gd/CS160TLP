@@ -7,17 +7,39 @@
 
 using std::string;
 
-func<Wallet> w;
-
 //create a new list of wallets
-void crealist() {
+Wallist :: Wallist() {
     w.alloc();
 }
 
 //clear list of wallets
-void clist() {
-    for (int i = 0; i < w.store; i++) {
-        w.p[i].cleallet();
-    }
+Wallist :: ~Wallist() {
     w.dealloc();
+}
+
+//Create a new wallet.
+void Wallist :: CreateWallet() {
+    Wallet wal;
+//Generate wallet's name by default.
+    int s = w.store;
+    wal.wName = "Wallet number ";
+    string sub = " ";
+    sub[0] = s%10 + 48;
+    while (s >= 10) {
+        s = s/10;
+        sub += " ";
+    }
+    s = w.store;
+    int k = sub.size();
+    while (k > 0) {
+        sub[--k] = s%10 + 48;
+    }
+    wal.wName += sub;
+//Generate wallet's ID by default.
+    int k = sub.size();
+    for (int i = 0; i < 8 - k; i++) {
+        wal.wID += "0";
+    }
+    wal.wID += sub;
+    w.push(wal);
 }

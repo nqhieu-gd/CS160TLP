@@ -73,7 +73,7 @@ int Wallet :: totalBalance() {
     return c;
 }
 
-//Clear the current wallet's data
+//Clear the current wallet's data.
 Wallet :: ~Wallet() {
     for (int i = 0; i < is.store; i++) {
         is.p[i].inc.dealloc();

@@ -10,7 +10,6 @@ using std::string;
 struct Wallet {
     string wID;
     string wName;
-    long long bal;
 
     func<IncomeSource> is;
     func<ExpenseCategory> ec;
@@ -32,9 +31,8 @@ struct Wallet {
 struct Wallist {
     func<Wallet> w;
 
-    void crealist();
+    Wallist();
+    ~Wallist();
 
-    void clist();
+    void CreateWallet();
 };
-
-void addTransaction(Wallet&, Transaction&);
