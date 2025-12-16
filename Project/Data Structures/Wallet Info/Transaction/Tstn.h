@@ -24,8 +24,8 @@ struct Transaction{
 
 bool CheckvalidDate(const Date&); // Only check if it's a valid Date or not - don't care about the current Date
 
-void inputTransactionFromFile(char*, Transaction&); //Date->Amount->size of string ->Note
+void inputTransactionFromFile(std::ifstream&, Transaction&); //Date->Amount->size of string ->Note
 
-void outputTransactiontoFile(char*,const Transaction&);
+void outputTransactiontoFile(std::ofstream&,const Transaction&);
 
 bool CompareTransaction(const Transaction& a, const Transaction& b); //Sort via Date -> Calculate and Statistic

@@ -10,16 +10,15 @@ struct IncomeSource {
     string iID;
     string iName;
     func<Transaction> inc;
-    long long income;
+    
+    long long income();
 
     //create income source list
     IncomeSource();
+    //clear income source list
     ~IncomeSource();
 
     void incAdd();
 
     void incSub();
-
-    //clear income source list
-    void clincourse();
 };

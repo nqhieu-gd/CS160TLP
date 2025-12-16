@@ -10,16 +10,15 @@ struct ExpenseCategory {
     string eID;
     string eName;
     func<Transaction> exp;
-    long long expense;
+    
+    long long expense();
 
     //create expense category list
     ExpenseCategory();
+    //clear expense category list
     ~ExpenseCategory();
 
     void expAdd();
 
     void expSub();
-
-    //clear expense category list
-    void clexpegory();
 };

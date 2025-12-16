@@ -10,27 +10,21 @@ bool CheckvalidDate(const Date& c){
     return 1;
 }
 
-void inputTransactionFromFile(char* file, Transaction& a){
-    std::ifstream fin;
-    fin.open(file, std::ios::binary);
+void inputTransactionFromFile(std::ifstream& fin, Transaction& a){
     fin.read((char*)&a.date,sizeof(Date));
     fin.read((char*)&a.amount, sizeof(a.amount));
     int lengthofstring;
     fin.read((char*)&lengthofstring, sizeof(lengthofstring));
     for (int i = 0; i <= lengthofstring; i++) a.description += "\0";
     fin.read(&a.description[0], lengthofstring);
-    fin.close();
 }
 
-void outputTransactiontoFile(char* file,const Transaction& a){
-    std::ofstream fout;
-    fout.open(file, std::ios::binary);
+void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
     fout.write((char*)&a.date,sizeof(Date));
     fout.write((char*)&a.amount,sizeof(a.amount));
     int len=a.description.length();
     fout.write((char*)&len, sizeof(len));
-    fout.write(&a.description[0],len*sizeof(char));
-    fout.close();
+    fout.write(&a.description[0], len);
 }
 
 /*bool CompareDate(const Date& a, const Date& b){

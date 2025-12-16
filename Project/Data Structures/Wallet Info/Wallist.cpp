@@ -37,7 +37,8 @@ void Wallist :: CreateWallet() {
     wal.wName += sub;
 //Generate wallet's ID by default.
     int k = sub.size();
-    for (int i = 0; i < 8 - k; i++) {
+    wal.wID = "W";
+    for (int i = 1; i < 8 - k; i++) {
         wal.wID += "0";
     }
     wal.wID += sub;
