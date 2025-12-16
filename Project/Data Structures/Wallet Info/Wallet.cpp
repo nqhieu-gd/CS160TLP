@@ -24,21 +24,29 @@ void Wallet :: outWal() {
         return;
     }
     int k = 0;
-    fout.write(&wID[0], wID.size());
+//Output wID Wxxxxxxx (8 digits, the first digit is always W).
+    fout.write(&wID[1], wID.size() - 1);
+//Output size of wName and output wName.
     k = wName.size();
     fout.write((char*) &k, sizeof(int));
     fout.write(&wName[0], wName.size());
+//Output the number of income sources in is (list of income sources).
     fout.write((char*) &is.store, sizeof(int));
     for (int i = 0; i < is.store; i++) {
+    //Output ID of each income sources.
         fout.write(&is.p[i].iID[0], is.p[i].iID.size());
+    //Output size of iName and iName of each income sources.
         k = is.p[i].iName.size();
         fout.write((char*) &k, sizeof(int));
         fout.write(&is.p[i].iName[0], is.p[i].iName.size());
+    //Output the number of transactions in inc (list of transaction in an income sources).
         fout.write((char*) &is.p[i].inc.store, sizeof(int));
         for (int j = 0; j < is.p[i].inc.store; j++) {
+        //Output each transaction.
             outputTransactiontoFile(fout, is.p[i].inc.p[j]);
         }
     }
+//Similarly with expense categories.
     fout.write((char*) &ec.store, sizeof(int));
     for (int i = 0; i < ec.store; i++) {
         fout.write(&ec.p[i].eID[0], ec.p[i].eID.size());
@@ -50,6 +58,7 @@ void Wallet :: outWal() {
             outputTransactiontoFile(fout, ec.p[i].exp.p[j]);
         }
     }
+//Close the output file.
     fout.close();
 }
 

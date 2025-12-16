@@ -39,4 +39,6 @@ struct Wallist {
     ~Wallist();
 
     void CreateWallet();
+
+    void inWal(string name);
 };
