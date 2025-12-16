@@ -13,7 +13,8 @@ struct IncomeSource {
     long long income;
 
     //create income source list
-    void crincourse();
+    IncomeSource();
+    ~IncomeSource();
 
     void incAdd();
 

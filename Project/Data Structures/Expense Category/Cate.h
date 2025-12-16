@@ -13,7 +13,8 @@ struct ExpenseCategory {
     long long expense;
 
     //create expense category list
-    void crexpegory();
+    ExpenseCategory();
+    ~ExpenseCategory();
 
     void expAdd();
 

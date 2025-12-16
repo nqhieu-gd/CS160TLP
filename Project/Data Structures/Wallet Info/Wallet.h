@@ -15,15 +15,18 @@ struct Wallet {
     func<IncomeSource> is;
     func<ExpenseCategory> ec;
 
-    void creallet();
+    int totalBalance();
 
-    void incomeAdd(Transaction t);
+    Wallet();
+    ~Wallet();
 
-    void expenseAdd(Transaction t);
+    void newSource(IncomeSource &ie, const string ID);
+    
+    void newExpense(ExpenseCategory &et, const string ID);
 
-    void totalBalance();
+    void incomeAdd(const Transaction t, const string ID);
 
-    void cleallet();
+    void expenseAdd(const Transaction t, const string ID);
 };
 
 struct Wallist {

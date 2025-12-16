@@ -14,7 +14,11 @@ struct Transaction{
     Date date;
     std::string description;
 
-    Transaction();
+    Transaction(): amount(0) {
+        date.day = 0;
+        date.month = 0;
+        date.year = 0;
+    };
     ~Transaction();
 };
 
@@ -23,7 +27,5 @@ bool CheckvalidDate(const Date&); // Only check if it's a valid Date or not - do
 void inputTransactionFromFile(char*, Transaction&); //Date->Amount->size of string ->Note
 
 void outputTransactiontoFile(char*,const Transaction&);
-
-void outputTransactiontoFileFromConsole(char*,const Transaction&);
 
 bool CompareTransaction(const Transaction& a, const Transaction& b); //Sort via Date -> Calculate and Statistic

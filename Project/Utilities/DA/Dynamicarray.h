@@ -19,7 +19,7 @@ public:
 
     //increase the list's capacity if not sufficent
     void stretch() {
-        T* temp = new T[this->size*2 + 1]
+        T* temp = new T[this->size*2 + 1];
         for (int t = 0; t < this->size; t++) {
             temp[t] = p[t];
         }

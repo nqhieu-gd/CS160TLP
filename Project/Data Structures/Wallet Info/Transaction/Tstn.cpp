@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include <string.h>
 #include "Tstn.h"
@@ -18,7 +17,7 @@ void inputTransactionFromFile(char* file, Transaction& a){
     fin.read((char*)&a.amount, sizeof(a.amount));
     int lengthofstring;
     fin.read((char*)&lengthofstring, sizeof(lengthofstring));
-    a.description.resize(lengthofstring);
+    for (int i = 0; i <= lengthofstring; i++) a.description += "\0";
     fin.read(&a.description[0], lengthofstring);
     fin.close();
 }
@@ -32,10 +31,6 @@ void outputTransactiontoFile(char* file,const Transaction& a){
     fout.write((char*)&len, sizeof(len));
     fout.write(&a.description[0],len*sizeof(char));
     fout.close();
-}
-
-void genTransaction(Transaction& a) {
-    
 }
 
 /*bool CompareDate(const Date& a, const Date& b){
