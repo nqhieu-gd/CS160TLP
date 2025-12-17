@@ -13,10 +13,9 @@ struct ExpenseCategory {
     
     long long expense();
 
-    //create expense category list
+    //create expense category list.
+    ExpenseCategory();
+    //create expense category list with a specific ID.
     ExpenseCategory(string ID);
-    //clear expense category list
     ~ExpenseCategory();
-
-    void expSub();
 };

@@ -14,7 +14,7 @@ struct Wallet {
     func<IncomeSource> is;
     func<ExpenseCategory> ec;
 
-    int totalBalance();
+    long long totalBalance();
 
     Wallet();
     ~Wallet();

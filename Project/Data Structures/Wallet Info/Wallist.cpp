@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 #include "Transaction\Tstn.h"
 #include "Wallet.h"
 #include "..\..\Utilities\DA\Dynamicarray.h"
@@ -36,7 +35,7 @@ void Wallist :: CreateWallet() {
     }
     wal.wName += sub;
 //Generate wallet's ID by default.
-    int k = sub.size();
+    k = sub.size();
     wal.wID = "W";
     for (int i = 1; i < 8 - k; i++) {
         wal.wID += "0";
@@ -62,12 +61,21 @@ void Wallist :: inWal(string id) {
                                         //ind is for processing the size of name or id of the wallet, as well as the number of IS and EC.
                                         //temp is for processing the size of IS and EC, as well as the number of transactions of each type.
     for (int i = 0; i < k; i++) {
-        if (w.p[i].wID == id) k = i;
-        break;
+        if (w.p[i].wID == id) {
+            k = i;
+            w.p[k].is.dealloc();
+            w.p[k].is.alloc();
+            w.p[k].ec.dealloc();
+            w.p[k].ec.alloc();
+            break;
+        }
     }
-    if (k == w.store) CreateWallet;
+    if (k == w.store) CreateWallet();
 //Input wallet ID.
-    for (int i = 1; i < ind; i++) w.p[k].wID[i] = '\0';
+    for (int i = 1; i < ind; i++) {
+        w.p[k].wID.resize(1);
+        w.p[k].wID.resize(8, ' ');
+    }
     fin.read(&w.p[k].wID[1], 7);
 //Input the wallet's name.
     fin.read((char*) &ind, 4);
@@ -79,39 +87,44 @@ void Wallist :: inWal(string id) {
 //Get the number of income sources and start inputting them.
     fin.read((char*) &ind, 4);
     for (int i = 0; i < ind; i++) {
+        IncomeSource istemp;
     //Input income source's ID.
-        for (int j = 0; j < 8; j++) w.p[k].is.p[i].iID[j] = '\0';
-        fin.read(&w.p[k].is.p[i].iID[0], 8);
+        istemp.iID.resize(0);
+        istemp.iID.resize(8, '0');
+        fin.read(&istemp.iID[0], 8);
     //Input income source's name.
         fin.read((char*) &temp, 4);
-        if (w.p[k].is.p[i].iName.size()) w.p[k].is.p[i].iName.erase(0, w.p[k].is.p[i].iName.size());
-        for (int j = 0; j < ind; j++) {
-            w.p[k].is.p[i].iName += " ";
-        }
-        fin.read(&w.p[k].is.p[i].iName[0], temp);
+        if (istemp.iName.size()) istemp.iName.erase(0, istemp.iName.size());
+        istemp.iName.resize(temp, ' ');
+        fin.read(&istemp.iName[0], temp);
     //Input the number of transactions and start inputting them.
         fin.read((char*) &temp, 4);
-        for (int j = 0; j < ind; j++) {
+        for (int j = 0; j < temp; j++) {
             inputTransactionFromFile(fin, t);
-            w.p[k].is.p[i].inc.push(t);
+            istemp.inc.push(t);
         }
+        w.p[k].is.push(istemp);
     }
 //Tread similarly with expense categories.
     fin.read((char*) &ind, 4);
     for (int i = 0; i < ind; i++) {
-        for (int j = 0; j < 8; j++) w.p[k].ec.p[i].eID[j] = '\0';
-        fin.read(&w.p[k].ec.p[i].eID[0], 8);
+        ExpenseCategory ectemp;
+    //Input expense category's ID.
+        ectemp.eID.resize(0);
+        ectemp.eID.resize(8, '0');
+        fin.read(&ectemp.eID[0], 8);
+    //Input expense category's name.
         fin.read((char*) &temp, 4);
-        w.p[k].ec.p[i].eName.erase(0, w.p[k].ec.p[i].eName.size());
-        for (int j = 0; j < ind; j++) {
-            w.p[k].ec.p[i].eName += " ";
-        }
-        fin.read(&w.p[k].ec.p[i].eName[0], temp);
+        ectemp.eName.erase(0, ectemp.eName.size());
+        ectemp.eName.resize(temp, ' ');
+        fin.read(&ectemp.eName[0], temp);
+    //Input the number of transactions and start inputting them.
         fin.read((char*) &temp, 4);
-        for (int j = 0; j < ind; j++) {
+        for (int j = 0; j < temp; j++) {
             inputTransactionFromFile(fin, t);
-            w.p[k].ec.p[i].exp.push(t);
+            ectemp.exp.push(t);
         }
+        w.p[k].ec.push(ectemp);
     }
     fin.close();
 }
