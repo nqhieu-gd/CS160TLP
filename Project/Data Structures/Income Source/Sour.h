@@ -14,11 +14,9 @@ struct IncomeSource {
     long long income();
 
     //create income source list
-    IncomeSource();
+    IncomeSource(string ID);
     //clear income source list
     ~IncomeSource();
-
-    void incAdd();
 
     void incSub();
 };

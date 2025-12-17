@@ -21,10 +21,6 @@ struct Wallet {
 
     void outWal();
 
-    void newSource(IncomeSource &ie, const string ID);
-    
-    void newExpense(ExpenseCategory &et, const string ID);
-
     void incomeAdd(const Transaction t, const string ID);
 
     void expenseAdd(const Transaction t, const string ID);

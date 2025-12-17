@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
+
+using std::string;
 
 struct Date{
     int day;
@@ -12,7 +13,7 @@ struct Date{
 struct Transaction{
     long long amount;
     Date date;
-    std::string description;
+    string description;
 
     Transaction(): amount(0) {
         date.day = 0;

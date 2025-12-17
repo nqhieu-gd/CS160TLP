@@ -62,16 +62,6 @@ void Wallet :: outWal() {
     fout.close();
 }
 
-void Wallet :: newSource(IncomeSource &ie, const string ID) {
-    std::cout << "Enter a new income source: ";
-    std::getline(std::cin, ie.iName);
-}
-
-void Wallet :: newExpense(ExpenseCategory &et, const string ID) {
-    std::cout << "Enter a new expense category: ";
-    std::getline(std::cin, et.eName);
-}
-
 //Add an income, if the source ID has already presented in is (list of income sources),
 //add t to that ID, else create a new ID name.
 void Wallet :: incomeAdd(const Transaction t, const string ID) {
@@ -80,13 +70,8 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
         outWal;
         return;
     }
-    IncomeSource ie;
+    IncomeSource ie(ID);
     string sub = " ";
-    for (int i = 0; i < ID.size(); i++) {
-        sub[0] = ID[i];
-        ie.iID += sub;
-    }
-    newSource(ie, ID);
     ie.inc.push(t);
     is.push(ie);
     outWal;
@@ -100,13 +85,7 @@ void Wallet :: expenseAdd(const Transaction t, const string ID) {
         outWal;
         return;
     }
-    ExpenseCategory et;
-    string sub = " ";
-    for (int i = 0; i < ID.size(); i++) {
-        sub[0] = ID[i];
-        et.eID += sub;
-    }
-    newExpense(et, ID);
+    ExpenseCategory et(ID);
     et.exp.push(t);
     ec.push(et);
     outWal;

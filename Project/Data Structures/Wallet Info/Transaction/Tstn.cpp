@@ -1,12 +1,12 @@
 #include <fstream>
-#include <string.h>
 #include "Tstn.h"
-using namespace std;
+
+using std::string;
 
 bool CheckvalidDate(const Date& c){
     int time[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31};
     if (c.year % 4 == 0 && c.year % 100 != 0 || c.year % 400 == 0) time [1] = 29;
-    if (c.day != time[c.month - 1]) return 0;
+    if (c.month < 1 || c.month > 12 || c.day > time[c.month - 1] || c.day < 0) return 0;
     return 1;
 }
 
@@ -15,8 +15,12 @@ void inputTransactionFromFile(std::ifstream& fin, Transaction& a){
     fin.read((char*)&a.amount, sizeof(a.amount));
     int lengthofstring;
     fin.read((char*)&lengthofstring, sizeof(lengthofstring));
-    for (int i = 0; i <= lengthofstring; i++) a.description += "\0";
-    fin.read(&a.description[0], lengthofstring);
+    if (lengthofstring) {
+        a.description.resize(lengthofstring);
+        fin.read(&a.description[0], lengthofstring);
+    } else {
+        a.description.clear(); 
+    }
 }
 
 void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
