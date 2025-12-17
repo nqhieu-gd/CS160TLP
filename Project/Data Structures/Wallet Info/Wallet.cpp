@@ -17,7 +17,7 @@ Wallet :: Wallet() {
 void Wallet :: outWal() {
     std::ofstream fout;
     string path = "..\\..\\Saved Wallet\\";
-    path += wName + ".bin";
+    path += wID + ".bin";
     fout.open(path, std::ios::binary | std::ios::out);
     if (!fout.is_open()) {
         std::cerr << "Error opening the destination path.";
