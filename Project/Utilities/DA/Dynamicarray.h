@@ -19,14 +19,13 @@ public:
 
     //Increase the list's size if not sufficent
     void stretch() {
-        T* temp = new T[this->size*2 + 1];
+        T* temp = new T[this->size*2];
         for (int t = 0; t < this->size; t++) {
             temp[t] = p[t];
         }
         delete[] p;
         p = temp;
         this->size*=2;
-        this->size+=1;
     }
 
     //Add a new item k to the list as the newest item (aka the highest in term of number order)
