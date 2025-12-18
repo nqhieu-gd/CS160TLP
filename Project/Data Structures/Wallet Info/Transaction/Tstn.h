@@ -29,5 +29,5 @@ void inputTransactionFromFile(std::ifstream&, Transaction&); //Date->Amount->siz
 
 void outputTransactiontoFile(std::ofstream&,const Transaction&);
 
-int CompareDate(const Date& a, const Date& b); // 1: a>b; -1: a<b; 0: a=b
+bool CompareDate(const Date& a, const Date& b); // 1: a>b; -1: a<b; 0: a=b
 //Sort via Date -> Calculate and Statistic

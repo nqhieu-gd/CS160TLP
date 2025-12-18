@@ -16,9 +16,10 @@ struct HashMap {
     func<HashNode> map;
 
     HashMap();
+    HashMap(Wallist wlist);
     ~HashMap();
 
-    void GenSource(Wallist wlist);
+    void GenSource();
 
-    void GenCategory(Wallist wlist);
+    void GenCategory();
 };

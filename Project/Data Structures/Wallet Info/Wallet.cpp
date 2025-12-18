@@ -66,6 +66,56 @@ void Wallet :: outWal() {
     fout.close();
 }
 
+//Convert name of an income source to its corresponding ID inside wallet,
+//if no such namepresents, create a new ID.
+string Wallet :: convertNameInc(string name) {
+    string str = name;
+    for (int i = 0; i < str.size(); i++) {
+        str[i] = std::toupper(str[i]);
+    }
+    for (int i = 0; i < is.store; i++) {
+        string sub = is.p[i].iName;
+        for (int j = 0; j < sub.size(); j++) {
+            sub[i] = std::toupper(sub[i]);
+        }
+        if (str == sub) return is.p[i].iID;
+    }
+    str = is.p[is.store].iID;
+    for (int i = 7; i >=0; i--) {
+        if (str[i] == '9') {
+            str[i] = 0;
+            continue;
+        }
+        str[i]++;
+    }
+    return str;
+}
+
+//Convert name of an expense category to its corresponding ID inside wallet,
+//if no such namepresents, create a new ID.
+string Wallet :: convertNameExp(string name) {
+    string str = name;
+    for (int i = 0; i < str.size(); i++) {
+        str[i] = std::toupper(str[i]);
+    }
+    for (int i = 0; i < ec.store; i++) {
+        string sub = ec.p[i].eName;
+        for (int j = 0; j < sub.size(); j++) {
+            sub[i] = std::toupper(sub[i]);
+        }
+        if (str == sub) return ec.p[i].eID;
+    }
+    str = ec.p[is.store].eID;
+    for (int i = 7; i >=0; i--) {
+        if (str[i] == '9') {
+            str[i] = 0;
+            continue;
+        }
+        str[i]++;
+    }
+    return str;
+}
+
 //Add an income, if the source ID has already presented in is (list of income sources),
 //add t to that ID, else create a new ID name.
 void Wallet :: incomeAdd(const Transaction t, const string ID) {

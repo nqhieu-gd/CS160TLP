@@ -9,13 +9,21 @@ HashMap :: HashMap() {
     map.alloc();
 }
 
+HashMap :: HashMap(Wallist wlist) {
+    map.alloc();
+}
+
 HashMap :: ~HashMap() {
     map.dealloc();
 }
 
-void HashMap :: GenSource(Wallist wlist) {
+void HashMap :: GenSource() {
     std::ofstream fout;
-    fout.open("..\\..\\Utility Save Files\\SourceList.bin");
+    fout.open("..\\..\\Utility Save Files\\SourceList.bin", std::ios::binary);
+    if (!fout.is_open() || !fout) {
+        std::cerr << "Can not find the income sources list.";
+        return;
+    }
 }
 
-void HashMap :: GenCategory(Wallist wlist) {}
+void HashMap :: GenCategory() {}

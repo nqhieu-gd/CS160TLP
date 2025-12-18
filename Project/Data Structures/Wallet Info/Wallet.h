@@ -21,6 +21,10 @@ struct Wallet {
 
     void outWal();
 
+    string convertNameInc(string name);
+
+    string convertNameExp(string name);
+
     void incomeAdd(const Transaction t, const string ID);
 
     void expenseAdd(const Transaction t, const string ID);
