@@ -77,9 +77,7 @@ void Wallist :: inWal(string id) {
 //Input the wallet's name.
     fin.read((char*) &ind, 4);
     if (w.p[k].wName.size()) w.p[k].wName.erase(0, w.p[k].wName.size());
-    for (int i = 0; i < ind; i++) {
-        w.p[k].wName += " ";
-    }
+    w.p[k].wName.resize(ind, ' ');
     fin.read(&w.p[k].wName[0], ind);
 //Get the number of income sources and start inputting them.
     fin.read((char*) &ind, 4);
@@ -165,16 +163,17 @@ void Wallist :: outSC() {
         std::cerr << "Can not find the income sources list file.";
         return;
     }
-    int k = isource().map.store;
+    HashMap hm = isource();
+    int k = hm.map.store;
     fout.write((char*) &k, 4);
-    for (int i = 0; i < isource().map.store; i++) {
-        k = isource().map.p[i].name.size();
+    for (int i = 0; i < hm.map.store; i++) {
+        k = hm.map.p[i].name.size();
         fout.write((char*) &k, 4);
-        fout.write((char*) &isource().map.p[i].name[0], k);
-        k = isource().map.p[i].IDlist.store;
+        fout.write((char*) &hm.map.p[i].name[0], k);
+        k = hm.map.p[i].IDlist.store;
         fout.write((char*) &k, 4);
         for (int j = 0; j < k; j++) {
-            fout.write((char*) &isource().map.p[i].IDlist.p[j][0], 16);
+            fout.write((char*) &hm.map.p[i].IDlist.p[j][0], 16);
         }
     }
     fout.close();
@@ -183,16 +182,17 @@ void Wallist :: outSC() {
         std::cerr << "Can not find the income expense categories list file.";
         return;
     }
-    k = ecategory().map.store;
+    hm = ecategory();
+    k = hm.map.store;
     fout.write((char*) &k, 4);
-    for (int i = 0; i < ecategory().map.store; i++) {
-        k = ecategory().map.p[i].name.size();
+    for (int i = 0; i < hm.map.store; i++) {
+        k = hm.map.p[i].name.size();
         fout.write((char*) &k, 4);
-        fout.write((char*) &ecategory().map.p[i].name[0], k);
-        k = ecategory().map.p[i].IDlist.store;
+        fout.write((char*) &hm.map.p[i].name[0], k);
+        k = hm.map.p[i].IDlist.store;
         fout.write((char*) &k, 4);
         for (int j = 0; j < k; j++) {
-            fout.write((char*) &ecategory().map.p[i].IDlist.p[j][0], 16);
+            fout.write((char*) &hm.map.p[i].IDlist.p[j][0], 16);
         }
     }
     fout.close();
