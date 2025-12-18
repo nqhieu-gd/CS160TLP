@@ -1,9 +1,9 @@
 #pragma once
 #include <fstream>
 #include "Transaction\Tstn.h"
-#include "..\..\Utilities\DA\Dynamicarray.h"
-#include "..\Income Source\Sour.cpp"
-#include "..\Expense Category\Cate.cpp"
+#include "..\\..\\Utilities\\DA\\Dynamicarray.h"
+#include "..\\Income Source\\Sour.cpp"
+#include "..\\Expense Category\\Cate.cpp"
 
 using std::string;
 
@@ -36,5 +36,5 @@ struct Wallist {
 
     void CreateWallet();
 
-    void inWal(string name);
+    void inWal(string id);
 };

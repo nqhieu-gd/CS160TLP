@@ -2,7 +2,7 @@
 #include <fstream>
 #include "Transaction\Tstn.h"
 #include "Wallet.h"
-#include "..\..\Utilities\DA\Dynamicarray.h"
+#include "..\\..\\Utilities\\DA\\Dynamicarray.h"
 
 using std::string;
 

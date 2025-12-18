@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "Wallet.h"
-#include "..\..\Utilities\DA\Dynamicarray.h"
+#include "..\\..\\Utilities\\DA\\Dynamicarray.h"
 
 using std::string;
 
