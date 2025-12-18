@@ -75,7 +75,6 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
         return;
     }
     IncomeSource ie(ID);
-    string sub = " ";
     ie.inc.push(t);
     is.push(ie);
     outWal();
