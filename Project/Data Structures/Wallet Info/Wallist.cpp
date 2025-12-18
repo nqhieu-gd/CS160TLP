@@ -20,7 +20,7 @@ Wallist :: ~Wallist() {
 void Wallist :: CreateWallet() {
     Wallet wal;
 //Generate wallet's name by default.
-    int s = w.store; //756
+    int s = w.store; 
     wal.wName = "Wallet number ";
     string sub = " ";
     while (s >= 10) {

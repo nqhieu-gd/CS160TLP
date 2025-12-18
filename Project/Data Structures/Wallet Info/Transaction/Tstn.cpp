@@ -31,12 +31,9 @@ void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
     fout.write(&a.description[0], len);
 }
 
-/*bool CompareDate(const Date& a, const Date& b){
+int CompareDate(const Date& a, const Date& b){
     int c = a.year*10000 + a.month*100 + a.day, d = b.year*10000 + b.month*100 + b.day;
-    return (c > d);
-}*/
-
-bool CompareTransaction(const Transaction& a, const Transaction& b) {
-    int c = a.date.year*10000 + a.date.month*100 + a.date.day, d = b.date.year*10000 + b.date.month*100 + b.date.day;
-    return (c > d);
+    if (c>d) return 1;
+    else if (c==d) return 0;
+    return -1;
 }
