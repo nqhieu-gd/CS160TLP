@@ -7,7 +7,7 @@ template <typename T>
 class func {
 public:
     T* p;
-    int size = 0, store = 0;
+    int size = 64, store = 0;
 
     void alloc() {
         p = new T[this->size];
