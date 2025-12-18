@@ -45,4 +45,6 @@ struct Wallist {
     void CreateWallet();
 
     void inWal(string id);
+
+    void outSC();
 };

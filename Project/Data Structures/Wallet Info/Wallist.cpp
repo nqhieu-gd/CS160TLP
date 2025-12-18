@@ -72,10 +72,7 @@ void Wallist :: inWal(string id) {
     }
     if (k == w.store) CreateWallet();
 //Input wallet ID.
-    for (int i = 1; i < ind; i++) {
-        w.p[k].wID.resize(1);
-        w.p[k].wID.resize(8, ' ');
-    }
+    w.p[k].wID = "W       ";
     fin.read(&w.p[k].wID[1], 7);
 //Input the wallet's name.
     fin.read((char*) &ind, 4);
@@ -159,4 +156,44 @@ HashMap Wallist :: ecategory() {
         }
     }
     return hm;
+}
+
+void Wallist :: outSC() {
+    std::ofstream fout;
+    fout.open("..\\..\\Utility Save Files\\Income.bin", std::ios::binary);
+    if (!fout.is_open()) {
+        std::cerr << "Can not find the income sources list file.";
+        return;
+    }
+    int k = isource().map.store;
+    fout.write((char*) &k, 4);
+    for (int i = 0; i < isource().map.store; i++) {
+        k = isource().map.p[i].name.size();
+        fout.write((char*) &k, 4);
+        fout.write((char*) &isource().map.p[i].name[0], k);
+        k = isource().map.p[i].IDlist.store;
+        fout.write((char*) &k, 4);
+        for (int j = 0; j < k; j++) {
+            fout.write((char*) &isource().map.p[i].IDlist.p[j][0], 16);
+        }
+    }
+    fout.close();
+    fout.open("..\\..\\Utility Save Files\\Expense.bin", std::ios::binary);
+    if (!fout.is_open()) {
+        std::cerr << "Can not find the income expense categories list file.";
+        return;
+    }
+    k = ecategory().map.store;
+    fout.write((char*) &k, 4);
+    for (int i = 0; i < ecategory().map.store; i++) {
+        k = ecategory().map.p[i].name.size();
+        fout.write((char*) &k, 4);
+        fout.write((char*) &ecategory().map.p[i].name[0], k);
+        k = ecategory().map.p[i].IDlist.store;
+        fout.write((char*) &k, 4);
+        for (int j = 0; j < k; j++) {
+            fout.write((char*) &ecategory().map.p[i].IDlist.p[j][0], 16);
+        }
+    }
+    fout.close();
 }
