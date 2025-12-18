@@ -71,12 +71,12 @@ void Wallet :: outWal() {
 string Wallet :: convertNameInc(string name) {
     string str = name;
     for (int i = 0; i < str.size(); i++) {
-        str[i] = std::toupper(str[i]);
+        upper(str[i]);
     }
     for (int i = 0; i < is.store; i++) {
         string sub = is.p[i].iName;
         for (int j = 0; j < sub.size(); j++) {
-            sub[i] = std::toupper(sub[i]);
+            upper(sub[i]);
         }
         if (str == sub) return is.p[i].iID;
     }
@@ -96,12 +96,12 @@ string Wallet :: convertNameInc(string name) {
 string Wallet :: convertNameExp(string name) {
     string str = name;
     for (int i = 0; i < str.size(); i++) {
-        str[i] = std::toupper(str[i]);
+        upper(str[i]);
     }
     for (int i = 0; i < ec.store; i++) {
         string sub = ec.p[i].eName;
         for (int j = 0; j < sub.size(); j++) {
-            sub[i] = std::toupper(sub[i]);
+            upper(sub[i]);
         }
         if (str == sub) return ec.p[i].eID;
     }

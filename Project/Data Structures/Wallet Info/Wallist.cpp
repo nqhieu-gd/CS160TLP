@@ -136,7 +136,7 @@ HashMap Wallist :: isource() {
             string str = w.p[i].is.p[j].iName;
             string sub = w.p[i].wID + w.p[i].is.p[j].iID;
             for (int k = 0; k < str.size(); k++) {
-                str[k] = std::toupper(str[k]);
+                upper(str[k]);
             }
             int check = hm.insert(str);
             hm.map.p[check].IDlist.push(sub);
@@ -152,7 +152,7 @@ HashMap Wallist :: ecategory() {
             string str = w.p[i].ec.p[j].eName;
             string sub = w.p[i].wID + w.p[i].ec.p[j].eID;
             for (int k = 0; k < str.size(); k++) {
-                str[k] = std::toupper(str[k]);
+                upper(str[k]);
             }
             int check = hm.insert(str);
             hm.map.p[check].IDlist.push(sub);

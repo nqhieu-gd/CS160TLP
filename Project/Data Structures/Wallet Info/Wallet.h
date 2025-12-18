@@ -5,6 +5,7 @@
 #include "..\\Income Source\\Sour.cpp"
 #include "..\\Expense Category\\Cate.cpp"
 #include "..\\..\\Utilities\\Hashmap\\HashMap.h"
+#include "..\\..\\Utilities\\Uppercase\\Uppercase.h"
 
 using std::string;
 
