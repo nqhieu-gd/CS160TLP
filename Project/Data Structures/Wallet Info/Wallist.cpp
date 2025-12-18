@@ -20,10 +20,9 @@ Wallist :: ~Wallist() {
 void Wallist :: CreateWallet() {
     Wallet wal;
 //Generate wallet's name by default.
-    int s = w.store;
+    int s = w.store; //756
     wal.wName = "Wallet number ";
     string sub = " ";
-    sub[0] = s%10 + 48;
     while (s >= 10) {
         s = s/10;
         sub += " ";
@@ -32,6 +31,7 @@ void Wallist :: CreateWallet() {
     int k = sub.size();
     while (k > 0) {
         sub[--k] = s%10 + 48;
+        s/=10;
     }
     wal.wName += sub;
 //Generate wallet's ID by default.
