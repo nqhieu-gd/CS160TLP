@@ -4,6 +4,7 @@
 #include "..\\..\\Utilities\\DA\\Dynamicarray.h"
 #include "..\\Income Source\\Sour.cpp"
 #include "..\\Expense Category\\Cate.cpp"
+#include "..\\..\\Utilities\\Hashmap\\HashMap.h"
 
 using std::string;
 
@@ -34,6 +35,8 @@ struct Wallet {
 
 struct Wallist {
     func<Wallet> w;
+    HashMap isource();
+    HashMap ecategory();
 
     Wallist();
     ~Wallist();

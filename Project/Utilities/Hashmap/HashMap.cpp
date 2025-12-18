@@ -1,15 +1,14 @@
 #include "HashMap.h"
-#include <fstream>
 
-HashNode :: HashNode(string n, string id): name(n), ID(id) {}
-
-HashNode :: ~HashNode() {}
-
-HashMap :: HashMap() {
-    map.alloc();
+HashNode :: HashNode(string n): name(n) {
+    IDlist.alloc();
 }
 
-HashMap :: HashMap(Wallist wlist) {
+HashNode :: ~HashNode() {
+    IDlist.dealloc();
+}
+
+HashMap :: HashMap() {
     map.alloc();
 }
 
@@ -17,13 +16,17 @@ HashMap :: ~HashMap() {
     map.dealloc();
 }
 
-void HashMap :: GenSource() {
-    std::ofstream fout;
-    fout.open("..\\..\\Utility Save Files\\SourceList.bin", std::ios::binary);
-    if (!fout.is_open() || !fout) {
-        std::cerr << "Can not find the income sources list.";
-        return;
+long HashMap :: search(string n) {
+    for (int i = 0; i < map.store; i++) {
+        if (n == map.p[i].name) return i;
     }
+    return -1;
 }
 
-void HashMap :: GenCategory() {}
+long HashMap :: insert(string n) {
+    long ind = search(n);
+    if (ind > -1) return ind;
+    HashNode node(n);
+    map.push(node);
+    return map.store - 1;
+}

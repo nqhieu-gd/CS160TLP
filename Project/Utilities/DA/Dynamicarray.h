@@ -15,6 +15,8 @@ public:
 
     void dealloc() {
         if(p) delete[] p;
+        size = 64;
+        store = 0;
     }
 
     //Increase the list's size if not sufficent
@@ -45,7 +47,7 @@ public:
     //Create a completely new array with default constructor.
     func() {
         p = nullptr;
-        size = 0;
+        size = 64;
         store = 0;
     }
 

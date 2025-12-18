@@ -128,3 +128,35 @@ void Wallist :: inWal(string id) {
     }
     fin.close();
 }
+
+HashMap Wallist :: isource() {
+    HashMap hm;
+    for (int i = 0; i < w.store; i++) {
+        for (int j = 0; j < w.p[i].is.store; j++) {
+            string str = w.p[i].is.p[j].iName;
+            string sub = w.p[i].wID + w.p[i].is.p[j].iID;
+            for (int k = 0; k < str.size(); k++) {
+                str[k] = std::toupper(str[k]);
+            }
+            int check = hm.insert(str);
+            hm.map.p[check].IDlist.push(sub);
+        }
+    }
+    return hm;
+}
+
+HashMap Wallist :: ecategory() {
+    HashMap hm;
+    for (int i = 0; i < w.store; i++) {
+        for (int j = 0; j < w.p[i].ec.store; j++) {
+            string str = w.p[i].ec.p[j].eName;
+            string sub = w.p[i].wID + w.p[i].ec.p[j].eID;
+            for (int k = 0; k < str.size(); k++) {
+                str[k] = std::toupper(str[k]);
+            }
+            int check = hm.insert(str);
+            hm.map.p[check].IDlist.push(sub);
+        }
+    }
+    return hm;
+}

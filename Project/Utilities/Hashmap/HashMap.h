@@ -6,9 +6,9 @@ using std::string;
 
 struct HashNode {
     string name;
-    string ID;
+    func<string> IDlist;
 
-    HashNode(string n, string id);
+    HashNode(string n);
     ~HashNode();
 };
 
@@ -16,10 +16,9 @@ struct HashMap {
     func<HashNode> map;
 
     HashMap();
-    HashMap(Wallist wlist);
     ~HashMap();
 
-    void GenSource();
+    long search(string n);
 
-    void GenCategory();
+    long insert(string n);
 };
