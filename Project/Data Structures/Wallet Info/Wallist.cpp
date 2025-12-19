@@ -75,9 +75,6 @@ bool Wallist :: inWal(string id) {
     }
     if (k == w.store) {
         CreateWallet();
-        std::ofstream fout;
-        fout.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::binary);
-        fout.close();
     }
 //Input wallet ID.
     w.p[k].wID = "W       ";
@@ -107,6 +104,7 @@ bool Wallist :: inWal(string id) {
             istemp.inc.push(t);
         }
         w.p[k].is.push(istemp);
+        istemp.inc.dealloc();
     }
 //Tread similarly with expense categories.
     fin.read((char*) &ind, 4);
@@ -128,6 +126,7 @@ bool Wallist :: inWal(string id) {
             ectemp.exp.push(t);
         }
         w.p[k].ec.push(ectemp);
+        ectemp.exp.dealloc();
     }
     fin.close();
     return 1;
@@ -165,6 +164,7 @@ HashMap Wallist :: ecategory() {
     return hm;
 }
 
+//Output list of IS and EC to files.
 void Wallist :: outSC() {
     std::ofstream fout;
     fout.open("..\\..\\Utility Save Files\\Income.bin", std::ios::binary);
@@ -207,10 +207,11 @@ void Wallist :: outSC() {
     fout.close();
 }
 
+//Delete a wallet.
 void Wallist :: delWal(int x) {
     std::ofstream fout;
     fout.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::binary);
-    fout.write((char*) &w.p[w.store - 1].wID, 8);
+    fout.write((char*) &w.p[w.store - 1].wID[0], 8);
     if (w.sub(x)) {
         for (int i = x - 1; i < w.store; i++) {
             for (int j = 7; j >= 0; j--) {
@@ -224,14 +225,17 @@ void Wallist :: delWal(int x) {
         }
     }
     fout.close();
+    outWallist();
 }
 
+//Output list of wallets to files.
 void Wallist :: outWallist() {
     std::fstream file;
     string str = "W0000001";
-    string term;
+    string term = "W0000000";
     file.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::in | std::ios::binary);
-    file.read((char*) &term[0], 8);
+    file.seekg(0, std::ios::end);
+    if (file.tellg() != 0) file.read((char*) &term[0], 8);
     file.close();
     int ind = 0;
     while (str != term && ind < w.store) {
@@ -249,7 +253,9 @@ void Wallist :: outWallist() {
             break;
         }
     }
-    term = "..\\..\\Saved Wallet\\" + term;
-    file.open(term, std::ios::out);
-    file.close();
+    if (term != "W0000000") {
+        term = "..\\..\\Saved Wallet\\" + term;
+        file.open(term, std::ios::out | std::ios::binary);
+        file.close();
+    }
 }

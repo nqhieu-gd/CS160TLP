@@ -76,14 +76,15 @@ string Wallet :: convertNameInc(string name) {
     for (int i = 0; i < is.store; i++) {
         string sub = is.p[i].iName;
         for (int j = 0; j < sub.size(); j++) {
-            upper(sub[i]);
+            upper(sub[j]);
         }
         if (str == sub) return is.p[i].iID;
     }
-    str = is.p[is.store].iID;
+    if (is.store == 0) return "00000001";
+    str = is.p[is.store - 1].iID;
     for (int i = 7; i >=0; i--) {
         if (str[i] == '9') {
-            str[i] = 0;
+            str[i] = '0';
             continue;
         }
         str[i]++;
@@ -101,14 +102,15 @@ string Wallet :: convertNameExp(string name) {
     for (int i = 0; i < ec.store; i++) {
         string sub = ec.p[i].eName;
         for (int j = 0; j < sub.size(); j++) {
-            upper(sub[i]);
+            upper(sub[j]);
         }
         if (str == sub) return ec.p[i].eID;
     }
-    str = ec.p[is.store].eID;
+    if (ec.store == 0) return "00000001";
+    str = ec.p[is.store - 1].eID;
     for (int i = 7; i >=0; i--) {
         if (str[i] == '9') {
-            str[i] = 0;
+            str[i] = '0';
             continue;
         }
         str[i]++;
@@ -127,6 +129,7 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
     IncomeSource ie(ID);
     ie.inc.push(t);
     is.push(ie);
+    ie.inc.dealloc();
     outWal();
 }
 
@@ -141,6 +144,7 @@ void Wallet :: expenseAdd(const Transaction t, const string ID) {
     ExpenseCategory et(ID);
     et.exp.push(t);
     ec.push(et);
+    et.exp.dealloc();
     outWal();
 }
 

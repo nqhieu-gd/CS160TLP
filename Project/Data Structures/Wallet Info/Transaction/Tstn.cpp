@@ -28,7 +28,7 @@ void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
     fout.write((char*)&a.amount,sizeof(a.amount));
     int len=a.description.length();
     fout.write((char*)&len, sizeof(len));
-    fout.write(&a.description[0], len);
+    if (a.description != "") fout.write(&a.description[0], len);
 }
 
 bool CompareDate(const Date& a, const Date& b){

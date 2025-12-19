@@ -2,8 +2,8 @@
 #include <fstream>
 #include "Transaction\Tstn.h"
 #include "..\\..\\Utilities\\DA\\Dynamicarray.h"
-#include "..\\Income Source\\Sour.cpp"
-#include "..\\Expense Category\\Cate.cpp"
+#include "..\\Income Source\\Sour.h"
+#include "..\\Expense Category\\Cate.h"
 #include "..\\..\\Utilities\\Hashmap\\HashMap.h"
 #include "..\\..\\Utilities\\Uppercase\\Uppercase.h"
 
@@ -42,6 +42,8 @@ struct Wallist {
     Wallist();
     ~Wallist();
 
+    void outWallist();
+
     void CreateWallet();
 
     bool inWal(string id);
@@ -49,6 +51,4 @@ struct Wallist {
     void outSC();
 
     void delWal(int x);
-
-    void outWallist();
 };
