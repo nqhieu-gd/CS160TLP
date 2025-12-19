@@ -156,7 +156,7 @@ void TransactionManagement(Wallist& wallist){
         case 0: return;
         case 1: {int index_IS=chooseIS(wallist);
                 if (index_IS==0) return;
-                if (--index_IS==wallist.w.p[index_wallet].is.store) wallist.CreateInSr();    //Create new IS and EC
+//                if (--index_IS==wallist.w.p[index_wallet].is.store) wallist.CreateInSr();    //Create new IS and EC
                 cout<<"========================================================"<<endl;
                 cout<<endl;
                 cout<<"Wallet: "<<wallist.w.p[index_wallet].wName<<endl;
@@ -170,7 +170,7 @@ void TransactionManagement(Wallist& wallist){
                 break;}
         case 2: {int index_EC=chooseEC(wallist);
                 if (index_EC==0) return;
-                if (--index_EC==wallist.w.p[index_wallet].ec.store) wallist.CreateEcCa();    //Create new IS and EC
+//                if (--index_EC==wallist.w.p[index_wallet].ec.store) wallist.CreateEcCa();    //Create new IS and EC
                 cout<<"========================================================"<<endl;
                 cout<<endl;
                 cout<<"Wallet: "<<wallist.w.p[index_wallet].wName<<endl;

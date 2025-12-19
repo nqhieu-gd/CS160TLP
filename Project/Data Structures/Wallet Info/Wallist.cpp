@@ -73,7 +73,12 @@ bool Wallist :: inWal(string id) {
             break;
         }
     }
-    if (k == w.store) CreateWallet();
+    if (k == w.store) {
+        CreateWallet();
+        std::ofstream fout;
+        fout.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::binary);
+        fout.close();
+    }
 //Input wallet ID.
     w.p[k].wID = "W       ";
     fin.read(&w.p[k].wID[1], 7);
@@ -228,12 +233,13 @@ void Wallist :: outWallist() {
     file.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::in | std::ios::binary);
     file.read((char*) &term[0], 8);
     file.close();
-    while (str != term) {
-        int ind = 0;
+    int ind = 0;
+    while (str != term && ind < w.store) {
+        ind = 0;
         for (int i = 1; i < 8; i++) {
             ind += ind*9 + str[i] - 48;
         }
-        w.p[ind].outWal();
+        w.p[ind - 1].outWal();
         for (int i = 7; i >= 0; i--) {
             if (str[i] == '9') {
                 str[i] = '0';
