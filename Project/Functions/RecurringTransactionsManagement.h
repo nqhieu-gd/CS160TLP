@@ -7,27 +7,30 @@
 #include "../Data Structures/Expense Category/Cate.h"
 #include "../Data Structures/Income Source/Sour.h"
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
+#include "TransactionManagement.h"
 
 struct Auto_Transaction{
-    Transaction auto_transaction;
-    Date last_add;
+    Transaction transaction;
+    Date last_add={0,0,0};
     Date start_date;
     Date end_date;
+    string wID="";
+    string iID="";
+    string eID="";
 };
 
 struct Auto_Transaction_Management{
     func<Auto_Transaction> atm;
-    void init();
-    void clear();
+    void init(); // Initial an empty dynamic array
+    void clear();// clear all dynamic data before closing the app
+    void read(); // Read data from "autotstn.bin"
+    void write();// Write data to "autotstn.bin"
+    void erase(int k);// Erase tstn number k (index: k-1) 
+    void checkexpired(); //If the transaction isn't added anymore-> delete
+    //If its Wallet or its IS/EC was deleted -> Deleted it too
+    //If its Wallet ID / IS/EC ID was in delete list -> erase
 };
 
-void Auto_Transaction_Management :: init(){
-    if (atm.p==nullptr){
-        atm.dealloc();
-        atm.alloc();
-    }
-}
-
-void Auto_Transaction_Management :: clear(){
-    atm.dealloc();
-}
+void autoadd(); //If the date is ok ->add
+// At the same time, it will clear expired Transaction
+void editautotransaction(Auto_Transaction_Management& ); //User can delete or add an auto transaction
