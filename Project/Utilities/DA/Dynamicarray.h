@@ -15,6 +15,7 @@ public:
 
     void dealloc() {
         if(p) delete[] p;
+        p=nullptr;
         size = 64;
         store = 0;
     }
