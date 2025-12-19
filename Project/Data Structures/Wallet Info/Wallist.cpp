@@ -203,5 +203,47 @@ void Wallist :: outSC() {
 }
 
 void Wallist :: delWal(int x) {
-    w.sub(x);
+    std::ofstream fout;
+    fout.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::binary);
+    fout.write((char*) &w.p[w.store - 1].wID, 8);
+    if (w.sub(x)) {
+        for (int i = x - 1; i < w.store; i++) {
+            for (int j = 7; j >= 0; j--) {
+                if (w.p[i].wID[j] == '0') {
+                    w.p[i].wID[j] = '9';
+                    continue;
+                }
+                w.p[i].wID[j]--;
+                break;
+            }
+        }
+    }
+    fout.close();
+}
+
+void Wallist :: outWallist() {
+    std::fstream file;
+    string str = "W0000001";
+    string term;
+    file.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::in | std::ios::binary);
+    file.read((char*) &term[0], 8);
+    file.close();
+    while (str != term) {
+        int ind = 0;
+        for (int i = 1; i < 8; i++) {
+            ind += ind*9 + str[i] - 48;
+        }
+        w.p[ind].outWal();
+        for (int i = 7; i >= 0; i--) {
+            if (str[i] == '9') {
+                str[i] = '0';
+                continue;
+            }
+            str[i]++;
+            break;
+        }
+    }
+    term = "..\\..\\Saved Wallet\\" + term;
+    file.open(term, std::ios::out);
+    file.close();
 }

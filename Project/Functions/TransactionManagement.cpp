@@ -194,8 +194,8 @@ Wallist inWallist() {
                 std::cerr << "Wallet limit exceeded!";
                 return def;
             }
-            if (id[i] == 9) {
-                id[i] = 0;
+            if (id[i] == '9') {
+                id[i] = '0';
                 continue;
             }
             id[i]++;

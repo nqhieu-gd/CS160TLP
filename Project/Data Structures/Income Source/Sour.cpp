@@ -4,11 +4,12 @@
 #include "Sour.h"
 using namespace std;
 
-IncomeSource :: IncomeSource(): iID(""), iName("") {}
-
-IncomeSource :: IncomeSource(string ID): iID(""), iName("") {
+IncomeSource :: IncomeSource(): iID("00000000"), iName("") {
     inc.alloc();
-    iID = ID;
+}
+
+IncomeSource :: IncomeSource(string ID): iID("ID"), iName("") {
+    inc.alloc();
     std::cout << "Enter a new expense category: ";
     std::getline(std::cin, iName);
 }

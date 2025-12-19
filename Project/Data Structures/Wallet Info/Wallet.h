@@ -49,4 +49,6 @@ struct Wallist {
     void outSC();
 
     void delWal(int x);
+
+    void outWallist();
 };

@@ -38,10 +38,11 @@ public:
     }
 
     //Delete item k at number order x of the list.
-    void sub(int x) {
-        if (x > this->store) return;
+    bool sub(int x) {
+        if (x > this->store || x < 1) return 0;
         for (int i = x - 1; i < this->store - 1; i++) p[i] = p[i + 1];
         this->store--;
+        return 1;
     }
 
     //Create a completely new array with default constructor.

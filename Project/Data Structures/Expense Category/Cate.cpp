@@ -4,11 +4,12 @@
 #include "Cate.h"
 using namespace std;
 
-ExpenseCategory :: ExpenseCategory(): eID(""), eName("") {}
-
-ExpenseCategory :: ExpenseCategory(string ID): eID(""), eName("") {
+ExpenseCategory :: ExpenseCategory(): eID("00000000"), eName("") {
     exp.alloc();
-    eID = ID;
+}
+
+ExpenseCategory :: ExpenseCategory(string ID): eID("ID"), eName("") {
+    exp.alloc();
     std::cout << "Enter a new expense category: ";
     std::getline(std::cin, eName);
 }
