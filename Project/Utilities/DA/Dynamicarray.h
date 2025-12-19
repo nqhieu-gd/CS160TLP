@@ -19,7 +19,7 @@ public:
         store = 0;
     }
 
-    //Increase the list's size if not sufficent
+    //Increase the list's size if not sufficent.
     void stretch() {
         T* temp = new T[this->size*2];
         for (int t = 0; t < this->size; t++) {
@@ -30,14 +30,14 @@ public:
         this->size*=2;
     }
 
-    //Add a new item k to the list as the newest item (aka the highest in term of number order)
+    //Add a new item k to the list as the newest item (aka the highest in term of number order).
     void push(T k) {
         while (this->store >= this->size) this->stretch();
         p[this->store] = k;
         this->store++;
     }
 
-    //Delete item k at index x of the list
+    //Delete item k at number order x of the list.
     void sub(int x) {
         if (x > this->store) return;
         for (int i = x - 1; i < this->store - 1; i++) p[i] = p[i + 1];

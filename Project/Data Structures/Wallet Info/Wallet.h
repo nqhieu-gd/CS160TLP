@@ -44,7 +44,9 @@ struct Wallist {
 
     void CreateWallet();
 
-    void inWal(string id);
+    bool inWal(string id);
 
     void outSC();
+
+    void delWal(int x);
 };

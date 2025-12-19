@@ -44,7 +44,7 @@ void Wallist :: CreateWallet() {
     w.push(wal);
 }
 
-void Wallist :: inWal(string id) {
+bool Wallist :: inWal(string id) {
 //Create a string represent the save file of the wallet.
     string file = "..\\..\\Saved Wallet\\";
     file += id;
@@ -54,8 +54,11 @@ void Wallist :: inWal(string id) {
     fin.open(file, std::ios::binary | std::ios::in);
     if (!fin.is_open()) {
         std::cerr << "Can not find the wallet source file.";
-        return;
+        return 0;
     }
+    fin.seekg(0, std::ios::end);
+    if (fin.tellg() == 0) return 0;
+    fin.seekg(0, std::ios::beg);
 //If wID already presented in wallet list, update wallet of that ID, else create a new wallet.
     int k = w.store, ind = 8, temp = 0; //k represent the index of the wallet we want to update/add;
                                         //ind is for processing the size of name or id of the wallet, as well as the number of IS and EC.
@@ -122,6 +125,7 @@ void Wallist :: inWal(string id) {
         w.p[k].ec.push(ectemp);
     }
     fin.close();
+    return 1;
 }
 
 HashMap Wallist :: isource() {
@@ -196,4 +200,8 @@ void Wallist :: outSC() {
         }
     }
     fout.close();
+}
+
+void Wallist :: delWal(int x) {
+    w.sub(x);
 }

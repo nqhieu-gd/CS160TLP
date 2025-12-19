@@ -8,7 +8,7 @@
 #include "../Data Structures/Income Source/Sour.h"
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 
-
+using std::string;
 
 //Choosing between Income/ Expense Management
 int ChooseIMorEM(){
@@ -48,7 +48,7 @@ bool ExamineDate(const Date& a){
 int chooseWallet(const Wallist& wallist){
     cout<<"========================================================"<<endl;
     cout<<endl;
-    cout<<"This is the list of Wallets"<<endl;
+    cout<<"This is the list of Wallets:"<<endl;
     for (int i=0;i<wallist.w.store;++i)
         cout<<i+1<<". "<<wallist.w.p[i].wName<<endl;
     cout<<wallist.w.store+1<<". Create a new Wallet."<<endl;
@@ -58,7 +58,7 @@ int chooseWallet(const Wallist& wallist){
     int choose;
     cout<<"Please enter the Wallet number:"<<endl;
     cin>>choose;
-    while (choose<0||choose>wallist.w.store){
+    while (choose<0||choose>wallist.w.store+1){
         cout<<"Invalid number! Please try again!"<<endl;
         cout<<"Please enter the Wallet number:"<<endl;
         cin>>choose;
@@ -183,4 +183,24 @@ void TransactionManagement(Wallist& wallist){
                 wallist.w.p[index_wallet].ec.p[index_EC].exp.push(a);
                 break;}
     }
+}
+
+Wallist inWallist() {
+    Wallist def;
+    string id = "W0000001";
+    while (def.inWal(id)) {
+        for (int i = 7; i >= 0; i--) {
+            if (i == 0) {
+                std::cerr << "Wallet limit exceeded!";
+                return def;
+            }
+            if (id[i] == 9) {
+                id[i] = 0;
+                continue;
+            }
+            id[i]++;
+            break;
+        }
+    }
+    return def;
 }
