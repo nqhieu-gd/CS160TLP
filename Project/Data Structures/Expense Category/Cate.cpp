@@ -8,9 +8,10 @@ ExpenseCategory :: ExpenseCategory(): eID("00000000"), eName("") {
     exp.alloc();
 }
 
-ExpenseCategory :: ExpenseCategory(string ID): eID("ID"), eName("") {
+ExpenseCategory :: ExpenseCategory(string ID): eID(ID), eName("") {
     exp.alloc();
     std::cout << "Enter a new expense category: ";
+    if (cin.peek() == '\n') std::cin.ignore();
     std::getline(std::cin, eName);
 }
 

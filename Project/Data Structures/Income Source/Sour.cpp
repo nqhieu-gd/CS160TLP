@@ -8,9 +8,10 @@ IncomeSource :: IncomeSource(): iID("00000000"), iName("") {
     inc.alloc();
 }
 
-IncomeSource :: IncomeSource(string ID): iID("ID"), iName("") {
+IncomeSource :: IncomeSource(string ID): iID(ID), iName("") {
     inc.alloc();
-    std::cout << "Enter a new expense category: ";
+    std::cout << "Enter a new income source: ";
+    if (cin.peek() == '\n') std::cin.ignore();
     std::getline(std::cin, iName);
 }
 
