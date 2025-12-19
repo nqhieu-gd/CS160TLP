@@ -9,6 +9,9 @@
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 
 using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
 
 //Choosing between Income/ Expense Management
 int ChooseIMorEM(){

@@ -9,6 +9,9 @@
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 #include "TransactionManagement.h"
 
+using std::ifstream;
+using std::ofstream;
+
 void Auto_Transaction_Management :: init(){
     if (atm.p==nullptr){
         atm.alloc();
