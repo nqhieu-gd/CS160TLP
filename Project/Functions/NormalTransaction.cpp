@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <fstream>
-#include "TransactionManagement.h"
+#include "NormalTransaction.h"
 #include "../Utilities/DA/Dynamicarray.h"
 #include "../Data Structures/Wallet Info/Wallet.h"
 #include "../Data Structures/Expense Category/Cate.h"
