@@ -8,7 +8,7 @@
 using std::string;
 
 struct ExpenseCategory {
-    Auto_Transaction_Management e_atm;
+    Auto_Transaction_List e_atm;
     string eID;
     string eName;
     func<Transaction> exp;

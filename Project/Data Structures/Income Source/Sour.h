@@ -8,7 +8,7 @@
 using std::string;
 
 struct IncomeSource {
-    Auto_Transaction_Management i_atm;
+    Auto_Transaction_List i_atm;
     string iID;
     string iName;
     func<Transaction> inc;

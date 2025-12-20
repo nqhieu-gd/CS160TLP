@@ -8,18 +8,18 @@
 using std::ifstream;
 using std::ofstream;
 
-void Auto_Transaction_Management :: init(){
+void Auto_Transaction_List :: init(){
     if (atm.p==nullptr){
         atm.alloc();   
     }
 }
 
-void Auto_Transaction_Management :: clear(){
+void Auto_Transaction_List :: clear(){
     atm.dealloc();
 }
 
 //Read from file
-void Auto_Transaction_Management :: readatm(ifstream& fin){
+void Auto_Transaction_List :: readatm(ifstream& fin){
     init();
     // Get number of auto trtn:
     int count=0;
@@ -41,7 +41,7 @@ void Auto_Transaction_Management :: readatm(ifstream& fin){
 }
 
 //Update to file
-void Auto_Transaction_Management :: writeatm(ofstream& fout){
+void Auto_Transaction_List :: writeatm(ofstream& fout){
     //First, number of autotransaction
     fout.write((char*)atm.store,sizeof(int));
     //Print each auto transaction
@@ -56,12 +56,12 @@ void Auto_Transaction_Management :: writeatm(ofstream& fout){
 }
 
 //Erase the tstn number k (index: k-1)
-void Auto_Transaction_Management:: erase(int k){
+void Auto_Transaction_List:: erase(int k){
     atm.sub(k);
 }
 
 //Erase all the tstn not available
-void Auto_Transaction_Management:: checkexpired(){
+void Auto_Transaction_List:: checkexpired(){
     for (int i=0;i<atm.store;++i)
         //Check if the autotransaction is infinite?
         if (atm.p[i].end_date.day==0&&atm.p[i].end_date.month==0&&atm.p[i].end_date.year==0) continue;

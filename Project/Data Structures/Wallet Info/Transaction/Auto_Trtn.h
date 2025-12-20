@@ -16,7 +16,7 @@ struct Auto_Transaction{
 };
 
 // Each Income Source or Expense Category will store a Auto_Transaction_Management
-struct Auto_Transaction_Management{
+struct Auto_Transaction_List{
     func<Auto_Transaction> atm;
     void init(); // Initial an empty dynamic array
     void clear();// clear all dynamic data before closing the app
