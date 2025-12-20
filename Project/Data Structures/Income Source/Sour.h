@@ -21,5 +21,5 @@ struct IncomeSource {
     IncomeSource(string ID);
     ~IncomeSource();
 
-    void irename(string name);
+    void iRename(string name);
 };
