@@ -31,3 +31,5 @@ void outputTransactiontoFile(std::ofstream&,const Transaction&);
 
 bool CompareDate(const Date& a, const Date& b); // 1: a>b; -1: a<b; 0: a=b
 //Sort via Date -> Calculate and Statistic
+
+Date GetCurrDate(); //Get Current Date :))

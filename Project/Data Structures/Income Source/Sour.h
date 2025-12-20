@@ -3,10 +3,12 @@
 #include <string>
 #include "..\\Wallet Info\\Transaction\\Tstn.h"
 #include "..\\..\\Utilities\\DA\\Dynamicarray.h"
+#include "..\Wallet Info\Transaction\Auto_Trtn.h"
 
 using std::string;
 
 struct IncomeSource {
+    Auto_Transaction_Management i_atm;
     string iID;
     string iName;
     func<Transaction> inc;

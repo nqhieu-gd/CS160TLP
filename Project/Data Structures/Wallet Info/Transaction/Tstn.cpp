@@ -35,3 +35,13 @@ bool CompareDate(const Date& a, const Date& b){
     int c = a.year*10000 + a.month*100 + a.day, d = b.year*10000 + b.month*100 + b.day;
     return (c > d);
 }
+//Get current Date
+Date GetCurrDate(){
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    Date a;
+    a.year = 1900 + ltm->tm_year; 
+    a.month = 1 + ltm->tm_mon;   
+    a.day = ltm->tm_mday;
+    return a;
+}

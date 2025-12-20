@@ -29,17 +29,6 @@ int ChooseIMorEM(){
     return choose;
 }
 
-//Get current Date
-Date GetCurrDate(){
-    time_t now = time(0);
-    tm *ltm = localtime(&now);
-    Date a;
-    a.year = 1900 + ltm->tm_year; 
-    a.month = 1 + ltm->tm_mon;   
-    a.day = ltm->tm_mday;
-    return a;
-}
-
 //Check if the Date is suitable
 bool ExamineDate(const Date& a){
     if (!CheckvalidDate(a)) return false;

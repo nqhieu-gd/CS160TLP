@@ -10,7 +10,6 @@
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 
 int ChooseIMorEM();
-Date GetCurrDate();
 bool ExamineDate(const Date&);
 int chooseWallet(const Wallist&);
 Date inputDate();
