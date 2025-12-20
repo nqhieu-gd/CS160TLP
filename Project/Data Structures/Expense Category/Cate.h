@@ -21,5 +21,5 @@ struct ExpenseCategory {
     ExpenseCategory(string ID);
     ~ExpenseCategory();
 
-    void erename(string name);
+    void eRename(string name);
 };

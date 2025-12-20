@@ -21,6 +21,6 @@ long long IncomeSource :: income() {
     return a;
 }
 
-void IncomeSource :: irename(string name) {
+void IncomeSource :: iRename(string name) {
     iName = name;
 }

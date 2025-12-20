@@ -21,6 +21,6 @@ long long ExpenseCategory :: expense() {
     return a;
 }
 
-void ExpenseCategory :: erename(string name) {
+void ExpenseCategory :: eRename(string name) {
     eName = name;
 }
