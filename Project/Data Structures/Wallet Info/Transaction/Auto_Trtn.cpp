@@ -6,6 +6,21 @@
 using std::ifstream;
 using std::ofstream;
 
+bool Auto_Transaction ::autoadd(){
+    if (last_add.day==0){
+        if (end_date.day==0) if (!CompareDate(start_date,GetCurrDate())) return true; //If start_date<=Curr_Date
+        // if start_date<=CurrDate<=end_date
+        if (end_date.day!=0) if (!CompareDate(start_date,GetCurrDate())&&!CompareDate(GetCurrDate(),end_date)) return true;
+    }
+    else{
+        int a=start_date.month+start_date.year*12;
+        int b=last_add.month+last_add.year*12;
+        if (end_date.day==0);
+    }
+    return false;
+}
+
+
 void Auto_Transaction_List :: init(){
     if (atm.p==nullptr){
         atm.alloc();   

@@ -12,7 +12,8 @@ struct Auto_Transaction{
     Transaction transaction;
     Date last_add={0,0,0};
     Date start_date;
-    Date end_date;  //If it is forever, 0/0/0 too
+    Date end_date={0,0,0};  //If it is forever, 0/0/0 too
+    bool autoadd();
 };
 
 // Each Income Source or Expense Category will store a Auto_Transaction_Management
