@@ -2,12 +2,6 @@
 #include <fstream>
 #include <ctime>
 #include "RecurringTransaction.h"
-#include "../Utilities/DA/Dynamicarray.h"
-#include "../Data Structures/Expense Category/Cate.h"
-#include "../Data Structures/Income Source/Sour.h"
-#include "../Data Structures/Wallet Info/Wallet.h"
-#include "../Data Structures/Wallet Info/Transaction/Tstn.h"
-#include "../Data Structures/Wallet Info/Transaction/Auto_Trtn.h"
 
 using std::ifstream;
 using std::ofstream;

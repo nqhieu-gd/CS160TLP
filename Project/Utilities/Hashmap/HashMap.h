@@ -1,6 +1,5 @@
 #pragma once
 #include "../DA/Dynamicarray.h"
-#include "../../Data Structures/Wallet Info/Wallet.h"
 
 using std::string;
 

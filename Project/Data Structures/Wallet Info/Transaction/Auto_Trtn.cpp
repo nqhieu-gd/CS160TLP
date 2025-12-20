@@ -2,8 +2,6 @@
 #include <ctime>
 #include <fstream>
 #include "Auto_Trtn.h"
-#include "../../../Utilities/DA/Dynamicarray.h"
-#include "Tstn.h"
 
 using std::ifstream;
 using std::ofstream;

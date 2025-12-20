@@ -2,11 +2,6 @@
 #include <ctime>
 #include <fstream>
 #include "NormalTransaction.h"
-#include "../Utilities/DA/Dynamicarray.h"
-#include "../Data Structures/Wallet Info/Wallet.h"
-#include "../Data Structures/Expense Category/Cate.h"
-#include "../Data Structures/Income Source/Sour.h"
-#include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 
 using std::string;
 using std::cout;
