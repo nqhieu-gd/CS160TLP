@@ -14,7 +14,7 @@ Wallet :: Wallet() {
 //Used after each change made in the wallet.
 void Wallet :: outWal() {
     std::ofstream fout;
-    string path = "..\\..\\Saved Wallet\\";
+    string path = "../../Saved Wallet/";
     path += wID + ".bin";
     fout.open(path, std::ios::binary | std::ios::out);
     if (!fout.is_open()) {
@@ -133,15 +133,13 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
                     break;
                 }
             }
+            return;
         }
-        outWal();
-        return;
     }
     IncomeSource ie(ID);
     ie.inc.push(t);
     is.push(ie);
     ie.inc.dealloc();
-    outWal();
 }
 
 //Add an expense, if the category ID has already presented in ec (list of expense categories),
@@ -156,15 +154,13 @@ void Wallet :: expenseAdd(const Transaction t, const string ID) {
                     break;
                 }
             }
+            return;
         }
-        outWal();
-        return;
     }
     ExpenseCategory et(ID);
     et.exp.push(t);
     ec.push(et);
     et.exp.dealloc();
-    outWal();
 }
 
 //Calculate the current month's total balance (total income minus total expense),
@@ -204,4 +200,25 @@ long long Wallet :: curBalance() {
         }
     }
     return bal;
+}
+
+void Wallet :: ECAdd(Transaction t, string name) {
+    string id = convertNameExp(name);
+    int k = ec.store;
+    expenseAdd(t, id);
+    if (k < ec.store) {
+        ec.p[ec.store - 1].eRename(name);
+    }
+    outWal();
+}
+
+void Wallet :: ISAdd(Transaction t, string name) {
+    string id = convertNameInc(name);
+    int k = is.store;
+    string sub = id;
+    incomeAdd(t, id);
+    if (k < is.store) {
+        is.p[is.store - 1].iRename(name);
+    }
+    outWal();
 }

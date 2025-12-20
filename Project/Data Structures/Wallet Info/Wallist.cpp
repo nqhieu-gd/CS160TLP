@@ -18,14 +18,14 @@ Wallist :: ~Wallist() {
 void Wallist :: CreateWallet() {
     Wallet wal;
 //Generate wallet's name by default.
-    int s = w.store; 
+    int s = w.store + 1; 
     wal.wName = "Wallet number ";
     string sub = " ";
     while (s >= 10) {
         s = s/10;
         sub += " ";
     }
-    s = w.store;
+    s = w.store + 1;
     int k = sub.size();
     while (k > 0) {
         sub[--k] = s%10 + 48;
@@ -44,7 +44,7 @@ void Wallist :: CreateWallet() {
 
 bool Wallist :: inWal(string id) {
 //Create a string represent the save file of the wallet.
-    string file = "..\\..\\Saved Wallet\\";
+    string file = "../../Saved Wallet/";
     file += id;
     file += ".bin";
     Transaction t;
@@ -167,7 +167,7 @@ HashMap Wallist :: ecategory() {
 //Output list of IS and EC to files.
 void Wallist :: outSC() {
     std::ofstream fout;
-    fout.open("..\\..\\Utility Save Files\\Income.bin", std::ios::binary);
+    fout.open("../../Utility Save Files/Income.bin", std::ios::binary);
     if (!fout.is_open()) {
         std::cerr << "Can not find the income sources list file.";
         return;
@@ -186,7 +186,7 @@ void Wallist :: outSC() {
         }
     }
     fout.close();
-    fout.open("..\\..\\Utility Save Files\\Expense.bin", std::ios::binary);
+    fout.open("../../Utility Save Files/Expense.bin", std::ios::binary);
     if (!fout.is_open()) {
         std::cerr << "Can not find the income expense categories list file.";
         return;
@@ -209,9 +209,6 @@ void Wallist :: outSC() {
 
 //Delete a wallet.
 void Wallist :: delWal(int x) {
-    std::ofstream fout;
-    fout.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::binary);
-    fout.write((char*) &w.p[w.store - 1].wID[0], 8);
     if (w.sub(x)) {
         for (int i = x - 1; i < w.store; i++) {
             for (int j = 7; j >= 0; j--) {
@@ -224,38 +221,17 @@ void Wallist :: delWal(int x) {
             }
         }
     }
-    fout.close();
     outWallist();
 }
 
 //Output list of wallets to files.
 void Wallist :: outWallist() {
-    std::fstream file;
-    string str = "W0000001";
-    string term = "W0000000";
-    file.open("..\\..\\Utility Save Files\\DeletedWallet.bin", std::ios::in | std::ios::binary);
-    file.seekg(0, std::ios::end);
-    if (file.tellg() != 0) file.read((char*) &term[0], 8);
+    std::ofstream file;
+    file.open("../../Utility Save Files/WalletNumber.bin", std::ios::binary);
+    file.write((char*) &w.store, 4);
     file.close();
     int ind = 0;
-    while (str != term && ind < w.store) {
-        ind = 0;
-        for (int i = 1; i < 8; i++) {
-            ind += ind*9 + str[i] - 48;
-        }
-        w.p[ind - 1].outWal();
-        for (int i = 7; i >= 0; i--) {
-            if (str[i] == '9') {
-                str[i] = '0';
-                continue;
-            }
-            str[i]++;
-            break;
-        }
-    }
-    if (term != "W0000000") {
-        term = "..\\..\\Saved Wallet\\" + term;
-        file.open(term, std::ios::out | std::ios::binary);
-        file.close();
+    for (int i = 0; i < w.store; i++) {
+        w.p[i].outWal();
     }
 }

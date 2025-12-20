@@ -174,18 +174,25 @@ void TransactionManagement(Wallist& wallist){
 Wallist inWallist() {
     Wallist def;
     string id = "W0000001";
-    while (def.inWal(id)) {
-        for (int i = 7; i >= 0; i--) {
-            if (i == 0) {
-                std::cerr << "Wallet limit exceeded!";
-                return def;
+    std::ifstream fin;
+    fin.open("../Utility Save Files/WalletNumber.bin", std::ios::binary);
+    int k = 0;
+    fin.read((char*) &k, 4);
+    fin.close();
+    for (int i = 0; i < k; i++) {
+        if (def.inWal(id)) {
+            for (int i = 7; i >= 0; i--) {
+                if (i == 0) {
+                    std::cerr << "Wallet limit exceeded!";
+                    return def;
+                }
+                if (id[i] == '9') {
+                    id[i] = '0';
+                    continue;
+                }
+                id[i]++;
+                break;
             }
-            if (id[i] == '9') {
-                id[i] = '0';
-                continue;
-            }
-            id[i]++;
-            break;
         }
     }
     return def;

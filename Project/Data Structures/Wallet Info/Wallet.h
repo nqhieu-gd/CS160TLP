@@ -10,6 +10,12 @@
 using std::string;
 
 struct Wallet {
+private:
+    void incomeAdd(const Transaction t, const string ID);
+
+    void expenseAdd(const Transaction t, const string ID);
+
+public:
     string wID;
     string wName;
 
@@ -28,11 +34,11 @@ struct Wallet {
 
     string convertNameInc(string name);
 
+    void ISAdd(Transaction t, string name);
+
+    void ECAdd(Transaction t, string name);
+
     string convertNameExp(string name);
-
-    void incomeAdd(const Transaction t, const string ID);
-
-    void expenseAdd(const Transaction t, const string ID);
 
     void rename();
 };
