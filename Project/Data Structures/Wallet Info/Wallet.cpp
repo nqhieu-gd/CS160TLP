@@ -8,7 +8,6 @@ using std::string;
 Wallet :: Wallet() {
     is.alloc();
     ec.alloc();
-    Statistic.alloc();
 }
 
 //Output the current wallet to the designated save file.
@@ -131,6 +130,7 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
             for (int j = is.p[i].inc.store - 1; j >= 0; j--) {
                 if (CompareDate(t.date, is.p[i].inc.p[j].date)) {
                     is.p[i].inc.insert(is.p[i].inc.store - 1, j);
+                    break;
                 }
             }
         }
@@ -153,6 +153,7 @@ void Wallet :: expenseAdd(const Transaction t, const string ID) {
             for (int j = ec.p[i].exp.store - 1; j >= 0; j--) {
                 if (CompareDate(t.date, ec.p[i].exp.p[j].date)) {
                     ec.p[i].exp.insert(ec.p[i].exp.store - 1, j);
+                    break;
                 }
             }
         }
@@ -196,16 +197,11 @@ long long Wallet :: curBalance() {
         for (int j = 0; j < is.p[i].inc.store; j++) {
             bal += is.p[i].inc.p[j].amount;
         }
-        for (int j = 0; j < is.p[i].i_atm.atm.store; j++) {
-            bal += is.p[i].i_atm.atm.p[j].transaction.amount;
-        }
     }
     for (int i = 0; i < ec.store; i++) {
         for (int j = 0; j < ec.p[i].exp.store; j++) {
             bal -= ec.p[i].exp.p[j].amount;
         }
-        for (int j = 0; j < ec.p[i].e_atm.atm.store; j++) {
-            bal -= ec.p[i].e_atm.atm.p[j].transaction.amount;
-        }
     }
+    return bal;
 }

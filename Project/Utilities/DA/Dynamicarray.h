@@ -12,6 +12,7 @@ public:
     int store;
 
     void alloc() {
+        if (p) return;
         p = new T[this->size];
     }
 
@@ -24,6 +25,7 @@ public:
 
     //Increase the list's size if not sufficent.
     void stretch() {
+        if (!p) return;
         T* temp = new T[this->size*2];
         for (int t = 0; t < this->size; t++) {
             temp[t] = p[t];
@@ -35,15 +37,16 @@ public:
 
     //Add a new item k to the list as the newest item (aka the highest in term of number order).
     void push(T k) {
+        if (!p) return;
         while (this->store >= this->size) this->stretch();
         p[this->store] = k;
         this->store++;
     }
 
-    //Delete item k at number order x of the list.
+    //Delete item k at index x of the list.
     bool sub(int x) {
-        if (x > this->store || x < 1) return 0;
-        for (int i = x - 1; i < this->store - 1; i++) p[i] = p[i + 1];
+        if (x >= this->store || x < 0) return 0;
+        for (int i = x; i < this->store - 1; i++) p[i] = p[i + 1];
         this->store--;
         return 1;
     }
@@ -53,7 +56,7 @@ public:
         if (a  < 0 || a >= store || b < 0 || b >= store || a == b) return;
         T temp = p[a];
         p[a] = p[b];
-        p[b] = p[a];
+        p[b] = temp;
     }
 
     //Insert item at index a to index b without changing the array's stored item number.
@@ -61,7 +64,7 @@ public:
         if (a  < 0 || a >= store || b < 0 || b >= store || a == b) return;
         T temp = p[a];
         if (a > b) {
-            for (int i = b; i < a; i++) {
+            for (int i = a - 1; i >= b; i--) {
                 p[i + 1] = p[i];
             }
             p[b] = temp;
@@ -94,6 +97,9 @@ public:
         } else {
             p = nullptr;
         }
+    }
+    ~func() {
+        dealloc();
     }
 
     //Adjust the "=" operator so that it transfer real data, used in sub(int x) (haven't touched yet tho).

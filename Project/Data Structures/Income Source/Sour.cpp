@@ -9,9 +9,6 @@ IncomeSource :: IncomeSource(): iID("00000000"), iName("") {
 
 IncomeSource :: IncomeSource(string ID): iID(ID), iName("") {
     inc.alloc();
-    std::cout << "Enter a new income source: ";
-    if (cin.peek() == '\n') std::cin.ignore();
-    std::getline(std::cin, iName);
 }
 
 IncomeSource :: ~IncomeSource() {}
@@ -22,4 +19,8 @@ long long IncomeSource :: income() {
         a += inc.p[i].amount;
     }
     return a;
+}
+
+void IncomeSource :: irename(string name) {
+    iName = name;
 }

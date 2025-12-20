@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include "../Wallet Info/Transaction/Tstn.h"
-#include "../Wallet Info/Monthly Record/MonthlyRecord.h"
 #include "../Wallet Info/Transaction/Auto_Trtn.h"
 #include "../../Utilities/DA/Dynamicarray.h"
 
@@ -21,4 +20,6 @@ struct ExpenseCategory {
     //create expense category list with a specific ID.
     ExpenseCategory(string ID);
     ~ExpenseCategory();
+
+    void erename(string name);
 };

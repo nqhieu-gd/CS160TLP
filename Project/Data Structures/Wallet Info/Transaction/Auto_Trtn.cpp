@@ -54,7 +54,7 @@ void Auto_Transaction_List :: writeatm(ofstream& fout){
 
 //Erase the tstn number k (index: k-1)
 void Auto_Transaction_List:: erase(int k){
-    atm.sub(k);
+    atm.sub(k - 1);
 }
 
 //Erase all the tstn not available
@@ -63,7 +63,6 @@ void Auto_Transaction_List:: checkexpired(){
         //Check if the autotransaction is infinite?
         if (atm.p[i].end_date.day==0&&atm.p[i].end_date.month==0&&atm.p[i].end_date.year==0) continue;
         else if (CompareDate(GetCurrDate(),atm.p[i].end_date)){
-            erase(i + 1);
-            i--;
+            atm.sub(i--);
         }
 }

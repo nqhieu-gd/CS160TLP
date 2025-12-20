@@ -1,6 +1,5 @@
 #pragma once
 #include <fstream>
-#include "Monthly Record/MonthlyRecord.h"
 #include "Transaction/Tstn.h"
 #include "../Income Source/Sour.h"
 #include "../Expense Category/Cate.h"
@@ -18,8 +17,6 @@ struct Wallet {
     func<IncomeSource> is;
     //List of expense categories and their transaction.
     func<ExpenseCategory> ec;
-    //Each month's statistic.
-    func<Monthly> Statistic;
 
     //Current balance of this wallet, accounting for all transaction since the beginning.
     long long curBalance();
