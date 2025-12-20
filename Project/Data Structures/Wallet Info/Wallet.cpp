@@ -110,7 +110,7 @@ string Wallet :: convertNameExp(string name) {
         if (str == sub) return ec.p[i].eID;
     }
     if (ec.store == 0) return "00000001";
-    str = ec.p[is.store - 1].eID;
+    str = ec.p[ec.store - 1].eID;
     for (int i = 7; i >=0; i--) {
         if (str[i] == '9') {
             str[i] = '0';
