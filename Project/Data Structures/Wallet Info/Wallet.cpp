@@ -202,6 +202,7 @@ long long Wallet :: curBalance() {
     return bal;
 }
 
+//BIG NOTE: ECAdd and ISAdd just add the available transaction to its category in the wallet, not create a new transaction.
 void Wallet :: ECAdd(Transaction t, string name) {
     string id = convertNameExp(name);
     int k = ec.store;
