@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <ctime>
 #include <fstream>
 #include "../Utilities/DA/Dynamicarray.h"
 #include "../Data Structures/Wallet Info/Wallet.h"

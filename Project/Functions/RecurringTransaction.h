@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <ctime>
 #include "../Utilities/DA/Dynamicarray.h"
 #include "../Data Structures/Expense Category/Cate.h"
 #include "../Data Structures/Income Source/Sour.h"

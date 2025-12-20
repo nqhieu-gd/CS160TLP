@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <ctime>
 #include "RecurringTransaction.h"
 
 using std::ifstream;

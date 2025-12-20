@@ -22,9 +22,8 @@ void Auto_Transaction_List :: readatm(ifstream& fin){
     // Get number of auto trtn:
     int count=0;
     fin.read((char*)&count, sizeof(int));
-    atm.store=count;
     //Get each auto trtn:
-    for (int i=0;i<atm.store;++i){
+    for (int i = 0;i < count; ++i){
         Auto_Transaction temp;
         //First, get the start Date->end Date->last Date
         fin.read((char*)&temp.start_date,sizeof(Date));
@@ -41,7 +40,7 @@ void Auto_Transaction_List :: readatm(ifstream& fin){
 //Update to file
 void Auto_Transaction_List :: writeatm(ofstream& fout){
     //First, number of autotransaction
-    fout.write((char*)atm.store,sizeof(int));
+    fout.write((char*) &atm.store,sizeof(int));
     //Print each auto transaction
     for (int i=0;i<atm.store;++i){
         //First, print start Date->end Date-> last Date
@@ -64,7 +63,7 @@ void Auto_Transaction_List:: checkexpired(){
         //Check if the autotransaction is infinite?
         if (atm.p[i].end_date.day==0&&atm.p[i].end_date.month==0&&atm.p[i].end_date.year==0) continue;
         else if (CompareDate(GetCurrDate(),atm.p[i].end_date)){
-            erase(i--);
-            --atm.store;
+            erase(i + 1);
+            i--;
         }
 }
