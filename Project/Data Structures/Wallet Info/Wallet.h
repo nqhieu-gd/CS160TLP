@@ -1,9 +1,10 @@
 #pragma once
 #include <fstream>
+#include "Monthly Record/MonthlyRecord.h"
 #include "Transaction/Tstn.h"
-#include "../../Utilities/DA/Dynamicarray.h"
 #include "../Income Source/Sour.h"
 #include "../Expense Category/Cate.h"
+#include "../../Utilities/DA/Dynamicarray.h"
 #include "../../Utilities/Hashmap/HashMap.h"
 #include "../../Utilities/Uppercase/Uppercase.h"
 
@@ -13,10 +14,15 @@ struct Wallet {
     string wID;
     string wName;
 
+    //List of income sources and their transaction.
     func<IncomeSource> is;
+    //List of expense categories and their transaction.
     func<ExpenseCategory> ec;
+    //Each month's statistic.
+    func<Monthly> Statistic;
 
-    long long totalBalance();
+    //Current balance of this wallet, accounting for all transaction since the beginning.
+    long long curBalance();
 
     Wallet();
     ~Wallet();

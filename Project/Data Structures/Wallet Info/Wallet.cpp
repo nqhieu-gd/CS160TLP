@@ -8,6 +8,7 @@ using std::string;
 Wallet :: Wallet() {
     is.alloc();
     ec.alloc();
+    Statistic.alloc();
 }
 
 //Output the current wallet to the designated save file.
@@ -43,6 +44,7 @@ void Wallet :: outWal() {
         //Output each transaction.
             outputTransactiontoFile(fout, is.p[i].inc.p[j]);
         }
+        is.p[i].i_atm.writeatm(fout);
     }
 //Similarly with expense categories.
 //Output the number of expense categories in is (list of expense categories).
@@ -60,6 +62,7 @@ void Wallet :: outWal() {
         //Output each transaction.
             outputTransactiontoFile(fout, ec.p[i].exp.p[j]);
         }
+        ec.p[i].e_atm.writeatm(fout);
     }
 //Close the output file.
     fout.close();
@@ -87,6 +90,7 @@ string Wallet :: convertNameInc(string name) {
             continue;
         }
         str[i]++;
+        break;
     }
     return str;
 }
@@ -113,6 +117,7 @@ string Wallet :: convertNameExp(string name) {
             continue;
         }
         str[i]++;
+        break;
     }
     return str;
 }
@@ -121,7 +126,14 @@ string Wallet :: convertNameExp(string name) {
 //add t to that ID, else create a new ID name.
 void Wallet :: incomeAdd(const Transaction t, const string ID) {
     for (int i = 0; i < is.store; i++) {
-        if (ID == is.p[i].iID) is.p[i].inc.push(t);
+        if (ID == is.p[i].iID) {
+            is.p[i].inc.push(t);
+            for (int j = is.p[i].inc.store - 1; j >= 0; j--) {
+                if (CompareDate(t.date, is.p[i].inc.p[j].date)) {
+                    is.p[i].inc.insert(is.p[i].inc.store - 1, j);
+                }
+            }
+        }
         outWal();
         return;
     }
@@ -136,7 +148,14 @@ void Wallet :: incomeAdd(const Transaction t, const string ID) {
 //add t to that ID, else create a new ID name.
 void Wallet :: expenseAdd(const Transaction t, const string ID) {
     for (int i = 0; i < ec.store; i++) {
-        if (ID == ec.p[i].eID) ec.p[i].exp.push(t);
+        if (ID == ec.p[i].eID) {
+            ec.p[i].exp.push(t);
+            for (int j = ec.p[i].exp.store - 1; j >= 0; j--) {
+                if (CompareDate(t.date, ec.p[i].exp.p[j].date)) {
+                    ec.p[i].exp.insert(ec.p[i].exp.store - 1, j);
+                }
+            }
+        }
         outWal();
         return;
     }
@@ -147,18 +166,9 @@ void Wallet :: expenseAdd(const Transaction t, const string ID) {
     outWal();
 }
 
-//Calculate the current wallet's total balance (total income minus total expense),
+//Calculate the current month's total balance (total income minus total expense),
 //can be negative, automatically update for each changes in wallet.
-long long Wallet :: totalBalance() {
-    long long c = 0;
-    for (int i = 0; i < is.store; i++) {
-        c += is.p[i].income();
-    }
-    for (int i = 0; i < ec.store; i++) {
-        c -= ec.p[i].expense();
-    }
-    return c;
-}
+
 
 //Clear the current wallet's data.
 Wallet :: ~Wallet() {
@@ -172,8 +182,30 @@ Wallet :: ~Wallet() {
     ec.dealloc();
 }
 
+//Option to rename the wallet.
 void Wallet :: rename() {
     std::cout << "Enter new name for wallet ID " << wID << ": ";
     std::getline(std::cin, wName);
     outWal();
+}
+
+//Current balance of the wallet.
+long long Wallet :: curBalance() {
+    long long bal = 0;
+    for (int i = 0; i < is.store; i++) {
+        for (int j = 0; j < is.p[i].inc.store; j++) {
+            bal += is.p[i].inc.p[j].amount;
+        }
+        for (int j = 0; j < is.p[i].i_atm.atm.store; j++) {
+            bal += is.p[i].i_atm.atm.p[j].transaction.amount;
+        }
+    }
+    for (int i = 0; i < ec.store; i++) {
+        for (int j = 0; j < ec.p[i].exp.store; j++) {
+            bal -= ec.p[i].exp.p[j].amount;
+        }
+        for (int j = 0; j < ec.p[i].e_atm.atm.store; j++) {
+            bal -= ec.p[i].e_atm.atm.p[j].transaction.amount;
+        }
+    }
 }

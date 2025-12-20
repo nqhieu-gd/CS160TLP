@@ -5,9 +5,11 @@ using std::string;
 
 template <typename T>
 class func {
+private:
+    int size;
 public:
     T* p;
-    int size = 64, store = 0;
+    int store;
 
     void alloc() {
         p = new T[this->size];
@@ -44,6 +46,32 @@ public:
         for (int i = x - 1; i < this->store - 1; i++) p[i] = p[i + 1];
         this->store--;
         return 1;
+    }
+
+    //Swap item at index a with item at index b.
+    void swap(int a, int b) {
+        if (a  < 0 || a >= store || b < 0 || b >= store || a == b) return;
+        T temp = p[a];
+        p[a] = p[b];
+        p[b] = p[a];
+    }
+
+    //Insert item at index a to index b without changing the array's stored item number.
+    void insert(int a, int b) {
+        if (a  < 0 || a >= store || b < 0 || b >= store || a == b) return;
+        T temp = p[a];
+        if (a > b) {
+            for (int i = b; i < a; i++) {
+                p[i + 1] = p[i];
+            }
+            p[b] = temp;
+        }
+        else {
+            for (int i = a; i < b; i++) {
+                p[i] = p[i + 1];
+            }
+            p[b] = temp;
+        }
     }
 
     //Create a completely new array with default constructor.

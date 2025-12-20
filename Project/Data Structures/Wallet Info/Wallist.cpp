@@ -101,6 +101,7 @@ bool Wallist :: inWal(string id) {
             inputTransactionFromFile(fin, t);
             istemp.inc.push(t);
         }
+        istemp.i_atm.readatm(fin);
         w.p[k].is.push(istemp);
         istemp.inc.dealloc();
     }
@@ -123,6 +124,7 @@ bool Wallist :: inWal(string id) {
             inputTransactionFromFile(fin, t);
             ectemp.exp.push(t);
         }
+        ectemp.e_atm.readatm(fin);
         w.p[k].ec.push(ectemp);
         ectemp.exp.dealloc();
     }
