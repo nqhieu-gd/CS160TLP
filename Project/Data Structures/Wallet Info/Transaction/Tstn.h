@@ -21,7 +21,6 @@ struct Transaction{
         date.month = 0;
         date.year = 0;
     };
-    ~Transaction();
 };
 
 bool ExamineDate(const Date&);

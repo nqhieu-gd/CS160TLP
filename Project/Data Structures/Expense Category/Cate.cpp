@@ -11,7 +11,10 @@ ExpenseCategory :: ExpenseCategory(string ID): eID(ID), eName("") {
     exp.alloc();
 }
 
-ExpenseCategory :: ~ExpenseCategory() {}
+ExpenseCategory :: ~ExpenseCategory() {
+    exp.dealloc();
+    e_atm.clear();
+}
 
 long long ExpenseCategory :: expense() {
     long long a = 0;

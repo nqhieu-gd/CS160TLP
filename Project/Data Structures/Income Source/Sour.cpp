@@ -11,7 +11,10 @@ IncomeSource :: IncomeSource(string ID): iID(ID), iName("") {
     inc.alloc();
 }
 
-IncomeSource :: ~IncomeSource() {}
+IncomeSource :: ~IncomeSource() {
+    inc.dealloc();
+    i_atm.clear();
+}
 
 long long IncomeSource :: income() {
     long long a = 0;
