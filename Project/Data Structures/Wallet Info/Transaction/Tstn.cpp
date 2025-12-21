@@ -2,6 +2,9 @@
 #include "Tstn.h"
 
 using std::string;
+using std::cout;
+using std::cin;
+using std::endl;
 
 bool CheckvalidDate(const Date& c){
     int time[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31};
@@ -34,6 +37,50 @@ void outputTransactiontoFile(std::ofstream& fout,const Transaction& a){
 bool CompareDate(const Date& a, const Date& b){
     int c = a.year*10000 + a.month*100 + a.day, d = b.year*10000 + b.month*100 + b.day;
     return (c > d);
+}
+
+//Check if the Date is suitable
+bool ExamineDate(const Date& a){
+    if (!CheckvalidDate(a)) return false;
+    if (CompareDate(a,GetCurrDate())) return false;
+    return true;
+}
+
+//Input Date
+Date inputDate(){
+    cout<<"========================================================"<<endl;
+    cout<<endl;
+    cout<<"1. Get current Date"<<endl;
+    cout<<"2. Enter the date manually (Note: this function does not accept future dates)"<<endl;
+    cout<<endl;
+    cout<<"========================================================"<<endl;
+    cout<<"Please enter the utility:";
+    int choose;
+    cin>>choose;
+    if (choose==1) return GetCurrDate();
+    cout<<"Please input the Date (format: dd mm yyyy):";
+    Date a;
+    cin>>a.day>>a.month>>a.year;
+    while (!ExamineDate(a)){
+        cout<<"Invalid Date! Please try again!"<<endl;
+        cout<<"Please input the Date (format: dd mm yyyy):";
+        Date a;
+        cin>>a.day>>a.month>>a.year;
+    }
+    return a;
+}
+
+Transaction ipt() {
+    Transaction t;
+    t.date = inputDate();
+    std::cout << "Enter the amount of money: ";
+    std::cin >> t.amount;
+    while (t.amount < 0) {
+        std::cerr << "Invalid amount of money!\n";
+        std::cout << "Try again: ";
+        std::cin >>t.amount;
+    }
+    return t;
 }
 
 //Get current Date

@@ -180,9 +180,8 @@ Wallet :: ~Wallet() {
 }
 
 //Option to rename the wallet.
-bool Wallet :: rename() {
-    std::cout << "Enter new name for wallet ID " << wID << ": ";
-    std::getline(std::cin, wName);
+void Wallet :: rename(string name) {
+    wName = name;
     outWal();
 }
 

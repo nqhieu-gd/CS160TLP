@@ -75,41 +75,40 @@ void Operation(Wallist& wallist, ATM_Management& atmm){
                         for (int n=1;n<=count;++n) wallist.w.p[i].is.p[j].inc.push(temp);
                     }
                 }
-            //After add, check if any autotransaction is expired
-            wallist.w.p[i].is.p[j].i_atm.checkexpired();
-            if (wallist.w.p[i].is.p[j].i_atm.atm.store!=0){
-                Address temp_address;
-                temp_address.w_index=i;
-                temp_address.i_index=j;
-                atmm.add(wallist.w.p[i].is.p[j].i_atm,temp_address);
-            }
-            wallist.w.p[i].ec.p[j].e_atm.checkexpired();
-        }
-        wallist.w.p[i].outWal();
-    }
-        //Similarly to Expense Category
-        for (int j=0;j<wallist.w.p[i].ec.store;++j){
-            //First, we check if it meets conditions to add
-            if (wallist.w.p[i].ec.p[j].e_atm.atm.store!=0){
-                for (int k=0;k<wallist.w.p[i].ec.p[j].e_atm.atm.store;++k){
-                    int count=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].autoadd();
-                    if (count!=0){
-                        Transaction temp=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].transaction;
-                        temp.date=GetCurrDate();
-                        for (int n=1;n<=count;++n) wallist.w.p[i].ec.p[j].exp.push(temp);
-                    }
+                //After add, check if any autotransaction is expired
+                wallist.w.p[i].is.p[j].i_atm.checkexpired();
+                if (wallist.w.p[i].is.p[j].i_atm.atm.store!=0){
+                    Address temp_address;
+                    temp_address.w_index=i;
+                    temp_address.i_index=j;
+                    atmm.add(wallist.w.p[i].is.p[j].i_atm,temp_address);
                 }
-            //After add, check if any autotransaction is expired
-            wallist.w.p[i].ec.p[j].e_atm.checkexpired();
-            if (wallist.w.p[i].ec.p[j].e_atm.atm.store!=0){
-                Address temp_address;
-                temp_address.w_index=i;
-                temp_address.e_index=j;
-                atmm.add(wallist.w.p[i].ec.p[j].e_atm,temp_address);
+            }
+            wallist.w.p[i].outWal();
+        }
+            //Similarly to Expense Category
+            for (int j=0;j<wallist.w.p[i].ec.store;++j){
+                //First, we check if it meets conditions to add
+                if (wallist.w.p[i].ec.p[j].e_atm.atm.store!=0){
+                    for (int k=0;k<wallist.w.p[i].ec.p[j].e_atm.atm.store;++k){
+                        int count=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].autoadd();
+                        if (count!=0){
+                            Transaction temp=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].transaction;
+                            temp.date=GetCurrDate();
+                            for (int n=1;n<=count;++n) wallist.w.p[i].ec.p[j].exp.push(temp);
+                        }
+                    }
+                //After add, check if any autotransaction is expired
+                wallist.w.p[i].ec.p[j].e_atm.checkexpired();
+                if (wallist.w.p[i].ec.p[j].e_atm.atm.store!=0){
+                    Address temp_address;
+                    temp_address.w_index=i;
+                    temp_address.e_index=j;
+                    atmm.add(wallist.w.p[i].ec.p[j].e_atm,temp_address);
+                }
             }
         }
     }
-}
 }
 
 void AddRecurringTransaction(Wallist& wallist){
@@ -141,7 +140,30 @@ void AddRecurringTransaction(Wallist& wallist){
     if (choosewallet==0) return;
     if (choosewallet==wallist.w.store+1){
         wallist.CreateWallet();
-        wallist.w.p[wallist.w.store-1].rename();
+        string str;
+        while (cin.peek() == '\n') cin.ignore();
+        while (1) {
+            bool check = false;
+            std::cout << "Enter a name for the new wallet: ";
+            std::getline(std::cin, str);
+            string name = str;
+            upperStr(name);
+            for (int i = 0; i < wallist.w.store - 1; i++) {
+                string sub = wallist.w.p[i].wName;
+                upperStr(sub);
+                if (name == sub) {
+                    std::cerr << "There was already a wallet with that name!\n";
+                    check = true;
+                    break;
+                }
+            }
+            if (check) {
+                std::cerr << "Try again.\n";
+                continue;
+            }
+            wallist.w.p[wallist.w.store - 1].rename(str);
+            break;
+        }
     }
     string i_iD="";
     string e_id="";

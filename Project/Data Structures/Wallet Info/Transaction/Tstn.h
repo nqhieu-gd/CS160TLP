@@ -24,6 +24,12 @@ struct Transaction{
     ~Transaction();
 };
 
+bool ExamineDate(const Date&);
+
+Date inputDate();
+
+Transaction ipt();
+
 bool CheckvalidDate(const Date&); // Only check if it's a valid Date or not - don't care about the current Date
 
 void inputTransactionFromFile(std::ifstream&, Transaction&); //Date->Amount->size of string ->Note
