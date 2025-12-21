@@ -42,3 +42,6 @@ void AddRecurringTransaction(Wallist&);
 
 //Delete a recurring transaction
 void DeleteRecurringTransaction(Wallist&, ATM_Management&);
+
+//main function
+void RecurringTransactionFunction(Wallist&, ATM_Management&);
