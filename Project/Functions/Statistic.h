@@ -11,7 +11,7 @@
 
 //Calculate Total Balance of all Wallets and Total Balances of each wallets
 //Use whenever start over the programme and in the dashboard
-void DashboaradStatistics(const Wallist&);
+void DashboardStatistics(const Wallist&);
 
 //Calculate Total Balance within a date range
 void TotalBalance(const Wallist&);

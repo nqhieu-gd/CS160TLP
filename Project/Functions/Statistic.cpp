@@ -129,12 +129,13 @@ void AnnualOverviewStatistics(const Wallist& wallist){
     years.alloc();
     cout<<"Please enter the year you want to overview(enter a year> current year to stop): ";
     int year_input;
-    do{
+    while (true){
         cin>>year_input;
-        if (year_input>GetCurrDate().year){
+        if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
-    }while (year_input<=GetCurrDate().year);
+        else break;
+    }
     //Then sort the years array
     for (int i=0;i<years.store-1;++i){
         for (int j=i+1;j<years.store;++j){
@@ -143,6 +144,16 @@ void AnnualOverviewStatistics(const Wallist& wallist){
             }
         }
     }
+    //Clear duplicate years
+    for (int i=0;i<years.store-1;++i){
+        for (int j=i+1;j<years.store;++j){
+            if (years.p[i]==years.p[j]){
+                years.sub(j);
+                j--;
+            }
+        }
+    }
+
     long long total_income=0, total_expense=0, net_balance;
     //Then, for each year, calculate total income, total expense, net balance
     cout<<endl;
@@ -185,12 +196,13 @@ void AnnualIncomeBreakdownStatistics(Wallist& wallist){
     years.alloc();
     cout<<"Please enter the year you want to overview(enter a year> current year to stop): ";
     int year_input;
-    do{
+    while (true){
         cin>>year_input;
-        if (year_input>GetCurrDate().year){
+        if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
-    }while (year_input<=GetCurrDate().year);
+        else break;
+    }
     //Then sort the years array
     for (int i=0;i<years.store-1;++i){
         for (int j=i+1;j<years.store;++j){
@@ -199,6 +211,16 @@ void AnnualIncomeBreakdownStatistics(Wallist& wallist){
             }
         }
     }
+    //Clear duplicate years
+    for (int i=0;i<years.store-1;++i){
+        for (int j=i+1;j<years.store;++j){
+            if (years.p[i]==years.p[j]){
+                years.sub(j);
+                j--;
+            }
+        }
+    }
+
     func<long long> total_income;
     total_income.alloc();
     HashMap hm = wallist.isource();
@@ -270,12 +292,13 @@ void AnnualExpenseBreakdownStatistics(Wallist& wallist){
     years.alloc();
     cout<<"Please enter the year you want to overview(enter a year> current year to stop): ";
     int year_input;
-    do{
+    while (true){
         cin>>year_input;
-        if (year_input>GetCurrDate().year){
+        if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
-    }while (year_input<=GetCurrDate().year);
+        else break;
+    }
 
     //Then sort the years array
     for (int i=0;i<years.store-1;++i){
