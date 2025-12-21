@@ -172,9 +172,9 @@ void AddRecurringTransaction(Wallist& wallist){
         else{
             i_iD=hm.map.p[chooseis-1].IDlist.p[0].substr(8,8);
         }
-        string current_is_name = ""; // Lưu lại tên để dùng nếu cần tạo mới
+        string current_is_name = ""; // Save the current Income Source name
         if (chooseis == hm.map.store + 1) {
-            current_is_name = name; // Biến name bạn đã nhập ở if phía trên
+            current_is_name = name; // If new, use the entered name
         } else {
             current_is_name = hm.map.p[chooseis - 1].name;
         }
@@ -195,7 +195,7 @@ void AddRecurringTransaction(Wallist& wallist){
         Date start_date;
         do {
             cin >> start_date.day >> start_date.month >> start_date.year;
-            // Kiểm tra logic ngày tháng của bạn
+            // Check logic for start date
             if (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate()))) 
                 cout << "Invalid date! Please input again: ";
         } while (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate())));
@@ -204,13 +204,13 @@ void AddRecurringTransaction(Wallist& wallist){
         Date end_date;
         do {
             cin >> end_date.day >> end_date.month >> end_date.year;
-            // Logic kiểm tra ngày kết thúc
+            // Check logic for end date
             bool isInfinite = (end_date.day == 0 && end_date.month == 0 && end_date.year == 0);
             if (!isInfinite && !(CheckvalidDate(end_date) && CompareDate(end_date, start_date))) 
                 cout << "Invalid date! Please input again: ";
         } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && CompareDate(end_date, start_date))));
 
-        // Đóng gói dữ liệu vào struct Auto_Transaction
+        // Paste inputs into Auto_Transaction structure
         Transaction t;
         t.amount = amount;
         t.description = description;
@@ -219,37 +219,37 @@ void AddRecurringTransaction(Wallist& wallist){
         at.start_date = start_date;
         at.end_date = end_date;
 
-        // --- BƯỚC 2: TÌM KIẾM VÀ THÊM VÀO VÍ ---
+        //Find if the Income Source with i_iD already exists in the chosen Wallet
     
         bool check = false;
-        // Tìm xem ID này đã có trong Ví chưa
+        //If yes, just add the Auto_Transaction into that Income Source
         for (int i = 0; i < wallist.w.p[choosewallet - 1].is.store; ++i) {
             if (wallist.w.p[choosewallet - 1].is.p[i].iID == i_iD) {
-                // TRƯỜNG HỢP 1: Đã có Nguồn thu này trong ví -> Chỉ cần thêm Auto Transaction vào
+                // Add the Auto_Transaction to the existing Income Source
                 wallist.w.p[choosewallet - 1].is.p[i].i_atm.atm.push(at); //
                 check = true;
                 break; 
             }
         }
 
-        // TRƯỜNG HỢP 2: Chưa có Nguồn thu này trong ví (!check)
+        //If not, create a new Income Source and add the Auto_Transaction into it
         if (!check) {
-            // 1. Khởi tạo IncomeSource mới với ID đã xác định
+            // Create new Income Source with i_iD
             IncomeSource newIS(i_iD); //
         
-            // 2. Đặt tên cho nó
+            //Name the Income Source
             newIS.iRename(current_is_name); //
 
-            // 3. Thêm Giao dịch định kỳ vào Nguồn thu mới này
+            // Add the Auto_Transaction to the new Income Source
             newIS.i_atm.atm.push(at); //
 
-            // 4. Thêm Nguồn thu mới vào Ví hiện tại
+            // Add the new Income Source to the chosen Wallet
             wallist.w.p[choosewallet - 1].is.push(newIS); //
         
     }
 
-        // --- BƯỚC 3: LƯU VÀ KẾT THÚC ---
-        wallist.w.p[choosewallet - 1].outWal(); // Cập nhật file ví
+        //save data into file
+        wallist.w.p[choosewallet - 1].outWal();
         cout << "Recurring transaction added successfully!" << endl;
         return;
     }
