@@ -220,14 +220,13 @@ void TransactionManagement(Wallist& wallist){
     }
 }
 
-Wallist inWallist() {
-    Wallist def;
+void inWallist(Wallist &wallist) {
     string id = "W0000001";
-    while (def.inWal(id)) {
+    while (wallist.inWal(id)) {
         for (int i = 7; i >= 0; i--) {
             if (i == 0) {
                 std::cerr << "Wallet limit exceeded!";
-                return def;
+                return;
             }
             if (id[i] == '9') {
                 id[i] = '0';
@@ -237,5 +236,4 @@ Wallist inWallist() {
             break;
         }
     }
-    return def;
 }

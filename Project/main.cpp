@@ -20,7 +20,8 @@ using std::endl;
 using std::string;
 
 int main(){
-    Wallist wallist = inWallist();
+    Wallist wallist;
+    inWallist(wallist);
     ATM_Management atmm;
     while (true){
         Operation(wallist, atmm); // Auto add recurring transactions at the start of each loop

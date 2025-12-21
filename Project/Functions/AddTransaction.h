@@ -17,4 +17,4 @@ int chooseEC(const Wallist&, int index);
 int chooseECWhatever(Wallist& wallist, int index);
 void inputRest(Transaction&);
 void TransactionManagement(Wallist&); //main function!
-Wallist inWallist();
+void inWallist(Wallist &wallist);
