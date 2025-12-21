@@ -246,4 +246,5 @@ bool Wallist :: editWal(int x, string name) {
     }
     w.p[x].rename(name);
     outWallist();
+    return 1;
 }
