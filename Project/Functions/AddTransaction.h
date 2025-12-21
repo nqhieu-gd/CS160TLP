@@ -9,10 +9,8 @@
 #include "../Data Structures/Wallet Info/Transaction/Tstn.h"
 
 int ChooseIMorEM();
-bool ExamineDate(const Date&);
 int chooseWallet(const Wallist&);
-Date inputDate();
-int chooseIS(const Wallist&);
-int chooseEC(const Wallist&);
+int chooseIS(const Wallist&, int index);
+int chooseEC(const Wallist&, int index);
 void inputRest(Transaction&);
 void TransactionManagement(Wallist&); //main function!
