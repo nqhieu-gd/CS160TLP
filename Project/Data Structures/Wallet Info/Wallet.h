@@ -38,6 +38,14 @@ public:
 
     void ECAdd(Transaction t, string name);
 
+    bool editIS(int x, string name);
+
+    bool editEC(int x, string name);
+
+    bool delIS(int x);
+
+    void delEC(int x);
+
     string convertNameExp(string name);
 
     void rename(string name);
@@ -60,4 +68,6 @@ struct Wallist {
     void outSC();
 
     void delWal(int x);
+
+    bool editWal(int x, string name);
 };

@@ -222,3 +222,59 @@ void Wallet :: ISAdd(Transaction t, string name) {
     }
     outWal();
 }
+
+bool Wallet :: editIS(int x, string name) {
+    string sub = name;
+    upperStr(sub);
+    for (int i = 0; i < is.store; i++) {
+        string temp = is.p[i].iName;
+        upperStr(temp);
+        if (sub == temp) return 0;
+    }
+    is.p[x].iRename(name);
+    outWal();
+}
+
+bool Wallet :: editEC(int x, string name) {
+    string sub = name;
+    upperStr(sub);
+    for (int i = 0; i < ec.store; i++) {
+        string temp = ec.p[i].eName;
+        upperStr(temp);
+        if (sub == temp) return 0;
+    }
+    ec.p[x].eRename(name);
+    outWal();
+}
+
+bool Wallet :: delIS(int x) {
+    if (is.sub(x)) {
+        for (int i = x - 1; i < is.store; i++) {
+            for (int j = 7; j >= 0; j--) {
+                if (is.p[i].iID[j] == '0') {
+                    is.p[i].iID[j] = '9';
+                    continue;
+                }
+                is.p[i].iID[j]--;
+                break;
+            }
+        }
+    }
+    outWal();
+}
+
+void Wallet :: delEC(int x) {
+    if (ec.sub(x)) {
+        for (int i = x - 1; i < ec.store; i++) {
+            for (int j = 7; j >= 0; j--) {
+                if (ec.p[i].eID[j] == '0') {
+                    ec.p[i].eID[j] = '9';
+                    continue;
+                }
+                ec.p[i].eID[j]--;
+                break;
+            }
+        }
+    }
+    outWal();
+}

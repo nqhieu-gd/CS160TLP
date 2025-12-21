@@ -235,3 +235,15 @@ void Wallist :: outWallist() {
         w.p[i].outWal();
     }
 }
+
+bool Wallist :: editWal(int x, string name) {
+    string sub = name;
+    upperStr(sub);
+    for (int i = 0; i < w.store; i++) {
+        string temp = w.p[i].wName;
+        upperStr(temp);
+        if (sub == temp) return 0;
+    }
+    w.p[x].rename(name);
+    outWallist();
+}

@@ -106,25 +106,12 @@ void TransactionManagement(Wallist& wallist){
         string str;
         while (cin.peek() == '\n') cin.ignore();
         while (1) {
-            bool check = false;
             std::cout << "Enter a name for the new wallet: ";
             std::getline(std::cin, str);
-            string name = str;
-            upperStr(name);
-            for (int i = 0; i < wallist.w.store - 1; i++) {
-                string sub = wallist.w.p[i].wName;
-                upperStr(sub);
-                if (name == sub) {
-                    std::cerr << "There was already a wallet with that name!\n";
-                    check = true;
-                    break;
-                }
-            }
-            if (check) {
-                std::cerr << "Try again.\n";
+            if (!wallist.editWal(index_wallet, str)) {
+                std::cerr << "There was already a wallet with that name!\n";
                 continue;
             }
-            wallist.w.p[wallist.w.store - 1].rename(str);
             break;
         }
     }
