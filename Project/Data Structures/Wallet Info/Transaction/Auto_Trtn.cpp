@@ -6,18 +6,54 @@
 using std::ifstream;
 using std::ofstream;
 
-bool Auto_Transaction ::autoadd(){
-    if (last_add.day==0){
-        if (end_date.day==0) if (!CompareDate(start_date,GetCurrDate())) return true; //If start_date<=Curr_Date
-        // if start_date<=CurrDate<=end_date
-        if (end_date.day!=0) if (!CompareDate(start_date,GetCurrDate())&&!CompareDate(GetCurrDate(),end_date)) return true;
+int Auto_Transaction::autoadd() {
+    Date end_count;
+    
+    // 1. Xác định mốc kết thúc (Limit Date)
+    // Nếu có End Date và End Date < Hôm nay -> Lấy End Date. Ngược lại lấy Hôm nay.
+    if (end_date.day != 0 && CompareDate(GetCurrDate(), end_date)) {
+        end_count = end_date;
+    } else {
+        end_count = GetCurrDate();
     }
-    else{
-        int a=start_date.month+start_date.year*12;
-        int b=last_add.month+last_add.year*12;
-        if (end_date.day==0);
+
+    // Nếu Start Date > End Count -> Chưa đến lúc bắt đầu -> Trả về 0
+    if (CompareDate(start_date, end_count)) return 0;
+
+    // 2. Tính Tọa độ tháng hiện tại (Current Limit)
+    // Công thức: year * 12 + month
+    int current_total_months = end_count.year * 12 + end_count.month;
+
+    // === XỬ LÝ NGÀY TRONG THÁNG (Logic quan trọng nhất) ===
+    int maxday[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    // Check năm nhuận cho end_count (để xác định ngày cuối tháng 2)
+    if (end_count.year % 400 == 0 || (end_count.year % 4 == 0 && end_count.year % 100 != 0)) {
+        maxday[1] = 29; // Tháng 2 là index 1
     }
-    return false;
+
+    // Kiểm tra: Hôm nay đã "qua" ngày đến hạn chưa?
+    // Qua hạn khi: (Ngày hiện tại >= Ngày Start) HOẶC (Hôm nay là ngày cuối cùng của tháng)
+    bool is_pass_due = (end_count.day >= start_date.day) || (end_count.day == maxday[end_count.month - 1]);
+
+    // Nếu chưa qua hạn, nghĩa là tháng này chưa được tính -> Trừ đi 1 tháng
+    if (!is_pass_due) {
+        current_total_months--;
+    }
+
+    // 3. Tính Tọa độ tháng của lần Add cuối (Last Add)
+    int last_added_months;
+    if (last_add.day == 0) {
+        // Nếu chưa add lần nào: Coi như lần add cuối là "tháng trước" của start_date
+        // Để khi trừ ra sẽ tính cả tháng start_date
+        last_added_months = start_date.year * 12 + start_date.month - 1;
+    } else {
+        last_added_months = last_add.year * 12 + last_add.month;
+    }
+
+    // 4. Kết quả = Hiệu số
+    int needed = current_total_months - last_added_months;
+
+    return needed;
 }
 
 
@@ -48,8 +84,6 @@ void Auto_Transaction_List :: readatm(ifstream& fin){
         inputTransactionFromFile(fin,temp.transaction);
         atm.push(temp);
     }
-    //After finish reading the atm, then will erase some expired transactions
-    checkexpired();
 }
 
 //Update to file
