@@ -83,7 +83,9 @@ void Operation(Wallist& wallist, ATM_Management& atmm){
                 temp_address.i_index=j;
                 atmm.add(wallist.w.p[i].is.p[j].i_atm,temp_address);
             }
+            wallist.w.p[i].ec.p[j].e_atm.checkexpired();
         }
+        wallist.w.p[i].outWal();
     }
         //Similarly to Expense Category
         for (int j=0;j<wallist.w.p[i].ec.store;++j){
@@ -138,7 +140,269 @@ void AddRecurringTransaction(Wallist& wallist){
     } while (choosewallet<0&&choosewallet>wallist.w.store+1);
     if (choosewallet==0) return;
     if (choosewallet==wallist.w.store+1){
+        wallist.CreateWallet();
+        wallist.w.p[wallist.w.store-1].rename();
+    }
+    string i_iD="";
+    string e_id="";
+    if (iore==1){
+        cout<<"This is list of Income Sources"<<endl;
+        HashMap hm = wallist.isource();
+        for (int i=0;i<hm.map.store;++i){
+            cout.width(4);
+            cout<<i+1;
+            cout<<". "<<hm.map.p[i].name<<endl;
+        }
+        cout<<"    "<<hm.map.store+1<<". Create a new Income Source"<<endl;
+        cout<<"    0. Go back to dashboard"<<endl;
+        cout<<"Enter Income Source number: ";
+        int chooseis;
+        do{
+            cin>>chooseis;
+            if (chooseis<0&&chooseis>hm.map.store+1) cout<<"Invalid number! Please input again:";
+        } while (chooseis<0&&chooseis>hm.map.store+1);
+        if (chooseis==0) return;
+        string name="";
+        if (chooseis==hm.map.store+1){
+            cout<<"Enter name of the new Income Source: ";
+            cin.ignore();
+            getline(cin,name);
+            i_iD=wallist.w.p[choosewallet-1].convertNameInc(name);
+        }
+        else{
+            i_iD=hm.map.p[chooseis-1].IDlist.p[0].substr(8,8);
+        }
+        string current_is_name = ""; // Lưu lại tên để dùng nếu cần tạo mới
+        if (chooseis == hm.map.store + 1) {
+            current_is_name = name; // Biến name bạn đã nhập ở if phía trên
+        } else {
+            current_is_name = hm.map.p[chooseis - 1].name;
+        }
+
+        cout << "Enter amount of money: ";
+        long long amount;
+        do {
+            cin >> amount;
+            if (amount < 0) cout << "Invalid amount! Please input again: ";
+        } while (amount < 0);
+
+        cout << "Enter description: ";
+        string description;
+        cin.ignore();
+        getline(cin, description);
+
+        cout << "Enter start date (dd mm yyyy): ";
+        Date start_date;
+        do {
+            cin >> start_date.day >> start_date.month >> start_date.year;
+            // Kiểm tra logic ngày tháng của bạn
+            if (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate()))) 
+                cout << "Invalid date! Please input again: ";
+        } while (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate())));
+
+        cout << "Enter end date (dd mm yyyy), enter 0 0 0 for infinite loop: ";
+        Date end_date;
+        do {
+            cin >> end_date.day >> end_date.month >> end_date.year;
+            // Logic kiểm tra ngày kết thúc
+            bool isInfinite = (end_date.day == 0 && end_date.month == 0 && end_date.year == 0);
+            if (!isInfinite && !(CheckvalidDate(end_date) && CompareDate(end_date, start_date))) 
+                cout << "Invalid date! Please input again: ";
+        } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && CompareDate(end_date, start_date))));
+
+        // Đóng gói dữ liệu vào struct Auto_Transaction
+        Transaction t;
+        t.amount = amount;
+        t.description = description;
+        Auto_Transaction at;
+        at.transaction = t;
+        at.start_date = start_date;
+        at.end_date = end_date;
+
+        // --- BƯỚC 2: TÌM KIẾM VÀ THÊM VÀO VÍ ---
+    
+        bool check = false;
+        // Tìm xem ID này đã có trong Ví chưa
+        for (int i = 0; i < wallist.w.p[choosewallet - 1].is.store; ++i) {
+            if (wallist.w.p[choosewallet - 1].is.p[i].iID == i_iD) {
+                // TRƯỜNG HỢP 1: Đã có Nguồn thu này trong ví -> Chỉ cần thêm Auto Transaction vào
+                wallist.w.p[choosewallet - 1].is.p[i].i_atm.atm.push(at); //
+                check = true;
+                break; 
+            }
+        }
+
+        // TRƯỜNG HỢP 2: Chưa có Nguồn thu này trong ví (!check)
+        if (!check) {
+            // 1. Khởi tạo IncomeSource mới với ID đã xác định
+            IncomeSource newIS(i_iD); //
+        
+            // 2. Đặt tên cho nó
+            newIS.iRename(current_is_name); //
+
+            // 3. Thêm Giao dịch định kỳ vào Nguồn thu mới này
+            newIS.i_atm.atm.push(at); //
+
+            // 4. Thêm Nguồn thu mới vào Ví hiện tại
+            wallist.w.p[choosewallet - 1].is.push(newIS); //
         
     }
+
+        // --- BƯỚC 3: LƯU VÀ KẾT THÚC ---
+        wallist.w.p[choosewallet - 1].outWal(); // Cập nhật file ví
+        cout << "Recurring transaction added successfully!" << endl;
+        return;
+    }
+    else{
+        cout<<"This is list of Expense Categories"<<endl;
+        HashMap hm = wallist.ecategory();
+        for (int i=0;i<hm.map.store;++i){
+            cout.width(4);
+            cout<<i+1;
+            cout<<". "<<hm.map.p[i].name<<endl;
+        }
+        cout<<"    "<<hm.map.store+1<<". Create a new Expense Category"<<endl;
+        cout<<"    0. Go back to dashboard"<<endl;
+        cout<<"Enter Expense Category number: ";
+        int chooseec;
+        do{
+            cin>>chooseec;
+            if (chooseec<0&&chooseec>hm.map.store+1) cout<<"Invalid number! Please input again:";
+        } while (chooseec<0&&chooseec>hm.map.store+1);
+        if (chooseec==0) return;
+        string name="";
+        string current_ec_name = "";
+        if (chooseec==hm.map.store+1){
+            cout<<"Enter name of the new Expense Category: ";
+            cin.ignore();
+            getline(cin,name);
+            e_id=wallist.w.p[choosewallet-1].convertNameExp(name);
+            current_ec_name = name;
+        }
+        else{
+            e_id=hm.map.p[chooseec-1].IDlist.p[0].substr(8,8);
+        }
+        //Similar to Income Source part, just change IS to EC and inc to exp
+        cout << "Enter amount of money: ";
+        long long amount;
+        do {
+            cin >> amount;
+            if (amount < 0) cout << "Invalid amount! Please input again: ";
+        } while (amount < 0);
+
+        cout << "Enter description: ";
+        string description;
+        cin.ignore();
+        getline(cin, description);
+
+        cout << "Enter start date (dd mm yyyy): ";
+        Date start_date;
+        do {
+            cin >> start_date.day >> start_date.month >> start_date.year;
+            if (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate()))) 
+                cout << "Invalid date! Please input again: ";
+        } while (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate())));
+
+        cout << "Enter end date (dd mm yyyy), enter 0 0 0 for infinite loop: ";
+        Date end_date;
+        do {
+            cin >> end_date.day >> end_date.month >> end_date.year;
+            bool isInfinite = (end_date.day == 0 && end_date.month == 0 && end_date.year == 0);
+            if (!isInfinite && !(CheckvalidDate(end_date) && CompareDate(end_date, start_date))) 
+                cout << "Invalid date! Please input again: ";
+        } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && CompareDate(end_date, start_date))));
+        Transaction t;
+        t.amount = amount;
+        t.description = description;
+        Auto_Transaction at;
+        at.transaction = t;
+        at.start_date = start_date;
+        at.end_date = end_date;
+        bool check = false;
+        for (int i = 0; i < wallist.w.p[choosewallet - 1].ec.store; ++i) {
+            if (wallist.w.p[choosewallet - 1].ec.p[i].eID == e_id) {
+                wallist.w.p[choosewallet - 1].ec.p[i].e_atm.atm.push(at); //
+                check = true;
+                break; 
+            }
+        }
+        if (!check) {
+            ExpenseCategory newEC(e_id);
+            newEC.eRename(current_ec_name); 
+            newEC.e_atm.atm.push(at); 
+            wallist.w.p[choosewallet - 1].ec.push(newEC); 
+            cout << "Recurring transaction added successfully!" << endl;
+            return;
+        }
+    }
+}
+
+void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
+    // Compute all recurring transactions available
+    int total_transactions = 0;
+    for (int i = 0; i < atmm.atl.store; ++i) {
+        total_transactions += atmm.atl.p[i].atm.store;
+    }
+
+    if (total_transactions == 0) {
+        cout << "There are no recurring transactions to delete." << endl;
+        return;
+    }
+
+    //Print all recurring transactions with numbering
+    atmm.prt(wallist);
     
+    cout << "0. Go back to Dashboard" << endl;
+    cout << "Enter the number of the transaction you want to delete: ";
+    
+    int choice;
+    do {
+        cin >> choice;
+        if (choice < 0 || choice > total_transactions) {
+            cout << "Invalid number! Please input again: ";
+        }
+    } while (choice < 0 || choice > total_transactions);
+
+    if (choice == 0) return;
+
+    // Find the real position of the chosen transaction
+    int current_count = 0;
+    int target_atl_index = -1; // Index of the Auto_Transaction_List in atmm.atl (0-based)
+    int target_atm_index = -1; // Index of the Auto_Transaction in the selected list (0-based)
+
+    bool found = false;
+    for (int i = 0; i < atmm.atl.store; ++i) {
+        // Iterate through each Auto_Transaction in the current Auto_Transaction_List
+        for (int j = 0; j < atmm.atl.p[i].atm.store; ++j) {
+            current_count++;
+            if (current_count == choice) {
+                target_atl_index = i;
+                target_atm_index = j;
+                found = true;
+                break;
+            }
+        }
+        if (found) break;
+    }
+
+    // Delete the transaction from the appropriate Wallet
+    if (found) {
+        Address addr = atmm.adrs.p[target_atl_index]; // Get the address info
+        int w_idx = addr.w_index;
+        
+        if (addr.i_index != -1) {
+            // In case of Income Source
+            wallist.w.p[w_idx].is.p[addr.i_index].i_atm.erase(target_atm_index + 1);
+        } 
+        else if (addr.e_index != -1) {
+            // In case of Expense Category
+            wallist.w.p[w_idx].ec.p[addr.e_index].e_atm.erase(target_atm_index + 1);
+        }
+
+        // Update the wallet file
+        wallist.w.p[w_idx].outWal(); //
+        cout << "Recurring transaction deleted successfully!" << endl;
+    } else {
+        cout << "Error: Could not locate the transaction." << endl;
+    }
 }

@@ -5,54 +5,48 @@
 
 using std::ifstream;
 using std::ofstream;
-
+//identify how many times need to auto add transaction
 int Auto_Transaction::autoadd() {
     Date end_count;
     
-    // 1. Xác định mốc kết thúc (Limit Date)
-    // Nếu có End Date và End Date < Hôm nay -> Lấy End Date. Ngược lại lấy Hôm nay.
+    //Identify the end date for counting
     if (end_date.day != 0 && CompareDate(GetCurrDate(), end_date)) {
         end_count = end_date;
     } else {
         end_count = GetCurrDate();
     }
-
-    // Nếu Start Date > End Count -> Chưa đến lúc bắt đầu -> Trả về 0
     if (CompareDate(start_date, end_count)) return 0;
 
-    // 2. Tính Tọa độ tháng hiện tại (Current Limit)
-    // Công thức: year * 12 + month
+    //Compute the number of months between start_date and end_count
     int current_total_months = end_count.year * 12 + end_count.month;
-
-    // === XỬ LÝ NGÀY TRONG THÁNG (Logic quan trọng nhất) ===
     int maxday[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    // Check năm nhuận cho end_count (để xác định ngày cuối tháng 2)
     if (end_count.year % 400 == 0 || (end_count.year % 4 == 0 && end_count.year % 100 != 0)) {
-        maxday[1] = 29; // Tháng 2 là index 1
+        maxday[1] = 29; 
     }
 
-    // Kiểm tra: Hôm nay đã "qua" ngày đến hạn chưa?
-    // Qua hạn khi: (Ngày hiện tại >= Ngày Start) HOẶC (Hôm nay là ngày cuối cùng của tháng)
+    //Check if the current month has passed the day of start_date
     bool is_pass_due = (end_count.day >= start_date.day) || (end_count.day == maxday[end_count.month - 1]);
 
-    // Nếu chưa qua hạn, nghĩa là tháng này chưa được tính -> Trừ đi 1 tháng
+    //If not passed, decrease one month
     if (!is_pass_due) {
         current_total_months--;
     }
 
-    // 3. Tính Tọa độ tháng của lần Add cuối (Last Add)
+    //Calculate the number of months last added
     int last_added_months;
     if (last_add.day == 0) {
-        // Nếu chưa add lần nào: Coi như lần add cuối là "tháng trước" của start_date
-        // Để khi trừ ra sẽ tính cả tháng start_date
+        // If never added before, use start_date
         last_added_months = start_date.year * 12 + start_date.month - 1;
     } else {
         last_added_months = last_add.year * 12 + last_add.month;
     }
-
-    // 4. Kết quả = Hiệu số
+    //Calculate how many times need to add
     int needed = current_total_months - last_added_months;
-
+    if (needed < 0) needed = 0; 
+    if (needed > 0) {
+        //Update last_add date
+        last_add = GetCurrDate();
+    }
     return needed;
 }
 
