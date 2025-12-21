@@ -220,7 +220,6 @@ void AddRecurringTransaction(Wallist& wallist){
         at.end_date = end_date;
 
         //Find if the Income Source with i_iD already exists in the chosen Wallet
-    
         bool check = false;
         //If yes, just add the Auto_Transaction into that Income Source
         for (int i = 0; i < wallist.w.p[choosewallet - 1].is.store; ++i) {
@@ -235,19 +234,15 @@ void AddRecurringTransaction(Wallist& wallist){
         //If not, create a new Income Source and add the Auto_Transaction into it
         if (!check) {
             // Create new Income Source with i_iD
-            IncomeSource newIS(i_iD); //
-        
+            IncomeSource newIS(i_iD);
             //Name the Income Source
             newIS.iRename(current_is_name); //
-
             // Add the Auto_Transaction to the new Income Source
             newIS.i_atm.atm.push(at); //
-
             // Add the new Income Source to the chosen Wallet
             wallist.w.p[choosewallet - 1].is.push(newIS); //
         
     }
-
         //save data into file
         wallist.w.p[choosewallet - 1].outWal();
         cout << "Recurring transaction added successfully!" << endl;
