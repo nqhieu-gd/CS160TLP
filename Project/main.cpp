@@ -6,6 +6,7 @@
 #include "Data Structures/Wallet Info/Transaction/Auto_Trtn.h"
 #include "Functions/RecurringTransaction.h"
 #include "Functions/AddTransaction.h"
+#include "Functions/EditWalletThings.h"
 #include "Functions/Statistic.h"
 #include "Utilities/Hashmap/Hashmap.h"
 #include "Utilities/Uppercase/Uppercase.h"
@@ -19,9 +20,7 @@ using std::endl;
 using std::string;
 
 int main(){
-    Wallist wallist;
-    // Read existing wallets from file
-    //
+    Wallist wallist = inWallist();
     ATM_Management atmm;
     while (true){
         Operation(wallist, atmm); // Auto add recurring transactions at the start of each loop
@@ -43,10 +42,23 @@ int main(){
         } while (choice < 0 || choice > 4);
         if (choice==0) break;
         switch (choice){
-            case 1: break;
-            case 2: RecurringTransactionFunction(wallist,atmm); break;
-            case 3: break;
-            case 4: Statisticfunction(wallist); break;
+            case 1: {
+                TransactionManagement(wallist);
+                break;
+            }
+            case 2: {
+                RecurringTransactionFunction(wallist,atmm);
+                break;
+            }
+            case 3: {
+                implementWhateverYouWant(wallist);
+                break;
+            }
+            case 4: {
+                Statisticfunction(wallist);
+                break;
+            }
+            default: break;
         }
     }
     cout<<"Thank you for using Personal Finance Manager. Goodbye!"<<endl;

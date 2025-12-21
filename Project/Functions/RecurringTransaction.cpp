@@ -141,9 +141,9 @@ void AddRecurringTransaction(Wallist& wallist){
     if (choosewallet==wallist.w.store+1){
         wallist.CreateWallet();
         string str;
-        while (cin.peek() == '\n') cin.ignore();
         while (1) {
             std::cout << "Enter a name for the new wallet: ";
+            while (cin.peek() == '\n') cin.ignore();
             std::getline(std::cin, str);
             if (!wallist.editWal(choosewallet, str)) {
                 std::cerr << "There was already a wallet with that name!\n";

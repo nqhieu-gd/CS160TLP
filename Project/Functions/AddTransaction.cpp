@@ -46,6 +46,26 @@ int chooseWallet(const Wallist& wallist){
     return choose;
 }
 
+int chooseWalletWhatever(const Wallist& wallist){
+    cout<<"========================================================"<<endl;
+    cout<<endl;
+    cout<<"This is the list of current available Wallets:"<<endl;
+    for (int i=0;i<wallist.w.store;++i)
+        cout<<i+1<<". "<<wallist.w.p[i].wName<<endl;
+    cout<<"0. Return to the Dashboard"<<endl;
+    cout<<endl;
+    cout<<"========================================================"<<endl;
+    int choose;
+    cout<<"Please enter the Wallet number:"<<endl;
+    cin>>choose;
+    while (choose<0||choose>wallist.w.store){
+        cout<<"Invalid number! Please try again!"<<endl;
+        cout<<"Please enter the Wallet number:"<<endl;
+        cin>>choose;
+    }
+    return choose;
+}
+
 //Choose Income Source
 int chooseIS(Wallist& wallist, int index){
     cout<<"========================================================"<<endl;
@@ -54,6 +74,26 @@ int chooseIS(Wallist& wallist, int index){
     for (int i=0;i<wallist.w.p[index].is.store;++i)
         cout<<i+1<<". "<<wallist.w.p[index].is.p[i].iName<<endl;
     cout<<wallist.w.p[index].is.store+1<<". Create a new Income Source."<<endl;
+    cout<<"0. Back to the Dashboard"<<endl;
+    cout<<endl;
+    cout<<"========================================================"<<endl;
+    cout<<"Please enter the Income Source number:"<<endl;
+    int choose;
+    cin>>choose;
+    while (choose<0||choose>wallist.w.p[index].is.store + 1){
+        cout<<"Invalid number! Please try again!"<<endl;
+        cout<<"Please enter the Income Source number: "<<endl;
+        cin>>choose;
+    }
+    return choose;
+}
+
+int chooseISWhatever(Wallist& wallist, int index){
+    cout<<"========================================================"<<endl;
+    cout<<endl;
+    cout<<"This is the list of Income Sources"<<endl;
+    for (int i=0;i<wallist.w.p[index].is.store;++i)
+        cout<<i+1<<". "<<wallist.w.p[index].is.p[i].iName<<endl;
     cout<<"0. Back to the Dashboard"<<endl;
     cout<<endl;
     cout<<"========================================================"<<endl;
@@ -82,6 +122,26 @@ int chooseEC(Wallist& wallist, int index){
     cout<<"Please enter the Expense Category number: "<<endl;
     int choose;
     cin>>choose;
+    while (choose<0||choose>wallist.w.p[index].ec.store + 1){
+        cout<<"Invalid number! Please try again!"<<endl;
+        cout<<"Please enter the Expense Category number:"<<endl;
+        cin>>choose;
+    }
+    return choose;
+}
+
+int chooseECWhatever(Wallist& wallist, int index){
+    cout<<"========================================================"<<endl;
+    cout<<endl;
+    cout<<"This is the list of Expense Category in the current wallet."<<endl;
+    for (int i=0;i<wallist.w.p[index].ec.store;++i)
+        cout<<i+1<<". "<<wallist.w.p[index].ec.p[i].eName<<endl;
+    cout<<"0. Back to the Dashboard"<<endl;
+    cout<<endl;
+    cout<<"========================================================"<<endl;
+    cout<<"Please enter the Expense Category number: "<<endl;
+    int choose;
+    cin>>choose;
     while (choose<0||choose>wallist.w.p[index].ec.store){
         cout<<"Invalid number! Please try again!"<<endl;
         cout<<"Please enter the Expense Category number:"<<endl;
@@ -104,9 +164,9 @@ void TransactionManagement(Wallist& wallist){
     if (--index_wallet==wallist.w.store) {
         wallist.CreateWallet();
         string str;
-        while (cin.peek() == '\n') cin.ignore();
         while (1) {
             std::cout << "Enter a name for the new wallet: ";
+            while (cin.peek() == '\n') cin.ignore();
             std::getline(std::cin, str);
             if (!wallist.editWal(index_wallet, str)) {
                 std::cerr << "There was already a wallet with that name!\n";
