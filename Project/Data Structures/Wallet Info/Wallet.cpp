@@ -233,6 +233,7 @@ bool Wallet :: editIS(int x, string name) {
     }
     is.p[x].iRename(name);
     outWal();
+    return 1;
 }
 
 bool Wallet :: editEC(int x, string name) {
@@ -245,9 +246,10 @@ bool Wallet :: editEC(int x, string name) {
     }
     ec.p[x].eRename(name);
     outWal();
+    return 1;
 }
 
-bool Wallet :: delIS(int x) {
+void Wallet :: delIS(int x) {
     if (is.sub(x)) {
         for (int i = x - 1; i < is.store; i++) {
             for (int j = 7; j >= 0; j--) {

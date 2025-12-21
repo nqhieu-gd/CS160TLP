@@ -42,7 +42,7 @@ public:
 
     bool editEC(int x, string name);
 
-    bool delIS(int x);
+    void delIS(int x);
 
     void delEC(int x);
 
