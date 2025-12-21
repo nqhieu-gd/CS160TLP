@@ -394,33 +394,33 @@ void Statisticfunction(Wallist& wallist){
     switch (choice){
         case 1:
             TotalBalance(wallist);
-            cout<<"Enter any number to go back to the dashboard:";
-            int temp;
-            cin>>temp;
+            cout << "Press Enter to go back to the dashboard...";
+            cin.ignore();
+            cin.get();
             break;
         case 2:
             TimeWalletStatistics(wallist);
-            cout<<"Enter any number to go back to the dashboard:";
-            int temp;
-            cin>>temp;
+            cout << "Press Enter to go back to the dashboard...";
+            cin.ignore();
+            cin.get();
             break;
         case 3:
             AnnualOverviewStatistics(wallist);
-            cout<<"Enter any number to go back to the dashboard:";
-            int temp;
-            cin>>temp;
+            cout << "Press Enter to go back to the dashboard...";
+            cin.ignore();
+            cin.get();
             break;
         case 4:
             AnnualIncomeBreakdownStatistics(wallist);
-            cout<<"Enter any number to go back to the dashboard:";
-            int temp;
-            cin>>temp;
+            cout << "Press Enter to go back to the dashboard...";
+            cin.ignore();
+            cin.get();
             break;
         case 5:
             AnnualExpenseBreakdownStatistics(wallist);
-            cout<<"Enter any number to go back to the dashboard:";
-            int temp;
-            cin>>temp;
+            cout << "Press Enter to go back to the dashboard...";
+            cin.ignore();
+            cin.get();
             break;
         case 0:
             break;
