@@ -122,7 +122,7 @@ void sthsthIS(Wallist &wallist) {
             int x = chooseWalletWhatever(wallist) - 1;
             if (x == -1) return;
             k = chooseISWhatever(wallist, x);
-            wallist.w.p[x].delIS(x);
+            wallist.w.p[x].delIS(k);
             break;
         }
         default: break;
@@ -154,7 +154,7 @@ void sthsthEC(Wallist &wallist) {
             int x = chooseWalletWhatever(wallist) - 1;
             if (x == -1) return;
             k = chooseECWhatever(wallist, x);
-            wallist.w.p[x].delEC(x);
+            wallist.w.p[x].delEC(k);
             break;
         }
         default: break;
