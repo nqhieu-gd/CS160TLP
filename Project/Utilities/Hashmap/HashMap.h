@@ -7,6 +7,7 @@ struct HashNode {
     string name;
     func<string> IDlist;
 
+    HashNode();
     HashNode(string n);
     ~HashNode();
 };

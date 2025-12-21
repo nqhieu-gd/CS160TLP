@@ -174,7 +174,7 @@ void AddRecurringTransaction(Wallist& wallist){
         string name="";
         if (chooseis==hm.map.store+1){
             cout<<"Enter name of the new Income Source: ";
-            cin.ignore();
+            while (cin.peek() == '\n') cin.ignore();
             getline(cin,name);
             i_iD=wallist.w.p[choosewallet-1].convertNameInc(name);
         }
@@ -197,7 +197,7 @@ void AddRecurringTransaction(Wallist& wallist){
 
         cout << "Enter description: ";
         string description;
-        cin.ignore();
+        while (cin.peek() == '\n') cin.ignore();
         getline(cin, description);
 
         cout << "Enter start date (dd mm yyyy): ";
@@ -278,7 +278,7 @@ void AddRecurringTransaction(Wallist& wallist){
         string current_ec_name = "";
         if (chooseec==hm.map.store+1){
             cout<<"Enter name of the new Expense Category: ";
-            cin.ignore();
+            while (cin.peek() == '\n') cin.ignore();
             getline(cin,name);
             e_id=wallist.w.p[choosewallet-1].convertNameExp(name);
             current_ec_name = name;
@@ -296,7 +296,7 @@ void AddRecurringTransaction(Wallist& wallist){
 
         cout << "Enter description: ";
         string description;
-        cin.ignore();
+        while (cin.peek() == '\n') cin.ignore();
         getline(cin, description);
 
         cout << "Enter start date (dd mm yyyy): ";
@@ -427,6 +427,6 @@ void RecurringTransactionFunction(Wallist& wallist, ATM_Management& atmm){
     if (choice==1) AddRecurringTransaction(wallist);
     else DeleteRecurringTransaction(wallist,atmm);
     cout<<"Press enter to go back to Dashboard...";
-    cin.ignore();
+    while (cin.peek() == '\n') cin.ignore();
     cin.get();
 }

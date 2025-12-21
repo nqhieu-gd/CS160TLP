@@ -37,7 +37,7 @@ public:
 
     //Add a new item k to the list as the newest item (aka the highest in term of number order).
     void push(T k) {
-        if (!p) return;
+        if (!p) (alloc());
         while (this->store >= this->size) this->stretch();
         p[this->store] = k;
         this->store++;

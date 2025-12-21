@@ -1,5 +1,9 @@
 #include "HashMap.h"
 
+HashNode :: HashNode(): name("") {
+    IDlist.alloc();
+}
+
 HashNode :: HashNode(string n): name(n) {
     IDlist.alloc();
 }
