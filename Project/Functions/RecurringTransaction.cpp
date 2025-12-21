@@ -204,10 +204,10 @@ void AddRecurringTransaction(Wallist& wallist){
         Date start_date;
         do {
             cin >> start_date.day >> start_date.month >> start_date.year;
-            // Check logic for start date
-            if (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate()))) 
+            if (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date))) 
                 cout << "Invalid date! Please input again: ";
-        } while (!(CheckvalidDate(start_date) && CompareDate(start_date, GetCurrDate())));
+                
+        } while (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date)));
 
         cout << "Enter end date (dd mm yyyy), enter 0 0 0 for infinite loop: ";
         Date end_date;
@@ -215,9 +215,9 @@ void AddRecurringTransaction(Wallist& wallist){
             cin >> end_date.day >> end_date.month >> end_date.year;
             // Check logic for end date
             bool isInfinite = (end_date.day == 0 && end_date.month == 0 && end_date.year == 0);
-            if (!isInfinite && !(CheckvalidDate(end_date) && CompareDate(end_date, start_date))) 
+            if (!isInfinite && !(CheckvalidDate(end_date) && !CompareDate(start_date, end_date))) 
                 cout << "Invalid date! Please input again: ";
-        } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && CompareDate(end_date, start_date))));
+        } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && !CompareDate(start_date, end_date))));
 
         // Paste inputs into Auto_Transaction structure
         Transaction t;
