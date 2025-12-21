@@ -40,7 +40,7 @@ public:
 
     string convertNameExp(string name);
 
-    void rename();
+    bool rename();
 };
 
 struct Wallist {

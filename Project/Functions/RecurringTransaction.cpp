@@ -137,6 +137,8 @@ void AddRecurringTransaction(Wallist& wallist){
         if (choosewallet<0&&choosewallet>wallist.w.store+1) cout<<"Invalid number! Please input again:";
     } while (choosewallet<0&&choosewallet>wallist.w.store+1);
     if (choosewallet==0) return;
-    if (choosewallet==wallist.w.store+1); // Create a new wallet
+    if (choosewallet==wallist.w.store+1){
+        
+    }
     
 }
