@@ -410,3 +410,23 @@ void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
         cout << "Error: Could not locate the transaction." << endl;
     }
 }
+
+//main function
+void RecurringTransactionFunction(Wallist& wallist, ATM_Management& atmm){
+    cout<<"This is list of tasks with recurring transaction function"<<endl;
+    cout<<"1. Add a recurring transaction"<<endl;
+    cout<<"2. Delete a recurring transaction"<<endl;
+    cout<<"0. Go back to Dashboard"<<endl;
+    cout<<"Please enter your choice: ";
+    int choice;
+    do{
+        cin>>choice;
+        if (choice<0||choice>2) cout<<"Invalid number! Please input again: ";
+    } while (choice<0||choice>2);
+    if (choice==0) return;
+    if (choice==1) AddRecurringTransaction(wallist);
+    else DeleteRecurringTransaction(wallist,atmm);
+    cout<<"Press enter to go back to Dashboard...";
+    cin.ignore();
+    cin.get();
+}
