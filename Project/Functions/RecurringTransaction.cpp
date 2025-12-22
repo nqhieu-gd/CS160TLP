@@ -427,6 +427,6 @@ void RecurringTransactionFunction(Wallist& wallist, ATM_Management& atmm){
     if (choice==1) AddRecurringTransaction(wallist);
     else DeleteRecurringTransaction(wallist,atmm);
     cout<<"Press enter to go back to Dashboard...";
-    while (cin.peek() == '\n') cin.ignore();
+    cin.ignore();
     cin.get();
 }
