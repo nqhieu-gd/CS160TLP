@@ -14,7 +14,7 @@ Wallet :: Wallet() {
 //Used after each change made in the wallet.
 void Wallet :: outWal() {
     std::ofstream fout;
-    string path = "Saved Wallet/";
+    string path = "Project/Saved Wallet/";
     path += wID + ".bin";
     fout.open(path, std::ios::binary | std::ios::out);
     if (!fout.is_open()) {
