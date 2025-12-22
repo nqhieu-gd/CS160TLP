@@ -1,4 +1,3 @@
-#include "Utilities/DA/Dynamicarray.h"
 #include "Data Structures/Expense Category/Cate.h"
 #include "Data Structures/Income Source/Sour.h"
 #include "Data Structures/Wallet Info/Wallet.h"
@@ -8,8 +7,10 @@
 #include "Functions/AddTransaction.h"
 #include "Functions/EditWalletThings.h"
 #include "Functions/Statistic.h"
+#include "Utilities/DA/Dynamicarray.h"
 #include "Utilities/Hashmap/Hashmap.h"
 #include "Utilities/Uppercase/Uppercase.h"
+#include "Utilities/Initialize/Ini.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -20,6 +21,7 @@ using std::endl;
 using std::string;
 
 int main(){
+    ini();
     Wallist wallist;
     inWallist(wallist);
     ATM_Management atmm;
