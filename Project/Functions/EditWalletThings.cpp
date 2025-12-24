@@ -11,7 +11,7 @@ int chooseOneThing() {
     std::cout << "3. Edit Expense Categories.\n";
     std::cout << "0. Return to Dashboard.\n";
     std::cin >> choice;
-    std::cout << "========================================================";
+    std::cout << "========================================================"<<std::endl;
     if (choice < 0 || choice > 3) {
         std::cerr << "Invalid choice.\n";
         choice = chooseOneThing();
