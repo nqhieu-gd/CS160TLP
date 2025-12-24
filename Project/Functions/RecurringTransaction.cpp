@@ -71,8 +71,26 @@ void Operation(Wallist& wallist, ATM_Management& atmm){
                     int count=wallist.w.p[i].is.p[j].i_atm.atm.p[k].autoadd();
                     if (count!=0){
                         Transaction temp=wallist.w.p[i].is.p[j].i_atm.atm.p[k].transaction;
-                        temp.date=GetCurrDate();
-                        for (int n=1;n<=count;++n) wallist.w.p[i].is.p[j].inc.push(temp);
+                        for (int n = 0; n < count; ++n) {
+                            Transaction monthly_t = temp;
+                            // Calculate the correct date for each added transaction
+                            int target_total_months = (GetCurrDate()).year * 12 + ((GetCurrDate()).month - 1) - (count - 1 - n);
+                            monthly_t.date.year = target_total_months / 12;
+                            monthly_t.date.month = (target_total_months % 12) + 1;
+                            monthly_t.date.day = temp.date.day;
+                            // Adjust day if it exceeds the number of days in the month
+                            if (!CheckvalidDate(monthly_t.date)) {
+                                int maxDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                                // Check for leap year
+                                if ((monthly_t.date.year % 4 == 0 && monthly_t.date.year % 100 != 0) || (monthly_t.date.year % 400 == 0)) {
+                                    maxDays[1] = 29;
+                                }
+                                // Adjust day to the maximum valid day of the month
+                                monthly_t.date.day = maxDays[monthly_t.date.month - 1];
+                            }
+                            // Add the transaction to the Income Source
+                            wallist.w.p[i].ISAdd(monthly_t, wallist.w.p[i].is.p[j].iName);
+                        }
                     }
                 }
                 //After add, check if any autotransaction is expired
@@ -94,8 +112,26 @@ void Operation(Wallist& wallist, ATM_Management& atmm){
                         int count=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].autoadd();
                         if (count!=0){
                             Transaction temp=wallist.w.p[i].ec.p[j].e_atm.atm.p[k].transaction;
-                            temp.date=GetCurrDate();
-                            for (int n=1;n<=count;++n) wallist.w.p[i].ec.p[j].exp.push(temp);
+                            for (int n = 0; n < count; ++n) {
+                            Transaction monthly_t = temp;
+                            // Calculate the correct date for each added transaction
+                            int target_total_months = (GetCurrDate()).year * 12 + ((GetCurrDate()).month - 1) - (count - 1 - n);
+                            monthly_t.date.year = target_total_months / 12;
+                            monthly_t.date.month = (target_total_months % 12) + 1;
+                            monthly_t.date.day = temp.date.day;
+                            // Adjust day if it exceeds the number of days in the month
+                            if (!CheckvalidDate(monthly_t.date)) {
+                                int maxDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                                // Check for leap year
+                                if ((monthly_t.date.year % 4 == 0 && monthly_t.date.year % 100 != 0) || (monthly_t.date.year % 400 == 0)) {
+                                    maxDays[1] = 29;
+                                }
+                                // Adjust day to the maximum valid day of the month
+                                monthly_t.date.day = maxDays[monthly_t.date.month - 1];
+                            }
+                            // Add the transaction to the Expense Category
+                            wallist.w.p[i].ECAdd(monthly_t, wallist.w.p[i].ec.p[j].eName);
+                        }
                         }
                     }
                 //After add, check if any autotransaction is expired
@@ -204,10 +240,9 @@ void AddRecurringTransaction(Wallist& wallist){
         Date start_date;
         do {
             cin >> start_date.day >> start_date.month >> start_date.year;
-            if (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date))) 
+            if (!CheckvalidDate(start_date)) 
                 cout << "Invalid date! Please input again: ";
-                
-        } while (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date)));
+        } while (!CheckvalidDate(start_date));
 
         cout << "Enter end date (dd mm yyyy), enter 0 0 0 for infinite loop: ";
         Date end_date;
@@ -218,7 +253,17 @@ void AddRecurringTransaction(Wallist& wallist){
             if (!isInfinite && !(CheckvalidDate(end_date) && !CompareDate(start_date, end_date))) 
                 cout << "Invalid date! Please input again: ";
         } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && !CompareDate(start_date, end_date))));
-
+        bool isPastCycle = CompareDate(GetCurrDate(), start_date);
+        if (isPastCycle) {
+        char confirm;
+        cout << "The cycle is started from the past." << endl;
+        cout << "The system will automatically add transactions to history. Are you sure? (y/n): ";
+        cin >> confirm;
+        if (confirm != 'y' && confirm != 'Y') {
+            cout << "Operation cancelled." << endl;
+            return; // Go back to dashboard
+        }
+        }
         // Paste inputs into Auto_Transaction structure
         Transaction t;
         t.amount = amount;
