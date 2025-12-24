@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <fstream>
-#include "../Utilities/DA/Dynamicarray.h"
-#include "../Data Structures/Expense Category/Cate.h"
-#include "../Data Structures/Income Source/Sour.h"
-#include "../Data Structures/Wallet Info/Wallet.h"
-#include "../Data Structures/Wallet Info/Transaction/Tstn.h"
-#include "../Utilities/Hashmap/Hashmap.h"
+#include "../Data Structures/Cate.h"
+#include "../Data Structures/Sour.h"
+#include "../Data Structures/Tstn.h"
+#include "../Data Structures/Wallet.h"
+#include "../../Utilities/DA/Dynamicarray.h"
+#include "../../Utilities/Hashmap/Hashmap.h"
 
 //Calculate Total Balance of all Wallets and Total Balances of each wallets
 //Use whenever start over the programme and in the dashboard

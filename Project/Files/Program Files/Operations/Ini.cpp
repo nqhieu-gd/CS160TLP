@@ -1,10 +1,10 @@
 #include <fstream>
-#include "Ini.h"
+#include "../../Header Files/Operations/Ini.h"
 
 void iniSaveNum() {
     std::ifstream fin;
     std::ofstream fout;
-    fin.open("Utility Save Files/WalletNumber.bin", std::ios::binary);
+    fin.open("Personal Financial Management App/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
     if (!fin.is_open()) {
         fout.open("Utility Save Files/WalletNumber.bin", std::ios::binary);
         fout.close();
@@ -15,9 +15,9 @@ void iniSaveNum() {
 void iniInwal() {
     std::ifstream fin;
     std::ofstream fout;
-    fin.open("Saved Wallet/W0000001.bin", std::ios::binary);
+    fin.open("Personal Financial Management App/Save Files/Saved Wallet/W0000001.bin", std::ios::binary);
     if (!fin.is_open()) {
-        fout.open("Saved Wallet/W0000001.bin", std::ios::binary);
+        fout.open("Personal Financial Management App/Save Files/Saved Wallet/W0000001.bin", std::ios::binary);
         fout.close();
     }
     else fin.close();

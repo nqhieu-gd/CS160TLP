@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Cate.h"
+#include "../../Header Files/Data Structures/Cate.h"
 using namespace std;
 
 ExpenseCategory :: ExpenseCategory(): eID("00000000"), eName("") {

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "../Data Structures/Wallet Info/Wallet.h"
+#include "../Data Structures/Wallet.h"
 
 int chooseOneThing();
 

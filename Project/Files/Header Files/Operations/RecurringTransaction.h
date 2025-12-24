@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <fstream>
-#include "../Utilities/DA/Dynamicarray.h"
-#include "../Data Structures/Expense Category/Cate.h"
-#include "../Data Structures/Income Source/Sour.h"
-#include "../Data Structures/Wallet Info/Wallet.h"
-#include "../Data Structures/Wallet Info/Transaction/Tstn.h"
-#include "../Data Structures/Wallet Info/Transaction/Auto_Trtn.h"
+#include "../Data Structures/Auto_Trtn.h"
+#include "../Data Structures/Cate.h"
+#include "../Data Structures/Sour.h"
+#include "../Data Structures/Tstn.h"
+#include "../Data Structures/Wallet.h"
+#include "../../Utilities/DA/Dynamicarray.h"
 
 struct Address{  //Save the Wallet index and IS/EC index
     int w_index=-1;
