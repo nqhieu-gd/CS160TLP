@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 #include <fstream>
-#include "../../../Utilities/DA/Dynamicarray.h"
+#include "../../Utilities/DA/Dynamicarray.h"
 #include "Tstn.h"
 
 using std::ifstream;

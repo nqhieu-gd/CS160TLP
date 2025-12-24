@@ -1,8 +1,8 @@
 #pragma once
 #include <fstream>
 #include <string>
-#include "../Wallet Info/Transaction/Tstn.h"
-#include "../Wallet Info/Transaction/Auto_Trtn.h"
+#include "Tstn.h"
+#include "Auto_Trtn.h"
 #include "../../Utilities/DA/Dynamicarray.h"
 
 using std::string;

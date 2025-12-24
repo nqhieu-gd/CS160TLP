@@ -1,8 +1,8 @@
 #pragma once
 #include <fstream>
-#include "Transaction/Tstn.h"
-#include "../Income Source/Sour.h"
-#include "../Expense Category/Cate.h"
+#include "Tstn.h"
+#include "Sour.h"
+#include "Cate.h"
 #include "../../Utilities/DA/Dynamicarray.h"
 #include "../../Utilities/Hashmap/HashMap.h"
 #include "../../Utilities/Uppercase/Uppercase.h"

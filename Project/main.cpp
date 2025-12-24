@@ -1,16 +1,16 @@
-#include "Data Structures/Expense Category/Cate.h"
-#include "Data Structures/Income Source/Sour.h"
-#include "Data Structures/Wallet Info/Wallet.h"
-#include "Data Structures/Wallet Info/Transaction/Tstn.h"
-#include "Data Structures/Wallet Info/Transaction/Auto_Trtn.h"
-#include "Functions/RecurringTransaction.h"
-#include "Functions/AddTransaction.h"
-#include "Functions/EditWalletThings.h"
-#include "Functions/Statistic.h"
-#include "Utilities/DA/Dynamicarray.h"
-#include "Utilities/Hashmap/Hashmap.h"
-#include "Utilities/Uppercase/Uppercase.h"
-#include "Utilities/Initialize/Ini.h"
+#include "Files/Header Files/Data Structures/Auto_Trtn.h"
+#include "Files/Header Files/Data Structures//Cate.h"
+#include "Files/Header Files/Data Structures/Sour.h"
+#include "Files/Header Files/Data Structures/Tstn.h"
+#include "Files/Header Files/Data Structures/Wallet.h"
+#include "Files/Header Files/Operations/AddTransaction.h"
+#include "Files/Header Files/Operations/EditWalletThings.h"
+#include "Files/Header Files/Operations/Ini.h"
+#include "Files/Header Files/Operations/RecurringTransaction.h"
+#include "Files/Header FIles/Statistics/Statistic.h"
+#include "Files/Utilities/DA/Dynamicarray.h"
+#include "Files/Utilities/Hashmap/Hashmap.h"
+#include "Files/Utilities/Uppercase/Uppercase.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -65,7 +65,7 @@ int main(){
         }
     }
     cout<<"Thank you for using Personal Finance Manager. Goodbye!"<<endl;
-    //Output all data to files before exiting
+    //Output all data to Files before exiting
     atmm.clr();
     return 0;
 }

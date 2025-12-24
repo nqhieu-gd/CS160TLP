@@ -1,6 +1,6 @@
 #include <iostream>
-#include "EditWalletThings.h"
-#include "AddTransaction.h"
+#include "../../Header Files/Operations/EditWalletThings.h"
+#include "../../Header Files/Operations/AddTransaction.h"
 
 int chooseOneThing() {
     int choice;

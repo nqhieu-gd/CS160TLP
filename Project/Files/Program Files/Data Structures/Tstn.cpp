@@ -1,5 +1,5 @@
 #include <fstream>
-#include "Tstn.h"
+#include "../../Header Files/Data Structures/Tstn.h"
 
 using std::string;
 using std::cout;

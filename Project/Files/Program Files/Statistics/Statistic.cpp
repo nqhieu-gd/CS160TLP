@@ -1,12 +1,12 @@
 #include <iostream>
 #include <fstream>
-#include "Statistic.h"
-#include "../Utilities/DA/Dynamicarray.h"
-#include "../Data Structures/Expense Category/Cate.h"
-#include "../Data Structures/Income Source/Sour.h"
-#include "../Data Structures/Wallet Info/Wallet.h"
-#include "../Data Structures/Wallet Info/Transaction/Tstn.h"
-#include "../Utilities/Hashmap/Hashmap.h"
+#include "../../Header Files/Statistics/Statistic.h"
+#include "../../Header Files/Data Structures/Cate.h"
+#include "../../Header Files/Data Structures/Sour.h"
+#include "../../Header Files/Data Structures/Wallet.h"
+#include "../../Header Files/Data Structures/Tstn.h"
+#include "../../Utilities/DA/Dynamicarray.h"
+#include "../../Utilities/Hashmap/Hashmap.h"
 
 using std::cout;
 using std::endl;

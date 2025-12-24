@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <fstream>
-#include "Auto_Trtn.h"
+#include "../../Header Files/Data Structures/Auto_Trtn.h"
 
 using std::ifstream;
 using std::ofstream;

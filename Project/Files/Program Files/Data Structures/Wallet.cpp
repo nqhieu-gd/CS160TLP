@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "Wallet.h"
+#include "../../Header Files/Data Structures/Wallet.h"
 
 using std::string;
 
@@ -14,7 +14,7 @@ Wallet :: Wallet() {
 //Used after each change made in the wallet.
 void Wallet :: outWal() {
     std::ofstream fout;
-    string path = "Project/Saved Wallet/";
+    string path = "Personal Financial Management App/Save Files/Saved Wallet/";
     path += wID + ".bin";
     fout.open(path, std::ios::binary | std::ios::out);
     if (!fout.is_open()) {

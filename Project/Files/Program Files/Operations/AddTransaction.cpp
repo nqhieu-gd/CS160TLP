@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "AddTransaction.h"
-#include "../Utilities/Uppercase/Uppercase.h"
+#include "../../Header Files/Operations/AddTransaction.h"
+#include "../../Utilities/Uppercase/Uppercase.h"
 
 using std::string;
 using std::cout;
