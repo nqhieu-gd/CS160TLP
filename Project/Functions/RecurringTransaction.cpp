@@ -166,7 +166,7 @@ void AddRecurringTransaction(Wallist& wallist){
     }
     cout.width(4);
     cout<<wallist.w.store+1<<". Create a new Wallet"<<endl;
-    cout<<"    0. Go back to dashboard"<<endl;
+    cout<<"   0. Go back to dashboard"<<endl;
     cout<<"Enter wallet number: ";
     int choosewallet;
     do{
