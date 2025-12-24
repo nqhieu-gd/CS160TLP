@@ -21,13 +21,13 @@ int chooseOneThing() {
 
 int chooseOneThingVer2() {
     int choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     std::cout << "Choose one operation to proceed:\n";
     std::cout << "1. Rename a Wallet.\n";
     std::cout << "2. Delete a Wallet.\n";
     std::cout << "0. Return to Dashboard.\n";
     std::cin >> choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
         std::cerr << "Invalid choice.\n";
         choice = chooseOneThingVer2();
@@ -37,13 +37,13 @@ int chooseOneThingVer2() {
 
 int chooseOneThingVer3() {
     int choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     std::cout << "Choose one operation to proceed:\n";
     std::cout << "1. Rename an Income Source.\n";
     std::cout << "2. Delete an Income Source.\n";
     std::cout << "0. Return to Dashboard.\n";
     std::cin >> choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
         std::cerr << "Invalid choice.\n";
         choice = chooseOneThingVer3();
@@ -53,13 +53,13 @@ int chooseOneThingVer3() {
 
 int chooseOneThingVer4() {
     int choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     std::cout << "Choose one operation to proceed:\n";
     std::cout << "1. Rename an Expense Category.\n";
     std::cout << "2. Delete an Expense Category.\n";
     std::cout << "0. Return to Dashboard.\n";
     std::cin >> choice;
-    std::cout << "========================================================";
+    std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
         std::cerr << "Invalid choice.\n";
         choice = chooseOneThingVer4();
