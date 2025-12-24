@@ -4,7 +4,7 @@
 
 int chooseOneThing() {
     int choice;
-    std::cout << "========================================================";
+    std::cout << "========================================================"<<std::endl;
     std::cout << "Choose one operation to proceed:\n";
     std::cout << "1. Edit Wallets.\n";
     std::cout << "2. Edit Income Sources.\n";
