@@ -1,5 +1,6 @@
 #pragma once
 #include "../DA/Dynamicarray.h"
+#include "iostream"
 
 using std::string;
 
@@ -10,6 +11,9 @@ struct HashNode {
     HashNode();
     HashNode(string n);
     ~HashNode();
+
+    int getIndexWal(int x);
+    int getIndexLocation(int x);
 };
 
 struct HashMap {
