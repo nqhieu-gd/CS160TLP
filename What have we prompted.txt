@@ -1,0 +1,5 @@
+1. Menu writing assist(mainly by Copilot)
+
+2. The rule of three:
+- Operator=
+- Deep copy
