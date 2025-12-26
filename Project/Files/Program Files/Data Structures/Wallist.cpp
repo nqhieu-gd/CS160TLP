@@ -209,7 +209,7 @@ void Wallist :: outSC() {
 
 //Delete a wallet.
 void Wallist :: delWal(int x) {
-    if (w.sub(x)) {
+    if (w.sub(x - 1)) {
         for (int i = x - 1; i < w.store; i++) {
             for (int j = 7; j >= 0; j--) {
                 if (w.p[i].wID[j] == '0') {
