@@ -104,8 +104,8 @@ void sthsthWallet(Wallist &wallist) {
             break;
         }
         case 2: {
-            int x = chooseWalletWhatever(wallist) - 1;
-            if (x == -1) return;
+            int x = chooseWalletWhatever(wallist);
+            if (x == 0) return;
             wallist.delWal(x);
             break;
         }
