@@ -198,8 +198,10 @@ void AddRecurringTransaction(Wallist& wallist){
             cout<<i+1;
             cout<<". "<<hm.map.p[i].name<<endl;
         }
-        cout<<"    "<<hm.map.store+1<<". Create a new Income Source"<<endl;
-        cout<<"    0. Go back to dashboard"<<endl;
+        cout.width(4);
+        cout<<hm.map.store+1<<". Create a new Income Source"<<endl;
+        cout.width(4);
+        cout<<0<<". Go back to dashboard"<<endl;
         cout<<"Enter Income Source number: ";
         int chooseis;
         do{
