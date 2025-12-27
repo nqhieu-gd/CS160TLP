@@ -155,8 +155,8 @@ void AddRecurringTransaction(Wallist& wallist){
     int iore;
     do {
         cin>>iore;
-        if (iore<0&&iore>2) cout<<"Invalid! Please enter again: ";
-    } while (iore<0&&iore>2);
+        if (iore<0||iore>2) cout<<"Invalid! Please enter again: ";
+    } while (iore<0||iore>2);
     if (iore==0) return;
     cout<<"This is list of Wallets"<<endl;
     for (int i=0;i<wallist.w.store;++i){
@@ -171,8 +171,8 @@ void AddRecurringTransaction(Wallist& wallist){
     int choosewallet;
     do{
         cin>>choosewallet;
-        if (choosewallet<0&&choosewallet>wallist.w.store+1) cout<<"Invalid number! Please input again:";
-    } while (choosewallet<0&&choosewallet>wallist.w.store+1);
+        if (choosewallet<0||choosewallet>wallist.w.store+1) cout<<"Invalid number! Please input again:";
+    } while (choosewallet<0||choosewallet>wallist.w.store+1);
     if (choosewallet==0) return;
     if (choosewallet==wallist.w.store+1){
         wallist.CreateWallet();
@@ -206,8 +206,8 @@ void AddRecurringTransaction(Wallist& wallist){
         int chooseis;
         do{
             cin>>chooseis;
-            if (chooseis<0&&chooseis>hm.map.store+1) cout<<"Invalid number! Please input again:";
-        } while (chooseis<0&&chooseis>hm.map.store+1);
+            if (chooseis<0||chooseis>hm.map.store+1) cout<<"Invalid number! Please input again:";
+        } while (chooseis<0||chooseis>hm.map.store+1);
         if (chooseis==0) return;
         string name="";
         if (chooseis==hm.map.store+1){
@@ -318,8 +318,8 @@ void AddRecurringTransaction(Wallist& wallist){
         int chooseec;
         do{
             cin>>chooseec;
-            if (chooseec<0&&chooseec>hm.map.store+1) cout<<"Invalid number! Please input again:";
-        } while (chooseec<0&&chooseec>hm.map.store+1);
+            if (chooseec<0||chooseec>hm.map.store+1) cout<<"Invalid number! Please input again:";
+        } while (chooseec<0||chooseec>hm.map.store+1);
         if (chooseec==0) return;
         string name="";
         string current_ec_name = "";
