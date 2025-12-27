@@ -57,7 +57,11 @@ Date inputDate(){
     cout<<"Please enter the utility: ";
     int choose;
     cin>>choose;
-    if (choose==1) return GetCurrDate();
+    if (choose < 1 || choose >2) {
+        std::cerr << "Invalid option. Please try again!\n";
+        return inputDate();
+    }
+    else if (choose==1) return GetCurrDate();
     cout<<"Please input the Date (format: dd mm yyyy): ";
     Date a;
     cin>>a.day>>a.month>>a.year;
