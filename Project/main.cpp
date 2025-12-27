@@ -15,6 +15,8 @@
 #include <string>
 #include <fstream>
 #include <ctime>
+#include <thread>
+#include <chrono>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -65,6 +67,7 @@ int main(){
         }
     }
     cout<<"Thank you for using Personal Finance Manager. Goodbye!"<<endl;
+    std::this_thread::sleep_for(std::chrono::seconds(5));
     //Output all data to Files before exiting
     atmm.clr();
     return 0;
