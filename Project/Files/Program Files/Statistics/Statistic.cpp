@@ -43,27 +43,62 @@ void DashboardStatistics(const Wallist& wallist){
 void TotalBalance(const Wallist& wallist){
     //Tell user to enter date range
     Date A,B;
-    do{
-        cout<<"Please enter the start date (day month year): ";
-        cin>>A.day>>A.month>>A.year;
-        cout<<"Please enter the end date (day month year): ";
-        cin>>B.day>>B.month>>B.year;
-        if (CompareDate(A,B)) cout<<"Invalid date range, please re-enter."<<endl;
-    }while (CompareDate(A,B));
+    do {
+        //enter start date
+        cout << "Please enter the start date (day month year): ";
+        while (true) {
+            cin >> A.day >> A.month >> A.year;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Invalid input! Please enter numbers only (day month year): ";
+            } 
+            else if (!CheckvalidDate(A)) { 
+                cout << "Invalid date (e.g., 30/2)! Please re-enter (day month year): ";
+            } 
+            else {
+                cin.ignore(32767, '\n'); 
+                break;
+            }
+        }
+        //Enter end date
+        cout << "Please enter the end date (day month year): ";
+        while (true) {
+            cin >> B.day >> B.month >> B.year;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Invalid input! Please enter numbers only (day month year): ";
+            } 
+            else if (!CheckvalidDate(B)) { //Check valid Date
+                cout << "Invalid date (e.g., 30/2)! Please re-enter (day month year): ";
+            } 
+            else {
+                cin.ignore(32767, '\n'); 
+                break;
+            }
+        }
+        if (CompareDate(A, B)) {
+            cout << "Invalid date range (Start Date must be before End Date). Please re-enter both dates." << endl;
+        }
+
+    } while (CompareDate(A, B));
     long long total_income=0;
     long long total_expense=0;
     for (int i=0;i<wallist.w.store;++i){
         for (int j=0;j<wallist.w.p[i].is.store;++j)
             for (int k=0;k<wallist.w.p[i].is.p[j].inc.store;++k)
             {
-                if (CompareDate(wallist.w.p[i].is.p[j].inc.p[k].date,B)) break;
-                if (!CompareDate(A,wallist.w.p[i].is.p[j].inc.p[k].date)) total_income+=wallist.w.p[i].is.p[j].inc.p[k].amount;
+                if (CompareDate(wallist.w.p[i].is.p[j].inc.p[k].date,B)) continue;
+                if (CompareDate(A,wallist.w.p[i].is.p[j].inc.p[k].date)) break;
+                total_income+=wallist.w.p[i].is.p[j].inc.p[k].amount;
             }
         for (int j=0;j<wallist.w.p[i].ec.store;++j)
             for (int k=0;k<wallist.w.p[i].ec.p[j].exp.store;++k)
             {
-                if (CompareDate(wallist.w.p[i].ec.p[j].exp.p[k].date,B)) break;
-                if (!CompareDate(A,wallist.w.p[i].ec.p[j].exp.p[k].date)) total_expense+=wallist.w.p[i].ec.p[j].exp.p[k].amount;
+                if (CompareDate(wallist.w.p[i].ec.p[j].exp.p[k].date,B)) continue;
+                if (CompareDate(A,wallist.w.p[i].ec.p[j].exp.p[k].date)) break;
+                total_expense+=wallist.w.p[i].ec.p[j].exp.p[k].amount;
     }
     }
     long long net_balance=total_income-total_expense;
@@ -80,13 +115,46 @@ void TotalBalance(const Wallist& wallist){
 void TimeWalletStatistics(const Wallist& wallist){
     //Tell user to enter date range
     Date A,B;
-    do{
-        cout<<"Please enter the start date (day month year): ";
-        cin>>A.day>>A.month>>A.year;
-        cout<<"Please enter the end date (day month year): ";
-        cin>>B.day>>B.month>>B.year;
-        if (!CompareDate(A,B)) cout<<"Invalid date range, please re-enter."<<endl;
-    }while (!CompareDate(A,B));
+    do {
+        //enter start date
+        cout << "Please enter the start date (day month year): ";
+        while (true) {
+            cin >> A.day >> A.month >> A.year;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Invalid input! Please enter numbers only (day month year): ";
+            } 
+            else if (!CheckvalidDate(A)) { 
+                cout << "Invalid date (e.g., 30/2)! Please re-enter (day month year): ";
+            } 
+            else {
+                cin.ignore(32767, '\n'); 
+                break;
+            }
+        }
+        //Enter end date
+        cout << "Please enter the end date (day month year): ";
+        while (true) {
+            cin >> B.day >> B.month >> B.year;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                cout << "Invalid input! Please enter numbers only (day month year): ";
+            } 
+            else if (!CheckvalidDate(B)) { //Check valid Date
+                cout << "Invalid date (e.g., 30/2)! Please re-enter (day month year): ";
+            } 
+            else {
+                cin.ignore(32767, '\n'); 
+                break;
+            }
+        }
+        if (CompareDate(A, B)) {
+            cout << "Invalid date range (Start Date must be before End Date). Please re-enter both dates." << endl;
+        }
+
+    } while (CompareDate(A, B));
     cout<<endl;
     cout<<"\n ======= Time-Wallet Based Statistics ======= \n";
     cout<<"Total Balance from "<<A.day<<"/"<<A.month<<"/"<<A.year<<" to "<<B.day<<"/"<<B.month<<"/"<<B.year<<endl;
@@ -101,14 +169,16 @@ void TimeWalletStatistics(const Wallist& wallist){
         for (int j=0;j<wallist.w.p[i].is.store;++j)
             for (int k=0;k<wallist.w.p[i].is.p[j].inc.store;++k)
             {
-                if (CompareDate(wallist.w.p[i].is.p[j].inc.p[k].date,B)) break;
-                if (!CompareDate(A,wallist.w.p[i].is.p[j].inc.p[k].date)) total_income+=wallist.w.p[i].is.p[j].inc.p[k].amount;
+                if (CompareDate(wallist.w.p[i].is.p[j].inc.p[k].date,B)) continue;
+                if (CompareDate(A,wallist.w.p[i].is.p[j].inc.p[k].date)) break;
+                total_income+=wallist.w.p[i].is.p[j].inc.p[k].amount;
             }
         for (int j=0;j<wallist.w.p[i].ec.store;++j)
             for (int k=0;k<wallist.w.p[i].ec.p[j].exp.store;++k)
             {
-                if (CompareDate(wallist.w.p[i].ec.p[j].exp.p[k].date,B)) break;
-                if (!CompareDate(A,wallist.w.p[i].ec.p[j].exp.p[k].date)) total_expense+=wallist.w.p[i].ec.p[j].exp.p[k].amount;
+                if (CompareDate(wallist.w.p[i].ec.p[j].exp.p[k].date,B)) continue;
+                if (CompareDate(A,wallist.w.p[i].ec.p[j].exp.p[k].date)) break;
+                total_expense+=wallist.w.p[i].ec.p[j].exp.p[k].amount;
             }
         long long net_balance=total_income-total_expense;
         cout<<"    Total Income: "<<total_income<<endl;
@@ -127,10 +197,16 @@ void AnnualOverviewStatistics(const Wallist& wallist){
     //First, ask user for the year they want to overview
     func<int> years;
     years.alloc();
-    cout<<"Please enter the year you want to overview(enter a year> current year to stop): ";
+    cout<<"Please enter the years you want to overview(enter a year> current year to stop): ";
     int year_input;
     while (true){
         cin>>year_input;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Invalid input! Please enter a valid year: ";
+            continue;
+        }
         if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
@@ -163,24 +239,26 @@ void AnnualOverviewStatistics(const Wallist& wallist){
         for (int j=0;j<wallist.w.p[i].is.store;++j)
             for (int k=0;k<wallist.w.p[i].is.p[j].inc.store;++k)
             {
+                if (wallist.w.p[i].is.p[j].inc.p[k].date.year>years.p[years.store-1]) continue;
+                if (wallist.w.p[i].is.p[j].inc.p[k].date.year<years.p[0]) break;
                 for (int y=0;y<years.store;++y){
                     if (wallist.w.p[i].is.p[j].inc.p[k].date.year==years.p[y]){
                         total_income+=wallist.w.p[i].is.p[j].inc.p[k].amount;
                         break;
                     }
                 }
-                if (wallist.w.p[i].is.p[j].inc.p[k].date.year>years.p[years.store-1]) break;
             }
         for (int j=0;j<wallist.w.p[i].ec.store;++j)
             for (int k=0;k<wallist.w.p[i].ec.p[j].exp.store;++k)
             {
+                if (wallist.w.p[i].ec.p[j].exp.p[k].date.year>years.p[years.store-1]) continue;
+                if (wallist.w.p[i].ec.p[j].exp.p[k].date.year<years.p[0]) break;
                 for (int y=0;y<years.store;++y){
                     if (wallist.w.p[i].ec.p[j].exp.p[k].date.year==years.p[y]){
                         total_expense+=wallist.w.p[i].ec.p[j].exp.p[k].amount;
                         break;
                     }
                 }
-                if (wallist.w.p[i].ec.p[j].exp.p[k].date.year>years.p[years.store-1]) break;
             }
     }
     net_balance=total_income-total_expense;
@@ -198,6 +276,12 @@ void AnnualIncomeBreakdownStatistics(Wallist& wallist){
     int year_input;
     while (true){
         cin>>year_input;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Invalid input! Please enter a valid year: ";
+            continue;
+        }
         if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
@@ -294,6 +378,12 @@ void AnnualExpenseBreakdownStatistics(Wallist& wallist){
     int year_input;
     while (true){
         cin>>year_input;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Invalid input! Please enter a valid year: ";
+            continue;
+        }
         if (year_input<=GetCurrDate().year){
             years.push(year_input);
         }
@@ -388,39 +478,43 @@ void Statisticfunction(Wallist& wallist){
     cout<<"=======================================\n";
     cout<<"Please enter your choice: ";
     int choice;
-    do{
-        cin>>choice;
-        if (choice<0 || choice>5) cout<<"Invalid choice, please re-enter: ";
-    }while(choice<0 || choice>5);
+    while (true){
+        cin >> choice;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Invalid input! Please enter a number: ";
+        } else if (choice < 0 || choice > 5) {
+            cout << "Invalid choice, please re-enter: ";
+        } else {
+            cin.ignore(32767, '\n');
+            break;
+        }
+    }
     switch (choice){
         case 1:
             TotalBalance(wallist);
             cout << "Press Enter to go back to the dashboard...";
-            cin.ignore();
             cin.get();
             break;
         case 2:
             TimeWalletStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
-            cin.ignore();
             cin.get();
             break;
         case 3:
             AnnualOverviewStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
-            cin.ignore();
             cin.get();
             break;
         case 4:
             AnnualIncomeBreakdownStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
-            cin.ignore();
             cin.get();
             break;
         case 5:
             AnnualExpenseBreakdownStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
-            cin.ignore();
             cin.get();
             break;
         case 0:

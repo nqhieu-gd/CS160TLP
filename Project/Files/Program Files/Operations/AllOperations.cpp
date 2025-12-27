@@ -20,7 +20,21 @@ int ChooseIMorEM(){
     cout<<"========================================================"<<endl;
     cout<<"Please enter the utility:"<<endl;
     int choose;
-    cin>>choose;
+    while (true){
+        cin>>choose;
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(32767,'\n');
+            cout<<"Invalid input! Please enter a number: ";
+        }
+        else if (choose<0||choose>2){
+            cout<<"Invalid choice, please re-enter: ";
+        }
+        else{
+            cin.ignore(32767,'\n');
+            break;
+        }
+    }  
     return choose;
 }
 
@@ -38,10 +52,20 @@ int chooseWallet(const Wallist& wallist){
     int choose;
     cout<<"Please enter a Wallet number: ";
     cin>>choose;
-    while (choose<0||choose>wallist.w.store+1){
-        cout<<"Invalid number! Please try agai n!"<<endl;
-        cout<<"Please enter a Wallet number: ";
-        cin>>choose;
+    while (true){
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(32767,'\n');
+            cout<<"Invalid input! Please enter a number: ";
+            cin>>choose;
+            continue;
+        }
+        if (choose<0||choose>wallist.w.store+1) {
+            cout<<"Invalid choice, please re-enter: ";
+            cin>>choose;
+            continue;
+        }
+        break;
     }
     return choose;
 }

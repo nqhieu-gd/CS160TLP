@@ -56,7 +56,17 @@ Date inputDate(){
     cout<<"========================================================"<<endl;
     cout<<"Please enter the utility: ";
     int choose;
-    cin>>choose;
+    while (true) {
+        cin >> choose;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(32767, '\n');
+            cout << "Invalid input! Please enter a number: ";
+        } else {
+            cin.ignore(32767, '\n');
+            break;
+        }
+    }
     if (choose < 1 || choose >2) {
         std::cerr << "Invalid option. Please try again!\n";
         return inputDate();
@@ -64,24 +74,42 @@ Date inputDate(){
     else if (choose==1) return GetCurrDate();
     cout<<"Please input the Date (format: dd mm yyyy): ";
     Date a;
-    cin>>a.day>>a.month>>a.year;
-    while (!ExamineDate(a)){
-        cout<<"Invalid Date! Please try again!"<<endl;
-        cout<<"Please input the Date (format: dd mm yyyy): ";
-        cin>>a.day>>a.month>>a.year;
+    while (true) {
+        cout << "Please input the Date (format: dd mm yyyy): ";
+        cin >> a.day >> a.month >> a.year;
+        if (cin.fail()) {
+            cin.clear();          
+            cin.ignore(32767, '\n'); 
+            cout << "Invalid format! Please enter numbers only.\n";
+        } 
+        else if (!ExamineDate(a)) {
+            cout << "Invalid Date ! Please try again.\n";
+        } 
+        else {
+            cin.ignore(32767, '\n');
+            break; 
+        }
     }
     return a;
 }
-
 Transaction ipt() {
     Transaction t;
     t.date = inputDate();
-    std::cout << "Enter the amount of money: ";
-    std::cin >> t.amount;
-    while (t.amount < 0) {
-        std::cerr << "Invalid amount of money!\n";
-        std::cout << "Try again: ";
-        std::cin >>t.amount;
+    cout << "Enter the amount of money: ";
+    while (true){
+        cin >> t.amount;
+        if (cin.fail()) {
+            cin.clear();          
+            cin.ignore(32767, '\n'); 
+            cout << "Invalid amount! Please enter a number: ";
+        } 
+        else if (t.amount < 0) {
+            cout << "Amount cannot be negative! Please try again: ";
+        } 
+        else {
+            cin.ignore(32767, '\n');
+            break; 
+        }
     }
     return t;
 }

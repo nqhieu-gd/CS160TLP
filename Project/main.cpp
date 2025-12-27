@@ -42,7 +42,18 @@ int main(){
         cout<<"Enter your choice: ";
         int choice;
         do{
-            cin>>choice;
+            // Input validation for integer choice
+            while (true) {
+                cin >> choice;
+                if (cin.fail()) {
+                cin.clear(); 
+                cin.ignore(32767, '\n'); 
+                cout << "Invalid input! Please enter a number: ";
+            } else {
+                cin.ignore(32767, '\n'); 
+                break; 
+            }
+        }
             if (choice<0||choice>4) cout<<"Invalid number! Please input again: ";
         } while (choice < 0 || choice > 4);
         if (choice==0) break;
