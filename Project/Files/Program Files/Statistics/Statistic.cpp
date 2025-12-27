@@ -48,8 +48,8 @@ void TotalBalance(const Wallist& wallist){
         cin>>A.day>>A.month>>A.year;
         cout<<"Please enter the end date (day month year): ";
         cin>>B.day>>B.month>>B.year;
-        if (!CompareDate(A,B)) cout<<"Invalid date range, please re-enter."<<endl;
-    }while (!CompareDate(A,B));
+        if (CompareDate(A,B)) cout<<"Invalid date range, please re-enter."<<endl;
+    }while (CompareDate(A,B));
     long long total_income=0;
     long long total_expense=0;
     for (int i=0;i<wallist.w.store;++i){
