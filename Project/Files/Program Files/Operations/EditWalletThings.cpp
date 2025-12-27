@@ -121,6 +121,7 @@ void sthsthIS(Wallist &wallist) {
             int x = chooseWalletWhatever(wallist) - 1;
             if (x == -1) return;
             k = chooseISWhatever(wallist, x);
+            if (k == 0) return;
             string str;
             while (1) {
                 std::cout << "Enter a new name for the Income Source: ";
@@ -140,6 +141,7 @@ void sthsthIS(Wallist &wallist) {
                 int x = chooseWalletWhatever(wallist) - 1;
                 if (x == -1) return;
                 k = chooseISWhatever(wallist, x);
+                if (k == 0) return;
                 std::cout << "You are going to delete every transaction of this Income Source \n";
                 std::cout << "in this wallet with no exception, so take it at your own risk!\n";
                 std::cout << "Input '0' to continue. ";
@@ -177,6 +179,7 @@ void sthsthEC(Wallist &wallist) {
             int x = chooseWalletWhatever(wallist) - 1;
             if (x == -1) return;
             k = chooseECWhatever(wallist, x);
+            if (k == 0) return;
             string str;
             while (1) {
                 std::cout << "Enter a new name for the Expense Category: ";
@@ -196,6 +199,7 @@ void sthsthEC(Wallist &wallist) {
                 int x = chooseWalletWhatever(wallist) - 1;
                 if (x == -1) return;
                 k = chooseECWhatever(wallist, x);
+                if (k == 0) return;
                 std::cout << "You are going to delete every transaction of this Expense Category \n";
                 std::cout << "in this wallet with no exception, so take it at your own risk!\n";
                 std::cout << "Input '0' to continue. ";
