@@ -27,11 +27,11 @@ int main(){
     ATM_Management atmm;
     while (true){
         Operation(wallist, atmm); // Auto add recurring transactions at the start of each loop
-        cout<<"======================================"<<endl;
+        cout<<"========================================================"<<endl;
         cout<<"        Personal Finance Manager        "<<endl;
-        cout<<"======================================"<<endl;
+        cout<<"========================================================"<<endl;
         DashboardStatistics(wallist);
-        cout<<"======================================="<<endl;
+        cout<<"========================================================"<<endl;
         cout<<"1. Add Transaction"<<endl;
         cout<<"2. Recurring Transaction Management"<<endl;
         cout<<"3. Edit Wallet/Income Source/Expense Category"<<endl;
