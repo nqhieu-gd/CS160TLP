@@ -194,7 +194,7 @@ void AddRecurringTransaction(Wallist& wallist){
         cout<<"This is list of Income Sources"<<endl;
         HashMap hm = wallist.isource();
         for (int i=0;i<hm.map.store;++i){
-            cout.width(4);
+            cout<<"    ";
             cout<<i+1;
             cout<<". "<<hm.map.p[i].name<<endl;
         }
@@ -389,6 +389,7 @@ void AddRecurringTransaction(Wallist& wallist){
 }
 
 void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
+    cout<<"========================================================"<<endl;
     // Compute all recurring transactions available
     int total_transactions = 0;
     for (int i = 0; i < atmm.atl.store; ++i) {
@@ -397,6 +398,7 @@ void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
 
     if (total_transactions == 0) {
         cout << "There are no recurring transactions to delete." << endl;
+    cout<<"========================================================"<<endl;
         return;
     }
 
@@ -404,6 +406,7 @@ void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
     atmm.prt(wallist);
     
     cout << "0. Go back to Dashboard" << endl;
+    cout<<"========================================================"<<endl;
     cout << "Enter the number of the transaction you want to delete: ";
     
     int choice;
@@ -460,10 +463,12 @@ void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
 
 //main function
 void RecurringTransactionFunction(Wallist& wallist, ATM_Management& atmm){
+    cout<<"========================================================"<<endl;
     cout<<"This is list of tasks with recurring transaction function"<<endl;
     cout<<"1. Add a recurring transaction"<<endl;
     cout<<"2. Delete a recurring transaction"<<endl;
     cout<<"0. Go back to Dashboard"<<endl;
+    cout<<"========================================================"<<endl;
     cout<<"Please enter your choice: ";
     int choice;
     do{

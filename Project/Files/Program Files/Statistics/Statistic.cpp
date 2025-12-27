@@ -377,7 +377,7 @@ void AnnualExpenseBreakdownStatistics(Wallist& wallist){
 }
 
 void Statisticfunction(Wallist& wallist){
-    cout<<"\n ===================================== \n";
+    cout<<"=======================================\n";
     cout<<"This is menu for reporting statistics"<<endl;
     cout<<"1. Time-based Statistics"<<endl;
     cout<<"2. Time-Wallet based Statistics"<<endl;
@@ -385,6 +385,7 @@ void Statisticfunction(Wallist& wallist){
     cout<<"4. Annual Income Breakdown Statistics"<<endl;
     cout<<"5. Annual Expense Breakdown Statistics"<<endl;
     cout<<"0. Go back to Dashboard"<<endl;
+    cout<<"=======================================\n";
     cout<<"Please enter your choice: ";
     int choice;
     do{
