@@ -259,14 +259,14 @@ void AddRecurringTransaction(Wallist& wallist){
         } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && !CompareDate(start_date, end_date))));
         bool isPastCycle = CompareDate(GetCurrDate(), start_date);
         if (isPastCycle) {
-        char confirm;
-        cout << "The cycle is started from the past." << endl;
-        cout << "The system will automatically add transactions to history. Are you sure? (y/n): ";
-        cin >> confirm;
-        if (confirm != 'y' && confirm != 'Y') {
-            cout << "Operation cancelled." << endl;
-            return; // Go back to dashboard
-        }
+            char confirm;
+            cout << "The cycle is started from the past." << endl;
+            cout << "The system will automatically add transactions to history. Are you sure? (y/n): ";
+            cin >> confirm;
+            if (confirm != 'y' && confirm != 'Y') {
+                cout << "Operation cancelled." << endl;
+                return; // Go back to dashboard
+            }
         }
         // Paste inputs into Auto_Transaction structure
         Transaction t;
@@ -353,9 +353,9 @@ void AddRecurringTransaction(Wallist& wallist){
         Date start_date;
         do {
             cin >> start_date.day >> start_date.month >> start_date.year;
-            if (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date))) 
+            if (!(CheckvalidDate(start_date))) 
                 cout << "Invalid date! Please input again: ";
-        } while (!(CheckvalidDate(start_date) && !CompareDate(GetCurrDate(), start_date)));
+        } while (!(CheckvalidDate(start_date)));
 
         cout << "Enter end date (dd mm yyyy), enter 0 0 0 for infinite loop: ";
         Date end_date;
@@ -365,6 +365,17 @@ void AddRecurringTransaction(Wallist& wallist){
             if (!isInfinite && !(CheckvalidDate(end_date) && !CompareDate(start_date, end_date))) 
                 cout << "Invalid date! Please input again: ";
         } while (!((end_date.day == 0 && end_date.month == 0 && end_date.year == 0) || (CheckvalidDate(end_date) && !CompareDate(start_date, end_date))));
+        bool isPastCycle = CompareDate(GetCurrDate(), start_date);
+        if (isPastCycle) {
+            char confirm;
+            cout << "The cycle is started from the past." << endl;
+            cout << "The system will automatically add transactions to history. Are you sure? (y/n): ";
+            cin >> confirm;
+            if (confirm != 'y' && confirm != 'Y') {
+                cout << "Operation cancelled." << endl;
+                return; // Go back to dashboard
+            }
+        }
         Transaction t;
         t.amount = amount;
         t.description = description;
