@@ -150,7 +150,7 @@ void Operation(Wallist& wallist, ATM_Management& atmm){
 void AddRecurringTransaction(Wallist& wallist){
     cout<<"1. Add an Income recurring transaction "<<endl;
     cout<<"2. Add an Expense recurring transaction "<<endl;
-    cout<<"0. Go back to the dash board"<<endl;
+    cout<<"0. Go back to the dash board"<<endl<<endl;
     cout<<"Please enter the task number:";
     int iore;
     do {
@@ -158,6 +158,7 @@ void AddRecurringTransaction(Wallist& wallist){
         if (iore<0&&iore>2) cout<<"Invalid! Please enter again: ";
     } while (iore<0&&iore>2);
     if (iore==0) return;
+    cout<<"========================================================"<<endl;
     cout<<"This is list of Wallets"<<endl;
     for (int i=0;i<wallist.w.store;++i){
         cout.width(4);
@@ -166,7 +167,7 @@ void AddRecurringTransaction(Wallist& wallist){
     }
     cout.width(4);
     cout<<wallist.w.store+1<<". Create a new Wallet"<<endl;
-    cout<<"   0. Go back to dashboard"<<endl;
+    cout<<"   0. Go back to dashboard"<<endl<<endl;
     cout<<"Enter wallet number: ";
     int choosewallet;
     do{
@@ -191,6 +192,7 @@ void AddRecurringTransaction(Wallist& wallist){
     string i_iD="";
     string e_id="";
     if (iore==1){
+        cout<<"========================================================"<<endl;
         cout<<"This is list of Income Sources"<<endl;
         HashMap hm = wallist.isource();
         for (int i=0;i<hm.map.store;++i){
@@ -198,10 +200,10 @@ void AddRecurringTransaction(Wallist& wallist){
             cout<<i+1;
             cout<<". "<<hm.map.p[i].name<<endl;
         }
-        cout.width(4);
+        cout<<"    ";
         cout<<hm.map.store+1<<". Create a new Income Source"<<endl;
-        cout.width(4);
-        cout<<0<<". Go back to dashboard"<<endl;
+        cout<<"    ";
+        cout<<0<<". Go back to dashboard"<<endl<<endl;
         cout<<"Enter Income Source number: ";
         int chooseis;
         do{
@@ -305,15 +307,16 @@ void AddRecurringTransaction(Wallist& wallist){
         return;
     }
     else{
+        cout<<"========================================================"<<endl;
         cout<<"This is list of Expense Categories"<<endl;
         HashMap hm = wallist.ecategory();
         for (int i=0;i<hm.map.store;++i){
-            cout.width(4);
+            cout<<"    ";
             cout<<i+1;
             cout<<". "<<hm.map.p[i].name<<endl;
         }
         cout<<"    "<<hm.map.store+1<<". Create a new Expense Category"<<endl;
-        cout<<"    0. Go back to dashboard"<<endl;
+        cout<<"    0. Go back to dashboard"<<endl<<endl;
         cout<<"Enter Expense Category number: ";
         int chooseec;
         do{
