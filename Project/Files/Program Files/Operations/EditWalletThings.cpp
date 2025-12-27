@@ -106,7 +106,12 @@ void sthsthWallet(Wallist &wallist) {
         case 2: {
             int x = chooseWalletWhatever(wallist);
             if (x == 0) return;
-            wallist.delWal(x);
+            std::cout << "You are going to delete every single one transaction in this wallet \n";
+            std::cout << "and itself with no exception, so take it at your own risk!\n";
+            std::cout << "Input '0' to continue: ";
+            string sub;
+            std::cin >> sub;
+            if (sub == "0")  wallist.delWal(x);
             break;
         }
         default: break;
@@ -144,7 +149,7 @@ void sthsthIS(Wallist &wallist) {
                 if (k == 0) return;
                 std::cout << "You are going to delete every transaction of this Income Source \n";
                 std::cout << "in this wallet with no exception, so take it at your own risk!\n";
-                std::cout << "Input '0' to continue. ";
+                std::cout << "Input '0' to continue: ";
                 string sub;
                 std::cin >> sub;
                 if (sub == "0") wallist.w.p[x].delIS(k);
@@ -155,7 +160,7 @@ void sthsthIS(Wallist &wallist) {
                 int x  = showSourceOrCategory(hmap, 1) - 1;
                 std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
                 std::cout << "this Income Source in EVERY WALLET with no exception, so take it at your own risk!\n";
-                std::cout << "Input '0' to continue. ";
+                std::cout << "Input '0' to continue: ";
                 string sub;
                 std::cin >> sub;
                 if (sub == "0") {
@@ -202,7 +207,7 @@ void sthsthEC(Wallist &wallist) {
                 if (k == 0) return;
                 std::cout << "You are going to delete every transaction of this Expense Category \n";
                 std::cout << "in this wallet with no exception, so take it at your own risk!\n";
-                std::cout << "Input '0' to continue. ";
+                std::cout << "Input '0' to continue: ";
                 string sub;
                 std::cin >> sub;
                 if (sub == "0") wallist.w.p[x].delEC(k);
@@ -213,7 +218,7 @@ void sthsthEC(Wallist &wallist) {
                 int x  = showSourceOrCategory(hmap, 2) - 1;
                 std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
                 std::cout << "this Expense Category in EVERY WALLET with no exception, so take it at your own risk!\n";
-                std::cout << "Input '0' to continue. ";
+                std::cout << "Input '0' to continue: ";
                 string sub;
                 std::cin >> sub;
                 if (sub == "0") {
