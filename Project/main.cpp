@@ -3,7 +3,7 @@
 #include "Files/Header Files/Data Structures/Sour.h"
 #include "Files/Header Files/Data Structures/Tstn.h"
 #include "Files/Header Files/Data Structures/Wallet.h"
-#include "Files/Header Files/Operations/AddTransaction.h"
+#include "Files/Header Files/Operations/AllOperations.h"
 #include "Files/Header Files/Operations/EditWalletThings.h"
 #include "Files/Header Files/Operations/Ini.h"
 #include "Files/Header Files/Operations/RecurringTransaction.h"

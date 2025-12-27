@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../../Header Files/Operations/EditWalletThings.h"
-#include "../../Header Files/Operations/AddTransaction.h"
+#include "../../Header Files/Operations/AllOperations.h"
 
 int chooseOneThing() {
     int choice;
@@ -13,7 +13,7 @@ int chooseOneThing() {
     std::cin >> choice;
     std::cout << "========================================================"<<std::endl;
     if (choice < 0 || choice > 3) {
-        std::cerr << "Invalid choice.\n";
+        std::cerr << "Invalid choice. Please Try again!\n";
         choice = chooseOneThing();
     }
     return choice;
@@ -29,7 +29,7 @@ int chooseOneThingVer2() {
     std::cin >> choice;
     std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
-        std::cerr << "Invalid choice.\n";
+        std::cerr << "Invalid choice. Please Try again!\n";
         choice = chooseOneThingVer2();
     }
     return choice;
@@ -45,7 +45,7 @@ int chooseOneThingVer3() {
     std::cin >> choice;
     std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
-        std::cerr << "Invalid choice.\n";
+        std::cerr << "Invalid choice. Please Try again!\n";
         choice = chooseOneThingVer3();
     }
     return choice;
@@ -61,8 +61,24 @@ int chooseOneThingVer4() {
     std::cin >> choice;
     std::cout << "======================================================== \n";
     if (choice < 0 || choice > 2) {
-        std::cerr << "Invalid choice.\n";
+        std::cerr << "Invalid choice. Please Try again!\n";
         choice = chooseOneThingVer4();
+    }
+    return choice;
+}
+
+int chooseBetween() {
+    int choice;
+    std::cout << "========================================================";
+    std::cout << "Choose one operation to proceed:\n";
+    std::cout << "1. Delete in a specific wallet.\n";
+    std::cout << "2. Delete in all wallet.\n";
+    std::cout << "0. Return to Dashboard.\n";
+    std::cin >> choice;
+    std::cout << "========================================================";
+    if (choice < 0 || choice > 2) {
+        std::cerr << "Invalid choice. Please Try again!\n";
+        choice = chooseBetween();
     }
     return choice;
 }
@@ -107,11 +123,11 @@ void sthsthIS(Wallist &wallist) {
             k = chooseISWhatever(wallist, x);
             string str;
             while (1) {
-                std::cout << "Enter a new name for the income source: ";
+                std::cout << "Enter a new name for the Income Source: ";
                 while (std::cin.peek() == '\n') std::cin.ignore();
                 std::getline(std::cin, str);
                 if (!wallist.w.p[x].editIS(k, str)) {
-                    std::cerr << "There was already an income source with that name!\n";
+                    std::cerr << "There was already an Income Source with that name!\n";
                     continue;
                 }
                 break;
@@ -119,10 +135,34 @@ void sthsthIS(Wallist &wallist) {
             break;
         }
         case 2: {
-            int x = chooseWalletWhatever(wallist) - 1;
-            if (x == -1) return;
-            k = chooseISWhatever(wallist, x);
-            wallist.w.p[x].delIS(k);
+            int j = chooseBetween();
+            if (j == 1) {
+                int x = chooseWalletWhatever(wallist) - 1;
+                if (x == -1) return;
+                k = chooseISWhatever(wallist, x);
+                std::cout << "You are going to delete every transaction of this Income Source \n";
+                std::cout << "in this wallet with no exception, so take it at your own risk!\n";
+                std::cout << "Input '0' to continue. ";
+                string sub;
+                std::cin >> sub;
+                if (sub == "0") wallist.w.p[x].delIS(k);
+                else std::cout << "Abandoned the task, returning to the dashboard.\n";
+            }
+            else if (j == 2) {
+                HashMap hmap = wallist.isource();
+                int x  = showSourceOrCategory(wallist, hmap, 1) - 1;
+                std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
+                std::cout << "this Income Source in EVERY WALLET with no exception, so take it at your own risk!\n";
+                std::cout << "Input '0' to continue. ";
+                string sub;
+                std::cin >> sub;
+                if (sub == "0") {
+                    for (int i = 0; i < hmap.map.p[x].IDlist.store; i++) {
+                        wallist.w.p[hmap.map.p[x].getIndexWal(i)].delIS(hmap.map.p[x].getIndexLocation(i));
+                    }
+                }
+                else std::cout << "Abandoned the task, returning to the dashboard.\n";
+            }
             break;
         }
         default: break;
@@ -139,11 +179,11 @@ void sthsthEC(Wallist &wallist) {
             k = chooseECWhatever(wallist, x);
             string str;
             while (1) {
-                std::cout << "Enter a new name for the expense category: ";
+                std::cout << "Enter a new name for the Expense Category: ";
                 while (std::cin.peek() == '\n') std::cin.ignore();
                 std::getline(std::cin, str);
                 if (!wallist.w.p[x].editEC(k, str)) {
-                    std::cerr << "There was already an expense category with that name!\n";
+                    std::cerr << "There was already an Expense Category with that name!\n";
                     continue;
                 }
                 break;
@@ -151,10 +191,34 @@ void sthsthEC(Wallist &wallist) {
             break;
         }
         case 2: {
-            int x = chooseWalletWhatever(wallist) - 1;
-            if (x == -1) return;
-            k = chooseECWhatever(wallist, x);
-            wallist.w.p[x].delEC(k);
+            int j = chooseBetween();
+            if (j == 1) {
+                int x = chooseWalletWhatever(wallist) - 1;
+                if (x == -1) return;
+                k = chooseECWhatever(wallist, x);
+                std::cout << "You are going to delete every transaction of this Expense Category \n";
+                std::cout << "in this wallet with no exception, so take it at your own risk!\n";
+                std::cout << "Input '0' to continue. ";
+                string sub;
+                std::cin >> sub;
+                if (sub == "0") wallist.w.p[x].delEC(k);
+                else std::cout << "Abandoned the task, returning to the dashboard.\n";
+            }
+            else if (j == 2) {
+                HashMap hmap = wallist.ecategory();
+                int x  = showSourceOrCategory(wallist, hmap, 2) - 1;
+                std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
+                std::cout << "this Expense Category in EVERY WALLET with no exception, so take it at your own risk!\n";
+                std::cout << "Input '0' to continue. ";
+                string sub;
+                std::cin >> sub;
+                if (sub == "0") {
+                    for (int i = 0; i < hmap.map.p[x].IDlist.store; i++) {
+                        wallist.w.p[hmap.map.p[x].getIndexWal(i)].delEC(hmap.map.p[x].getIndexLocation(i));
+                    }
+                }
+                else std::cout << "Abandoned the task, returning to the dashboard.\n";
+            }
             break;
         }
         default: break;

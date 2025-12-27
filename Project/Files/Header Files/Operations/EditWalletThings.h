@@ -10,6 +10,8 @@ int chooseOneThingVer3();
 
 int chooseOneThingVer4();
 
+int chooseBetween();
+
 void sthsthWallet(Wallist &wallist);
 
 void sthsthIS(Wallist &wallist);

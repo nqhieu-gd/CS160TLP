@@ -12,6 +12,28 @@ HashNode :: ~HashNode() {
     IDlist.dealloc();
 }
 
+int HashNode :: getIndexWal(int x) {
+    if (x < 0 || x >= IDlist.store) return -1;
+    std::string str = IDlist.p[x];
+    int ind = 0;
+    for (int i = 1; i < 8; i++) {
+        ind *= 10;
+        ind += str[i] - 48;
+    }
+    return ind - 1;
+}
+
+int HashNode :: getIndexLocation(int x) {
+    if (x < 0 || x >= IDlist.store) return -1;
+    std::string str = IDlist.p[x];
+    int ind = 0;
+    for (int i = 8; i < 16; i++) {
+        ind *= 10;
+        ind += str[i] - 48;
+    }
+    return ind - 1;
+}
+
 HashMap :: HashMap() {
     map.alloc();
 }
