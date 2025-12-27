@@ -458,6 +458,7 @@ void DeleteRecurringTransaction(Wallist& wallist, ATM_Management& atmm) {
 
 //main function
 void RecurringTransactionFunction(Wallist& wallist, ATM_Management& atmm){
+    cout<<"========================================================"<<endl;
     cout<<"This is list of tasks with recurring transaction function"<<endl;
     cout<<"1. Add a recurring transaction"<<endl;
     cout<<"2. Delete a recurring transaction"<<endl;
