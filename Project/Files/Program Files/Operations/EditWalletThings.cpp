@@ -150,7 +150,7 @@ void sthsthIS(Wallist &wallist) {
             }
             else if (j == 2) {
                 HashMap hmap = wallist.isource();
-                int x  = showSourceOrCategory(wallist, hmap, 1) - 1;
+                int x  = showSourceOrCategory(hmap, 1) - 1;
                 std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
                 std::cout << "this Income Source in EVERY WALLET with no exception, so take it at your own risk!\n";
                 std::cout << "Input '0' to continue. ";
@@ -206,7 +206,7 @@ void sthsthEC(Wallist &wallist) {
             }
             else if (j == 2) {
                 HashMap hmap = wallist.ecategory();
-                int x  = showSourceOrCategory(wallist, hmap, 2) - 1;
+                int x  = showSourceOrCategory(hmap, 2) - 1;
                 std::cout << "WARNING WARNING: You are going to delete every transaction of \n";
                 std::cout << "this Expense Category in EVERY WALLET with no exception, so take it at your own risk!\n";
                 std::cout << "Input '0' to continue. ";

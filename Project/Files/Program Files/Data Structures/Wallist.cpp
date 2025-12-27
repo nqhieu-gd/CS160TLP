@@ -44,7 +44,7 @@ void Wallist :: CreateWallet() {
 
 bool Wallist :: inWal(string id) {
 //Create a string represent the save file of the wallet.
-    string file = "Personal Financial Management App/Save Files/Saved Wallet/";
+    string file = "Files/Save Files/Saved Wallet/";
     file += id;
     file += ".bin";
     Transaction t;
@@ -167,7 +167,7 @@ HashMap Wallist :: ecategory() {
 //Output list of IS and EC to files.
 void Wallist :: outSC() {
     std::ofstream fout;
-    fout.open("Personal Financial Management App/Save Files/Utility Save Files/Income.bin", std::ios::binary);
+    fout.open("Files/Save Files/Utility Save Files/Income.bin", std::ios::binary);
     if (!fout.is_open()) {
         std::cerr << "Can not find the income sources list file.";
         return;
@@ -186,7 +186,7 @@ void Wallist :: outSC() {
         }
     }
     fout.close();
-    fout.open("Personal Financial Management App/Save Files/Utility Save Files/Expense.bin", std::ios::binary);
+    fout.open("Files/Save Files/Utility Save Files/Expense.bin", std::ios::binary);
     if (!fout.is_open()) {
         std::cerr << "Can not find the income expense categories list file.";
         return;
@@ -227,10 +227,9 @@ void Wallist :: delWal(int x) {
 //Output list of wallets to files.
 void Wallist :: outWallist() {
     std::ofstream file;
-    file.open("Personal Financial Management App/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
+    file.open("Files/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
     file.write((char*) &w.store, 4);
     file.close();
-    int ind = 0;
     for (int i = 0; i < w.store; i++) {
         w.p[i].outWal();
     }

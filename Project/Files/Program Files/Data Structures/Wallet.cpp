@@ -14,7 +14,7 @@ Wallet :: Wallet() {
 //Used after each change made in the wallet.
 void Wallet :: outWal() {
     std::ofstream fout;
-    string path = "Personal Financial Management App/Save Files/Saved Wallet/";
+    string path = "Files/Save Files/Saved Wallet/";
     path += wID + ".bin";
     fout.open(path, std::ios::binary | std::ios::out);
     if (!fout.is_open()) {
@@ -250,7 +250,7 @@ bool Wallet :: editEC(int x, string name) {
 }
 
 void Wallet :: delIS(int x) {
-    if (is.sub(x)) {
+    if (is.sub(x - 1)) {
         for (int i = x - 1; i < is.store; i++) {
             for (int j = 7; j >= 0; j--) {
                 if (is.p[i].iID[j] == '0') {
@@ -266,7 +266,7 @@ void Wallet :: delIS(int x) {
 }
 
 void Wallet :: delEC(int x) {
-    if (ec.sub(x)) {
+    if (ec.sub(x - 1)) {
         for (int i = x - 1; i < ec.store; i++) {
             for (int j = 7; j >= 0; j--) {
                 if (ec.p[i].eID[j] == '0') {

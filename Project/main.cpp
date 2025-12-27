@@ -1,5 +1,5 @@
 #include "Files/Header Files/Data Structures/Auto_Trtn.h"
-#include "Files/Header Files/Data Structures//Cate.h"
+#include "Files/Header Files/Data Structures/Cate.h"
 #include "Files/Header Files/Data Structures/Sour.h"
 #include "Files/Header Files/Data Structures/Tstn.h"
 #include "Files/Header Files/Data Structures/Wallet.h"
@@ -7,9 +7,9 @@
 #include "Files/Header Files/Operations/EditWalletThings.h"
 #include "Files/Header Files/Operations/Ini.h"
 #include "Files/Header Files/Operations/RecurringTransaction.h"
-#include "Files/Header FIles/Statistics/Statistic.h"
+#include "Files/Header Files/Statistics/Statistic.h"
 #include "Files/Utilities/DA/Dynamicarray.h"
-#include "Files/Utilities/Hashmap/Hashmap.h"
+#include "Files/Utilities/Hashmap/HashMap.h"
 #include "Files/Utilities/Uppercase/Uppercase.h"
 #include <iostream>
 #include <string>
