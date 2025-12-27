@@ -237,7 +237,7 @@ void AddRecurringTransaction(Wallist& wallist){
 
         cout << "Enter description: ";
         string description;
-        cin.ignore(32767, '\n');
+        while (cin.peek() != '\n') cin.ignore();
         getline(cin, description);
 
         cout << "Enter start date (dd mm yyyy): ";
