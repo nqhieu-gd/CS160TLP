@@ -6,7 +6,7 @@ void iniSaveNum() {
     std::ofstream fout;
     fin.open("Files/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
     if (!fin.is_open()) {
-        fout.open("Utility Save Files/WalletNumber.bin", std::ios::binary);
+        fout.open("Files/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
         fout.close();
     }
     else fin.close();

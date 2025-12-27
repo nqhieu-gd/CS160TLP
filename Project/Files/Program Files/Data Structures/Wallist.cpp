@@ -210,6 +210,7 @@ void Wallist :: outSC() {
 //Delete a wallet.
 void Wallist :: delWal(int x) {
     if (w.sub(x - 1)) {
+        string str = "Files/Save Files/Saved Wallet/" + w.p[w.store - 1].wID + ".bin";
         for (int i = x - 1; i < w.store; i++) {
             for (int j = 7; j >= 0; j--) {
                 if (w.p[i].wID[j] == '0') {
@@ -220,6 +221,10 @@ void Wallist :: delWal(int x) {
                 break;
             }
         }
+        std::ofstream fout;
+        fout.open(str, std::ios::binary);
+        if (fout.is_open()) fout.close();
+        
     }
     outWallist();
 }

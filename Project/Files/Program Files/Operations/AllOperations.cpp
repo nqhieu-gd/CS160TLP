@@ -248,6 +248,8 @@ void TransactionManagement(Wallist& wallist){
 
 void inWallist(Wallist &wallist) {
     string id = "W0000001";
+    std::ifstream fin;
+    fin.open("Files/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
     while (wallist.inWal(id)) {
         for (int i = 7; i >= 0; i--) {
             if (i == 0) {
