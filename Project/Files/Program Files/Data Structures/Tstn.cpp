@@ -72,7 +72,6 @@ Date inputDate(){
         return inputDate();
     }
     else if (choose==1) return GetCurrDate();
-    cout<<"Please input the Date (format: dd mm yyyy): ";
     Date a;
     while (true) {
         cout << "Please input the Date (format: dd mm yyyy): ";
