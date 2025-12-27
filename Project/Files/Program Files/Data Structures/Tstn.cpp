@@ -8,7 +8,7 @@ using std::endl;
 
 bool CheckvalidDate(const Date& c){
     int time[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31};
-    if (c.year % 4 == 0 && c.year % 100 != 0 || c.year % 400 == 0) time [1] = 29;
+    if ((c.year % 4 == 0 && c.year % 100 != 0) || c.year % 400 == 0) time [1] = 29;
     if (c.month < 1 || c.month > 12 || c.day > time[c.month - 1] || c.day < 1) return 0;
     return 1;
 }
@@ -54,17 +54,16 @@ Date inputDate(){
     cout<<"2. Enter the date manually (Note: this function does not accept future dates)"<<endl;
     cout<<endl;
     cout<<"========================================================"<<endl;
-    cout<<"Please enter the utility:";
+    cout<<"Please enter the utility: ";
     int choose;
     cin>>choose;
     if (choose==1) return GetCurrDate();
-    cout<<"Please input the Date (format: dd mm yyyy):";
+    cout<<"Please input the Date (format: dd mm yyyy): ";
     Date a;
     cin>>a.day>>a.month>>a.year;
     while (!ExamineDate(a)){
         cout<<"Invalid Date! Please try again!"<<endl;
-        cout<<"Please input the Date (format: dd mm yyyy):";
-        Date a;
+        cout<<"Please input the Date (format: dd mm yyyy): ";
         cin>>a.day>>a.month>>a.year;
     }
     return a;

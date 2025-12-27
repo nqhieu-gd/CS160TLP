@@ -7,7 +7,7 @@
 #include "../Data Structures/Tstn.h"
 #include "../Data Structures/Wallet.h"
 #include "../../Utilities/DA/Dynamicarray.h"
-#include "../../Utilities/Hashmap/Hashmap.h"
+#include "../../Utilities/Hashmap/HashMap.h"
 
 //Calculate Total Balance of all Wallets and Total Balances of each wallets
 //Use whenever start over the programme and in the dashboard
