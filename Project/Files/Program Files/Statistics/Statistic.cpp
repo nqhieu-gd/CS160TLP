@@ -349,7 +349,7 @@ void AnnualIncomeBreakdownStatistics(Wallist& wallist){
 
     // Output the Annual Income Breakdown
     
-    cout << "Annual Income Breakdown for the following years:";
+    cout << "Annual Income Breakdown for the following years:\n";
 
     long long grand_total = 0;
     
@@ -445,7 +445,7 @@ void AnnualExpenseBreakdownStatistics(Wallist& wallist){
 
     // Output the Annual Expense Breakdown
     
-    cout << "Annual Expense Breakdown for the following years:";
+    cout << "Annual Expense Breakdown for the following years:\n";
 
     long long grand_total = 0;
     
