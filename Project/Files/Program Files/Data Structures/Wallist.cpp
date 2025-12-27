@@ -230,7 +230,6 @@ void Wallist :: outWallist() {
     file.open("Files/Save Files/Utility Save Files/WalletNumber.bin", std::ios::binary);
     file.write((char*) &w.store, 4);
     file.close();
-    int ind = 0;
     for (int i = 0; i < w.store; i++) {
         w.p[i].outWal();
     }

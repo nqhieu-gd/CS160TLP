@@ -6,7 +6,7 @@
 #include "../../Header Files/Data Structures/Wallet.h"
 #include "../../Header Files/Data Structures/Tstn.h"
 #include "../../Utilities/DA/Dynamicarray.h"
-#include "../../Utilities/Hashmap/Hashmap.h"
+#include "../../Utilities/Hashmap/HashMap.h"
 
 using std::cout;
 using std::endl;

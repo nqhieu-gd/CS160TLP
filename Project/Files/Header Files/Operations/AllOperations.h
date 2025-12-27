@@ -15,7 +15,7 @@ int chooseIS(const Wallist&, int index);
 int chooseISWhatever(Wallist& wallist, int index);
 int chooseEC(const Wallist&, int index);
 int chooseECWhatever(Wallist& wallist, int index);
-int showSourceOrCategory(Wallist& wallist, HashMap& hmap, int choice);
+int showSourceOrCategory(HashMap& hmap, int choice);
 void inputRest(Transaction&);
 void TransactionManagement(Wallist&); //main function!
 void inWallist(Wallist &wallist);

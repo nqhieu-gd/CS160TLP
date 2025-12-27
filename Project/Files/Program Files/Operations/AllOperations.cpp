@@ -150,7 +150,7 @@ int chooseECWhatever(Wallist& wallist, int index){
     return choose;
 }
 
-int showSourceOrCategory(Wallist& wallist, HashMap& hmap, int choice) {
+int showSourceOrCategory(HashMap& hmap, int choice) {
     string str = "Income Source";
     string strs = "Income Sources";
     if (choice == 2) {
