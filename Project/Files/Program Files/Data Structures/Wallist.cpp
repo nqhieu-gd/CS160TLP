@@ -51,7 +51,6 @@ bool Wallist :: inWal(string id) {
     std::ifstream fin;
     fin.open(file, std::ios::binary | std::ios::in);
     if (!fin.is_open()) {
-        std::cerr << "Can not find the wallet source file.\n";
         return 0;
     }
     fin.seekg(0, std::ios::end);
