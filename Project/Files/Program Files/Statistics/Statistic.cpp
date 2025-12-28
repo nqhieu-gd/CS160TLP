@@ -505,16 +505,19 @@ void Statisticfunction(Wallist& wallist){
         case 3:
             AnnualOverviewStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
+            cin.ignore(32767, '\n');
             cin.get();
             break;
         case 4:
             AnnualIncomeBreakdownStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
+            cin.ignore(32767, '\n');
             cin.get();
             break;
         case 5:
             AnnualExpenseBreakdownStatistics(wallist);
             cout << "Press Enter to go back to the dashboard...";
+            cin.ignore(32767, '\n');
             cin.get();
             break;
         case 0:
