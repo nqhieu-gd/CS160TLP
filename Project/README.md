@@ -2,7 +2,7 @@ This project is done with the contributions of 2 students: Tran Nhu Khai (251250
 
 How to compile the program:
 
-**Step 1:** Open terminal and navigate to this folder (Project).
+**Step 1:** Open terminal and navigate to this folder.
 
 For example, if Project is in C:/Download and you are using Windows, call cd C:/Download/Project.
 
