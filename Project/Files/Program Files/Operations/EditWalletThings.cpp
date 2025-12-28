@@ -132,7 +132,7 @@ void sthsthIS(Wallist &wallist) {
                 std::cout << "Enter a new name for the Income Source: ";
                 while (std::cin.peek() == '\n') std::cin.ignore();
                 std::getline(std::cin, str);
-                if (!wallist.w.p[x].editIS(k, str)) {
+                if (!wallist.w.p[x].editIS(k - 1, str)) {
                     std::cerr << "There was already an Income Source with that name!\n";
                     continue;
                 }
@@ -190,7 +190,7 @@ void sthsthEC(Wallist &wallist) {
                 std::cout << "Enter a new name for the Expense Category: ";
                 while (std::cin.peek() == '\n') std::cin.ignore();
                 std::getline(std::cin, str);
-                if (!wallist.w.p[x].editEC(k, str)) {
+                if (!wallist.w.p[x].editEC(k - 1, str)) {
                     std::cerr << "There was already an Expense Category with that name!\n";
                     continue;
                 }

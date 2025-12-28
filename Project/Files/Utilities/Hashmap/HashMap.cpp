@@ -31,7 +31,7 @@ int HashNode :: getIndexLocation(int x) {
         ind *= 10;
         ind += str[i] - 48;
     }
-    return ind - 1;
+    return ind;
 }
 
 HashMap :: HashMap() {
