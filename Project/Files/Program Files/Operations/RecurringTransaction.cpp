@@ -51,7 +51,7 @@ void ATM_Management:: prt(const Wallist& wallist){
             cout<<++count;
             cout<<". Wallet: "<<wallist.w.p[adrs.p[i].w_index].wName<<endl;
             if (adrs.p[i].i_index!=-1) cout<<"          Income Source: "<<wallist.w.p[adrs.p[i].w_index].is.p[adrs.p[i].i_index].iName<<endl;
-            else cout<<"          Income Source: "<<wallist.w.p[adrs.p[i].w_index].ec.p[adrs.p[i].e_index].eName<<endl;
+            else cout<<"          Expense Category: "<<wallist.w.p[adrs.p[i].w_index].ec.p[adrs.p[i].e_index].eName<<endl;
             printatl(atl.p[i]);
             cout<<endl;
         }
