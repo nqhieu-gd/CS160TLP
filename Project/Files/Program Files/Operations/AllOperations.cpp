@@ -143,12 +143,12 @@ int chooseEC(Wallist& wallist, int index){
     cout<<"0. Back to the Dashboard"<<endl;
     cout<<endl;
     cout<<"========================================================"<<endl;
-    cout<<"Please enter a Expense Category number: ";
+    cout<<"Please enter an Expense Category number: ";
     int choose;
     cin>>choose;
     while (choose<0||choose>wallist.w.p[index].ec.store + 1){
         cout<<"Invalid number! Please try again!"<<endl;
-        cout<<"Please enter a Expense Category number: ";
+        cout<<"Please enter an Expense Category number: ";
         cin>>choose;
     }
     return choose;
@@ -163,12 +163,12 @@ int chooseECWhatever(Wallist& wallist, int index){
     cout<<"0. Back to the Dashboard"<<endl;
     cout<<endl;
     cout<<"========================================================"<<endl;
-    cout<<"Please enter a Expense Category number: ";
+    cout<<"Please enter an Expense Category number: ";
     int choose;
     cin>>choose;
     while (choose<0||choose>wallist.w.p[index].ec.store){
         cout<<"Invalid number! Please try again!"<<endl;
-        cout<<"Please enter a Expense Category number: ";
+        cout<<"Please enter an Expense Category number: ";
         cin>>choose;
     }
     return choose;
@@ -189,12 +189,12 @@ int showSourceOrCategory(HashMap& hmap, int choice) {
     cout<<"0. Back to the Dashboard"<<endl;
     cout<<endl;
     cout<<"========================================================"<<endl;
-    cout<<"Please enter a " << str << " number: ";
+    cout<<"Please enter an " << str << " number: ";
     int choose;
     cin>>choose;
     while (choose<0||choose>hmap.map.store){
         cout<<"Invalid number! Please try again!"<<endl;
-        cout<<"Please enter a " << str << " number: ";
+        cout<<"Please enter an " << str << " number: ";
         cin>>choose;
     }
     return choose;
