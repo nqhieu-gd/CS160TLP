@@ -78,7 +78,7 @@ int main(){
         }
     }
     cout<<"Thank you for using Personal Finance Manager. Goodbye!"<<endl;
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     //Output all data to Files before exiting
     atmm.clr();
     return 0;
